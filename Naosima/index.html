@@ -2,92 +2,142 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상품 목업</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>상품 목업(리얼버전)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <style>
         body { font-family: "Pretendard Variable", Pretendard, sans-serif; }
-        /* 스크롤바 숨김 처리 */
-        .hide-scroll::-webkit-scrollbar { display: none; }
-        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        /* 터치 시 파란 박스 제거 (모바일 친화적) */
+        * { -webkit-tap-highlight-color: transparent; } 
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen pb-24 flex justify-center">
+<body class="bg-gray-100 min-h-screen flex justify-center">
 
-    <div class="w-full max-w-[430px] bg-white min-h-screen shadow-2xl relative">
+    <div class="w-full max-w-[430px] bg-white min-h-screen shadow-2xl relative pb-24">
         
-        <header class="sticky top-0 bg-white/95 backdrop-blur z-20 flex justify-between items-center p-4 border-b border-gray-100">
-            <div class="text-xl font-medium cursor-pointer">←</div>
-            <div class="flex gap-4 text-gray-400">
-                <span>♥</span>
-                <span>🔗</span>
+        <header class="sticky top-0 bg-white/90 backdrop-blur-md z-30 flex justify-between items-center p-4 border-b border-gray-100 transition-all">
+            <button onclick="alert('이전 페이지로 이동합니다.')" class="p-2 -ml-2 hover:bg-gray-100 rounded-full transition">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            
+            <div class="flex gap-2">
+                <button onclick="toggleHeart(this)" class="p-2 hover:bg-gray-100 rounded-full transition group">
+                    <svg class="w-6 h-6 text-gray-400 group-hover:text-red-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                </button>
+                <button onclick="alert('공유하기 링크가 복사되었습니다!')" class="p-2 hover:bg-gray-100 rounded-full transition">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+                </button>
             </div>
         </header>
 
-        <div class="relative w-full aspect-[4/3] bg-gray-200">
+        <div class="relative w-full aspect-[4/3] bg-gray-200 group overflow-hidden">
             <img src="https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?q=80&w=800" 
-                 class="w-full h-full object-cover" alt="대표 이미지">
+                 class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" alt="메인 이미지">
+            
+            <div class="absolute bottom-4 right-4 bg-black/60 text-white text-xs px-3 py-1 rounded-full backdrop-blur-sm">
+                1 / 5
+            </div>
         </div>
 
         <div class="p-5">
-            <div class="text-sm text-gray-500 mb-2 font-medium">지역 · 카테고리 입력</div>
+            <div class="text-sm text-blue-600 font-bold mb-2">오사카 · 유니버설 스튜디오</div>
             
-            <h1 class="text-xl font-bold text-gray-900 leading-snug mb-3">
-                상품 제목을 입력해주세요<br>
-                (두 줄까지 예쁘게 나옵니다)
+            <h1 class="text-2xl font-bold text-gray-900 leading-snug mb-3">
+                [즉시확정] 오사카 유니버설 스튜디오 재팬 1일 입장권
             </h1>
 
-            <div class="flex items-center gap-1 mb-5 text-sm">
-                <span class="text-yellow-400">★</span>
-                <span class="font-bold text-gray-900">4.9</span>
-                <span class="text-gray-400">(후기 99+)</span>
+            <div class="flex items-center gap-1 mb-5 text-sm cursor-pointer hover:underline" onclick="alert('리뷰 목록 페이지로 이동합니다.')">
+                <div class="flex text-yellow-400">★★★★★</div>
+                <span class="font-bold text-gray-900 ml-1">4.9</span>
+                <span class="text-gray-400 border-b border-gray-300">(후기 3,421개) &gt;</span>
             </div>
             
             <div class="py-4 border-t border-b border-gray-100 flex justify-between items-center">
-                <span class="text-gray-400 text-sm line-through">정가 00,000원</span>
+                <span class="text-gray-400 text-sm line-through">98,000원</span>
                 <div class="flex items-baseline gap-2">
-                    <span class="text-red-500 font-bold text-lg">SALE</span>
-                    <span class="text-2xl font-bold text-gray-900">50,000원</span>
+                    <span class="text-red-500 font-bold text-lg">12%</span>
+                    <span class="text-2xl font-bold text-gray-900">86,500원</span>
                 </div>
             </div>
         </div>
 
-        <div class="h-2 bg-gray-50"></div>
+        <div class="h-3 bg-gray-100"></div>
+
+        <div class="sticky top-[73px] bg-white z-20 flex border-b border-gray-200">
+            <button class="flex-1 py-3 text-sm font-bold text-blue-600 border-b-2 border-blue-600">상품안내</button>
+            <button class="flex-1 py-3 text-sm text-gray-500 hover:bg-gray-50 transition" onclick="alert('상세정보 탭입니다')">상세정보</button>
+            <button class="flex-1 py-3 text-sm text-gray-500 hover:bg-gray-50 transition" onclick="alert('후기 탭입니다')">후기</button>
+            <button class="flex-1 py-3 text-sm text-gray-500 hover:bg-gray-50 transition" onclick="alert('문의 탭입니다')">문의</button>
+        </div>
 
         <div class="p-5">
-            <h2 class="font-bold text-lg mb-4">어떤 상품인가요?</h2>
-            
-            <div class="text-gray-600 text-sm leading-7 space-y-4">
-                <p>
-                    여기에 상품에 대한 매력적인 소개글을 적어주세요.<br>
-                    기획 의도가 잘 드러나도록 작성하면 좋습니다.
-                </p>
-                
-                <div class="bg-gray-50 p-4 rounded-lg my-4">
-                    <strong>💡 핵심 포인트</strong>
-                    <ul class="list-disc list-inside mt-2 text-gray-500">
-                        <li>포인트 1</li>
-                        <li>포인트 2</li>
-                        <li>포인트 3</li>
-                    </ul>
+            <h2 class="font-bold text-lg mb-4">상품 핵심 포인트</h2>
+            <div class="space-y-3 mb-8">
+                <div class="flex items-start gap-3 bg-blue-50 p-4 rounded-xl">
+                    <span class="text-2xl">⚡️</span>
+                    <div>
+                        <p class="font-bold text-sm text-gray-900">E-티켓 즉시 발송</p>
+                        <p class="text-xs text-gray-500 mt-1">결제 즉시 바우처가 전송됩니다.</p>
+                    </div>
                 </div>
-
-                <p>
-                    추가적인 설명이 필요하다면 여기에 계속 적으시면 됩니다.<br>
-                    이미지가 더 필요하면 아래 코드를 사용하세요.
-                </p>
-
-                <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800" 
-                     class="rounded-lg w-full mt-2 mb-2 object-cover h-48">
+                <div class="flex items-start gap-3 bg-blue-50 p-4 rounded-xl">
+                    <span class="text-2xl">🎢</span>
+                    <div>
+                        <p class="font-bold text-sm text-gray-900">모든 어트랙션 이용 가능</p>
+                        <p class="text-xs text-gray-500 mt-1">닌텐도 월드 포함 (확약권 필요)</p>
+                    </div>
+                </div>
             </div>
+
+            <p class="text-gray-600 text-sm leading-7">
+                세계 최고의 엔터테인먼트가 모인 곳!<br>
+                할리우드의 인기 영화를 테마로 한 어트랙션부터<br>
+                아이들이 좋아하는 캐릭터들까지 모두 만나보세요.<br><br>
+                <strong>[이용 안내]</strong><br>
+                - 바우처의 QR코드를 제시 후 입장합니다.<br>
+                - 재입장은 불가합니다.
+            </p>
+             <img src="https://images.unsplash.com/photo-1605548230624-8d2d639e7021?q=80&w=800" 
+             class="rounded-xl w-full my-6 shadow-sm">
         </div>
 
-        <div class="fixed bottom-0 max-w-[430px] w-full bg-white border-t border-gray-200 p-4 z-50 flex gap-3 pb-8">
-            <button class="flex-1 bg-blue-600 text-white font-bold py-3.5 rounded-lg shadow-lg hover:bg-blue-700 transition">
+        <div class="fixed bottom-0 max-w-[430px] w-full bg-white border-t border-gray-200 p-4 z-50 flex items-center gap-3 pb-8 safe-area-bottom shadow-[0_-5px_10px_rgba(0,0,0,0.05)]">
+            <div class="flex-1">
+                <p class="text-xs text-gray-500">총 결제 금액</p>
+                <p class="text-xl font-bold text-blue-600">86,500원</p>
+            </div>
+            <button onclick="confirmBooking()" 
+                    class="bg-blue-600 hover:bg-blue-700 active:scale-95 active:bg-blue-800 text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-lg shadow-blue-200">
                 예약하기
             </button>
         </div>
     </div>
+
+    <script>
+        // 찜하기 버튼 누르면 빨간색 채워지는 기능
+        function toggleHeart(btn) {
+            const svg = btn.querySelector('svg');
+            if (svg.getAttribute('fill') === 'none') {
+                svg.setAttribute('fill', 'currentColor'); // 색 채우기
+                svg.classList.remove('text-gray-400');
+                svg.classList.add('text-red-500');
+                alert('관심 상품에 담았습니다! ♥');
+            } else {
+                svg.setAttribute('fill', 'none'); // 색 빼기
+                svg.classList.add('text-gray-400');
+                svg.classList.remove('text-red-500');
+            }
+        }
+
+        // 예약하기 버튼 기능
+        function confirmBooking() {
+            // 진짜처럼 묻기
+            if(confirm('선택하신 날짜로 예약을 진행하시겠습니까?')) {
+                // 확인 누르면
+                alert('예약 페이지로 이동합니다. (데모)');
+            }
+        }
+    </script>
 </body>
 </html>
