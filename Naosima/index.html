@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 목업</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <style>
+        body { font-family: "Pretendard Variable", Pretendard, sans-serif; }
+        /* 스크롤바 숨김 처리 */
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen pb-24 flex justify-center">
+
+    <div class="w-full max-w-[430px] bg-white min-h-screen shadow-2xl relative">
+        
+        <header class="sticky top-0 bg-white/95 backdrop-blur z-20 flex justify-between items-center p-4 border-b border-gray-100">
+            <div class="text-xl font-medium cursor-pointer">←</div>
+            <div class="flex gap-4 text-gray-400">
+                <span>♥</span>
+                <span>🔗</span>
+            </div>
+        </header>
+
+        <div class="relative w-full aspect-[4/3] bg-gray-200">
+            <img src="https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?q=80&w=800" 
+                 class="w-full h-full object-cover" alt="대표 이미지">
+        </div>
+
+        <div class="p-5">
+            <div class="text-sm text-gray-500 mb-2 font-medium">지역 · 카테고리 입력</div>
+            
+            <h1 class="text-xl font-bold text-gray-900 leading-snug mb-3">
+                상품 제목을 입력해주세요<br>
+                (두 줄까지 예쁘게 나옵니다)
+            </h1>
+
+            <div class="flex items-center gap-1 mb-5 text-sm">
+                <span class="text-yellow-400">★</span>
+                <span class="font-bold text-gray-900">4.9</span>
+                <span class="text-gray-400">(후기 99+)</span>
+            </div>
+            
+            <div class="py-4 border-t border-b border-gray-100 flex justify-between items-center">
+                <span class="text-gray-400 text-sm line-through">정가 00,000원</span>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-red-500 font-bold text-lg">SALE</span>
+                    <span class="text-2xl font-bold text-gray-900">50,000원</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="h-2 bg-gray-50"></div>
+
+        <div class="p-5">
+            <h2 class="font-bold text-lg mb-4">어떤 상품인가요?</h2>
+            
+            <div class="text-gray-600 text-sm leading-7 space-y-4">
+                <p>
+                    여기에 상품에 대한 매력적인 소개글을 적어주세요.<br>
+                    기획 의도가 잘 드러나도록 작성하면 좋습니다.
+                </p>
+                
+                <div class="bg-gray-50 p-4 rounded-lg my-4">
+                    <strong>💡 핵심 포인트</strong>
+                    <ul class="list-disc list-inside mt-2 text-gray-500">
+                        <li>포인트 1</li>
+                        <li>포인트 2</li>
+                        <li>포인트 3</li>
+                    </ul>
+                </div>
+
+                <p>
+                    추가적인 설명이 필요하다면 여기에 계속 적으시면 됩니다.<br>
+                    이미지가 더 필요하면 아래 코드를 사용하세요.
+                </p>
+
+                <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800" 
+                     class="rounded-lg w-full mt-2 mb-2 object-cover h-48">
+            </div>
+        </div>
+
+        <div class="fixed bottom-0 max-w-[430px] w-full bg-white border-t border-gray-200 p-4 z-50 flex gap-3 pb-8">
+            <button class="flex-1 bg-blue-600 text-white font-bold py-3.5 rounded-lg shadow-lg hover:bg-blue-700 transition">
+                예약하기
+            </button>
+        </div>
+    </div>
+</body>
+</html>
