@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>나오시마 워킹투어(목업)</title>
+    <title>상품 기획안 템플릿</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <style>
@@ -11,9 +11,11 @@
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
         .keep-all { word-break: keep-all; word-wrap: break-word; }
-        /* 코스 타임라인 선 */
+        /* 코스 타임라인 선 스타일 */
         .timeline-line { position: absolute; left: 19px; top: 10px; bottom: -20px; width: 2px; background-color: #E5E7EB; z-index: 0; }
         .last-item .timeline-line { display: none; }
+        /* 이미지 로딩 전 회색 박스 처리 */
+        .auto-img { min-height: 50px; background-color: #E5E7EB; }
     </style>
 </head>
 <body class="bg-[#F2F3F5] min-h-screen flex justify-center">
@@ -22,14 +24,14 @@
 
         <div class="relative w-full h-[560px] bg-gray-200">
             <div class="absolute top-0 left-0 w-full z-20 flex justify-between p-5 pt-6 text-white">
-                <button class="text-2xl drop-shadow-md">←</button>
+                <a href="../index.html" class="text-2xl drop-shadow-md cursor-pointer">←</a>
                 <div class="flex gap-4 drop-shadow-md">
                     <button>♥</button>
                     <button>🔗</button>
                 </div>
             </div>
 
-            <img src="./images/1.jpg" class="w-full h-full object-cover" alt="나오시마 메인">
+            <img data-img="1" class="w-full h-full object-cover auto-img" alt="메인 배너">
             
             <div class="absolute bottom-0 w-full h-[350px] bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
 
@@ -140,8 +142,8 @@
                 </div>
             </div>
 
-            <div class="mt-8 rounded-2xl overflow-hidden h-48 relative shadow-md">
-                <img src="./images/2.jpg" class="w-full h-full object-cover">
+            <div class="mt-8 rounded-2xl overflow-hidden h-48 relative shadow-md bg-gray-200">
+                <img data-img="2" class="w-full h-full object-cover auto-img" alt="상세 이미지">
                 <div class="absolute bottom-0 left-0 w-full bg-black/50 p-3">
                     <p class="text-white text-xs font-bold">📍 혼무라 지구의 여유로운 점심 시간</p>
                 </div>
@@ -189,8 +191,8 @@
                         <p class="text-sm text-gray-600 mt-1 mb-3 leading-relaxed">
                             자연광이 가장 아름다운 시간대에 <strong>모네와 제임스 터렐</strong>을 만납니다. 땅속에 지어진 안도 타다오의 건축 미학을 느껴보세요.
                         </p>
-                        <div class="rounded-xl overflow-hidden shadow-sm h-40">
-                            <img src="./images/3.jpg" class="w-full h-full object-cover">
+                        <div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200">
+                            <img data-img="3" class="w-full h-full object-cover auto-img" alt="코스 이미지">
                         </div>
                     </div>
                 </div>
@@ -249,7 +251,7 @@
             <span class="text-[#2A4700] font-bold text-[11px] uppercase border border-[#2A4700] px-2 py-0.5 rounded-full">HOST</span>
             <h2 class="text-xl font-bold mb-6 mt-3">건축과 예술을 사랑하는<br>전문 가이드입니다</h2>
             
-            <img src="./images/4.png" class="w-[120px] h-[120px] object-cover rounded-full mx-auto mb-5 shadow-lg border-4 border-white">
+            <img data-img="4" class="w-[120px] h-[120px] object-cover rounded-full mx-auto mb-5 shadow-lg border-4 border-white auto-img">
             
             <p class="text-gray-600 text-[15px] leading-relaxed keep-all">
                 "혼자 가면 30%밖에 보이지 않지만,<br>설명을 들으면 120%가 보입니다."<br><br>
@@ -293,5 +295,28 @@
         </div>
 
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const images = document.querySelectorAll('.auto-img');
+            const extensions = ['jpg', 'png', 'jpeg', 'webp']; // 우선순위
+            
+            images.forEach(img => {
+                const id = img.getAttribute('data-img');
+                if (!id) return;
+                let attempt = 0;
+                function tryLoad() {
+                    if (attempt >= extensions.length) return;
+                    const ext = extensions[attempt];
+                    const src = `./images/${id}.${ext}`;
+                    const tempImg = new Image();
+                    tempImg.src = src;
+                    tempImg.onload = () => { img.src = src; };
+                    tempImg.onerror = () => { attempt++; tryLoad(); };
+                }
+                tryLoad();
+            });
+        });
+    </script>
 </body>
 </html>
