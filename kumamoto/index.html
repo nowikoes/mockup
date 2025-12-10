@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>구마모토 올데이 투어</title>
+    <title>구마모토 워킹투어(주간+야간)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <style>
         body { font-family: "Pretendard Variable", Pretendard, sans-serif; }
         .hide-scroll::-webkit-scrollbar { display: none; }
         .keep-all { word-break: keep-all; word-wrap: break-word; }
-        /* 템플릿 공통 스타일 */
+        /* 타임라인 스타일 */
         .timeline-line { position: absolute; left: 19px; top: 10px; bottom: -20px; width: 2px; background-color: #E5E7EB; z-index: 0; }
         .last-item .timeline-line { display: none; }
+        /* 이미지 로딩 전 스타일 */
         .auto-img { min-height: 50px; background-color: #E5E7EB; }
     </style>
 </head>
@@ -36,14 +37,14 @@
             <div class="absolute bottom-10 left-6 right-6 text-white">
                 <div class="flex flex-wrap gap-2 mb-3">
                     <span class="bg-[#2A4700] text-[#B7D2B6] text-[11px] font-bold px-2 py-1 rounded border border-[#486326]">역사+쇼핑</span>
-                    <span class="bg-white/20 backdrop-blur-md text-white text-[11px] font-bold px-2 py-1 rounded">선택형 투어</span>
+                    <span class="bg-white/20 backdrop-blur-md text-white text-[11px] font-bold px-2 py-1 rounded border border-white/30">선택형 투어</span>
                 </div>
                 <h1 class="text-[28px] font-bold leading-[1.3] mb-3 keep-all">
-                    구마모토 완전 정복<br>빛과 그림자 & Night Vibe
+                    일본 3대 성 <br>그리고 장인의 숨결
                 </h1>
                 <p class="text-[15px] opacity-90 keep-all leading-relaxed">
-                    오전엔 웅장한 성과 역사를 산책하고,<br>
-                    오후엔 힙한 쇼핑과 야경을 즐깁니다.
+                    오전엔 건축과 역사를 걷는 인문학 산책,<br>
+                    오후엔 힙한 쇼핑과 야경을 즐기는 Night Vibe.
                 </p>
             </div>
         </div>
@@ -51,9 +52,9 @@
         <div class="bg-white rounded-t-[30px] -mt-6 relative z-10 px-6 pt-8 pb-6 shadow-sm">
             <div class="flex justify-between items-start text-center border-b border-gray-100 pb-6">
                 <div class="flex flex-col items-center gap-2 w-1/4">
-                    <span class="text-2xl">🚢</span>
+                    <span class="text-2xl">🚩</span>
                     <span class="text-[13px] font-bold text-gray-700">미팅</span>
-                    <span class="text-[11px] text-gray-500">조사이엔<br>파르코</span>
+                    <span class="text-[11px] text-gray-500">가라시마초<br>사쿠라마치</span>
                 </div>
                 <div class="flex flex-col items-center gap-2 w-1/4">
                     <span class="text-2xl">⏳</span>
@@ -75,9 +76,9 @@
             <div class="mt-6 bg-[#F9FAFB] rounded-2xl p-5">
                 <span class="text-[#2A4700] font-bold text-xs mb-2 block">💡 이런 분들께 추천해요</span>
                 <ul class="text-sm text-gray-600 space-y-2">
-                    <li class="flex items-start gap-2"><span>✔ 남들 다 가는 곳도 가고, 우리만의 의미도 찾고 싶은 분</span></li>
+                    <li class="flex items-start gap-2"><span>✔ 유명한 것만 보는 게 아니라 '제대로' 알고 싶은 분</span></li>
                     <li class="flex items-start gap-2"><span>✔ 후쿠오카 품절 대란에 지쳐 쇼핑 재고가 필요한 분</span></li>
-                    <li class="flex items-start gap-2"><span>✔ 밤에 할 게 없어 고민인 여행객</span></li>
+                    <li class="flex items-start gap-2"><span>✔ 건축적 가치가 있는 로컬 노포 맛집을 원하시는 분</span></li>
                 </ul>
             </div>
         </div>
@@ -93,15 +94,15 @@
                 <div class="flex items-start gap-5 relative z-10">
                     <div class="w-[76px] h-[76px] rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center text-3xl z-10">🏯</div>
                     <div class="pt-1">
-                        <h3 class="font-bold text-[#141719] text-lg mb-1">빛과 그림자 역사 산책</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed keep-all">화려한 랜드마크 이면에 숨겨진 조선 도공의 역사를 스토리텔링으로 풀어냅니다.</p>
+                        <h3 class="font-bold text-[#141719] text-lg mb-1">건축과 인문학</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed keep-all">난공불락의 요새를 만든 기술과 그 아래 터를 잡았던 조선 도공의 삶을 연결합니다.</p>
                     </div>
                 </div>
 
                 <div class="flex items-start gap-5 relative z-10">
                     <div class="w-[76px] h-[76px] rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center text-3xl z-10">🛍️</div>
                     <div class="pt-1">
-                        <h3 class="font-bold text-[#141719] text-lg mb-1">Night Vibe 쇼핑</h3>
+                        <h3 class="font-bold text-[#141719] text-lg mb-1">재고의 땅, 득템 가이드</h3>
                         <p class="text-gray-500 text-sm leading-relaxed keep-all">후쿠오카엔 없는 레어템 확보! 빈티지 디깅부터 백화점 텍스리펀까지 효율적으로.</p>
                     </div>
                 </div>
@@ -109,16 +110,9 @@
                 <div class="flex items-start gap-5 relative z-10">
                     <div class="w-[76px] h-[76px] rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center text-3xl z-10">🍽</div>
                     <div class="pt-1">
-                        <h3 class="font-bold text-[#141719] text-lg mb-1">실패 없는 로컬 미식</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed keep-all">100년 노포 식당부터 현지인 야타이(포장마차) 거리까지 찐 맛집 리스트 제공.</p>
+                        <h3 class="font-bold text-[#141719] text-lg mb-1">건축적 가치가 있는 미식</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed keep-all">단순한 식사가 아닙니다. 100년 노포와 문화재급 건물에서 즐기는 특별한 경험.</p>
                     </div>
-                </div>
-            </div>
-
-            <div class="mt-8 rounded-2xl overflow-hidden h-48 relative shadow-md bg-gray-200">
-                <img data-img="2" class="w-full h-full object-cover auto-img" alt="상세">
-                <div class="absolute bottom-0 left-0 w-full bg-black/50 p-3">
-                    <p class="text-white text-xs font-bold">📍 구마모토 성의 웅장한 모습</p>
                 </div>
             </div>
         </div>
@@ -133,103 +127,186 @@
             
             <div class="relative pl-2">
                 
-                <div class="mb-6">
-                    <span class="bg-[#2A4700] text-white text-xs font-bold px-2 py-1 rounded">☀️ 1부: 역사 산책</span>
+                <div class="mb-8">
+                    <span class="bg-[#2A4700] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">☀️ 1부: 역사 & 건축 산책</span>
                 </div>
 
                 <div class="flex gap-4 mb-10 relative z-10">
                     <div class="timeline-line"></div>
-                    <div class="w-10 h-10 rounded-full bg-[#141719] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">09:30</div>
+                    <div class="w-10 h-10 rounded-full bg-[#141719] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">10:00</div>
                     <div>
-                        <h3 class="font-bold text-lg text-gray-900">조사이엔 미팅</h3>
-                        <p class="text-sm text-gray-600 mt-1">"구마모토의 빛나는 현재와 아픈 과거를 함께 걷는 여행입니다." 오프닝.</p>
+                        <h3 class="font-bold text-lg text-gray-900">가라시마초 미팅</h3>
+                        <p class="text-sm text-gray-600 mt-1 leading-relaxed">
+                            구마모토의 빛나는 현재와 과거를 함께 걷는 여행입니다.<br>
+                            투어 테마 및 경로를 상세하게 브리핑 해드립니다.
+                        </p>
                     </div>
                 </div>
 
                 <div class="flex gap-4 mb-10 relative z-10">
                     <div class="timeline-line"></div>
-                    <div class="w-10 h-10 rounded-full bg-white border-2 border-[#141719] flex items-center justify-center text-xs font-bold shrink-0 z-10">09:40</div>
+                    <div class="w-10 h-10 rounded-full bg-white border-2 border-[#141719] flex items-center justify-center text-xs font-bold shrink-0 z-10">10:10</div>
                     <div>
-                        <h3 class="font-bold text-lg text-gray-900">구마모토성 & 가토 신사</h3>
-                        <p class="text-sm text-gray-600 mt-1">난공불락의 성벽과 조선 석공들의 이야기. 가토 기요마사의 양면성 고찰.</p>
+                        <h3 class="font-bold text-lg text-gray-900">성 진입로 & 해자 탐방</h3>
+                        <p class="text-sm text-gray-600 mt-1 leading-relaxed">
+                            미유키자카 오르막을 오르며 방어 시설의 위압감을 체험합니다. 해자가 적의 침입을 막는 원리를 알아봅니다.
+                        </p>
                     </div>
                 </div>
 
                 <div class="flex gap-4 mb-10 relative z-10">
                     <div class="timeline-line"></div>
-                    <div class="w-10 h-10 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center text-xs font-bold shrink-0 z-10">10:50</div>
-                    <div>
-                        <h3 class="font-bold text-lg text-gray-900">우루산마치(울산마을)</h3>
-                        <p class="text-sm text-gray-600 mt-1">"400년 전, 이곳에 우리 선조들이 살았습니다." 잊혀진 디아스포라의 삶.</p>
-                    </div>
-                </div>
-
-                <div class="flex gap-4 mb-10 relative z-10">
-                    <div class="timeline-line"></div>
-                    <div class="w-10 h-10 rounded-full bg-[#FFB44D] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">11:40</div>
-                    <div>
-                        <h3 class="font-bold text-lg text-gray-900">신마치 레트로 중식</h3>
-                        <p class="text-sm text-gray-600 mt-1">100년 노포 식당이 즐비한 거리. 현지인 추천 맛집 리스트 제공 (자유식).</p>
-                    </div>
-                </div>
-
-                <div class="flex gap-4 mb-10 relative z-10">
-                    <div class="timeline-line"></div>
-                    <div class="w-10 h-10 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center text-xs font-bold shrink-0 z-10">13:10</div>
-                    <div>
-                        <h3 class="font-bold text-lg text-gray-900">스이젠지 조주엔 정원</h3>
-                        <p class="text-sm text-gray-600 mt-1">무거운 역사를 뒤로하고 평화로운 정원에서 힐링. 후지산 언덕 & 고킨덴 찻집.</p>
-                    </div>
-                </div>
-
-                <div class="flex gap-4 mb-12 relative z-10">
-                    <div class="timeline-line bg-gray-100"></div>
-                    <div class="w-10 h-10 rounded-full bg-gray-400 text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">15:00</div>
-                    <div>
-                        <h3 class="font-bold text-lg text-gray-500">시내 복귀 및 휴식</h3>
-                        <p class="text-sm text-gray-400 mt-1">1부 종료. 카페에서 1시간 동안 휴식 및 휴대폰 충전.</p>
-                    </div>
-                </div>
-
-                <div class="mb-6">
-                    <span class="bg-[#141719] text-white text-xs font-bold px-2 py-1 rounded">🌙 2부: 쇼핑 & 야경</span>
-                </div>
-
-                <div class="flex gap-4 mb-10 relative z-10">
-                    <div class="timeline-line"></div>
-                    <div class="w-10 h-10 rounded-full bg-[#141719] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">16:00</div>
-                    <div>
-                        <h3 class="font-bold text-lg text-gray-900">파르코 앞 집결</h3>
-                        <p class="text-sm text-gray-600 mt-1">"후쿠오카에 없던 것들, 찾으러 가시죠."</p>
-                    </div>
-                </div>
-
-                <div class="flex gap-4 mb-10 relative z-10">
-                    <div class="timeline-line"></div>
-                    <div class="w-10 h-10 rounded-full bg-white border-2 border-[#141719] flex items-center justify-center text-xs font-bold shrink-0 z-10">16:10</div>
+                    <div class="w-10 h-10 rounded-full bg-[#2A4700] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">10:30</div>
                     <div class="w-full">
-                        <h3 class="font-bold text-lg text-gray-900">카미노우라 & 시모토리</h3>
-                        <p class="text-sm text-gray-600 mt-1 mb-3">빈티지 디깅부터 백화점 품절템 리벤지까지.</p>
+                        <h3 class="font-bold text-lg text-[#2A4700]">구마모토성 & 가토 신사</h3>
+                        <p class="text-sm text-gray-600 mt-1 mb-3 leading-relaxed">
+                            적을 막는 곡선 성벽 '무샤가에시'의 미학.<br>
+                            지진 복구 현장과 가토 기요마사의 조선 축성 기술 연관성을 깊이있게 알아봅니다.
+                        </p>
                         <div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200">
-                            <img data-img="3" class="w-full h-full object-cover auto-img">
+                            <img data-img="2" class="w-full h-full object-cover auto-img" alt="구마모토성">
                         </div>
                     </div>
                 </div>
 
                 <div class="flex gap-4 mb-10 relative z-10">
                     <div class="timeline-line"></div>
-                    <div class="w-10 h-10 rounded-full bg-[#5D5FEF] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">18:50</div>
+                    <div class="w-10 h-10 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center text-xs font-bold shrink-0 z-10">11:30</div>
                     <div>
-                        <h3 class="font-bold text-lg text-gray-900">시청 전망 로비 야경</h3>
-                        <p class="text-sm text-gray-600 mt-1">무료로 즐기는 구마모토 성 최고의 뷰 포인트.</p>
+                        <h3 class="font-bold text-lg text-gray-900">우루산마치(울산마을)</h3>
+                        <p class="text-sm text-gray-600 mt-1 leading-relaxed">
+                            "왜 일본의 성 바로 밑에 '울산'이 있을까?"<br>
+                            400년 전 끌려온 조선 도공들의 삶과 언어적 흔적을 짚어봅니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 mb-10 relative z-10">
+                    <div class="timeline-line"></div>
+                    <div class="w-10 h-10 rounded-full bg-[#FFB44D] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">12:00</div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-900">신마치 런치 큐레이션 (자유식)</h3>
+                        <p class="text-sm text-gray-600 mt-1 leading-relaxed">
+                            "실패 없는 성하 마을의 맛"<br>
+                            100년 전통 수타 소바, 줄 서는 가정식 등 엄선된 맛집 리스트를 제공합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 mb-10 relative z-10">
+                    <div class="timeline-line"></div>
+                    <div class="w-10 h-10 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center text-xs font-bold shrink-0 z-10">13:10</div>
+                    <div class="w-full">
+                        <h3 class="font-bold text-lg text-gray-900">후루마치 근대 건축 산책</h3>
+                        <p class="text-sm text-gray-600 mt-1 mb-3 leading-relaxed">
+                            에도/메이지 시대 상인들의 부를 보여주는 건축 양식.<br>
+                            센바 교의 너구리 동상 전설을 들어봅니다.
+                        </p>
+                        <div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200">
+                            <img data-img="3" class="w-full h-full object-cover auto-img" alt="후루마치 거리">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 mb-12 relative z-10">
+                    <div class="timeline-line bg-gray-100"></div>
+                    <div class="w-10 h-10 rounded-full bg-gray-400 text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">14:30</div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-500">카페 큐레이션 & 1부 종료</h3>
+                        <p class="text-sm text-gray-400 mt-1 leading-relaxed">
+                            문화재 건물에서 마시는 커피 한 잔.<br>
+                            야간 투어에 참여하시는 분들께는 잠시 휴식의 시간을 드립니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex justify-center mb-12">
+                    <div class="bg-gray-100 text-gray-500 text-xs px-4 py-2 rounded-full font-bold border border-gray-200">
+                        ☕️ Break Time (1시간 개별 휴식)
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <span class="bg-[#141719] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">🌙 2부: 쇼핑 & 야경</span>
+                </div>
+
+                <div class="flex gap-4 mb-10 relative z-10">
+                    <div class="timeline-line border-l-2 border-gray-700"></div>
+                    <div class="w-10 h-10 rounded-full bg-[#141719] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">16:30</div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-900">사쿠라마치 미팅</h3>
+                        <p class="text-sm text-gray-600 mt-1">
+                            "자유 시간은 없습니다. 따라오시면 끝납니다."<br>
+                            고객별 구매 희망 리스트 사전 체크하고 함께 전략을 짭니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 mb-10 relative z-10">
+                    <div class="timeline-line border-l-2 border-gray-700"></div>
+                    <div class="w-10 h-10 rounded-full bg-white border-2 border-gray-500 flex items-center justify-center text-xs font-bold shrink-0 z-10">16:40</div>
+                    <div class="w-full">
+                        <h3 class="font-bold text-lg text-gray-900">츠루야 백화점 공략</h3>
+                        <p class="text-sm text-gray-600 mt-1 mb-3 leading-relaxed">
+                            한국인 선호 브랜드(손수건, 잡화) 매장 직행.<br>
+                            선물 포장 요청 통역 및 한정 디저트 추천드려요.
+                        </p>
+                        <div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200">
+                            <img data-img="4" class="w-full h-full object-cover auto-img" alt="백화점 쇼핑">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 mb-10 relative z-10">
+                    <div class="timeline-line border-l-2 border-gray-700"></div>
+                    <div class="w-10 h-10 rounded-full bg-white border-2 border-gray-500 flex items-center justify-center text-xs font-bold shrink-0 z-10">17:20</div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-900">카미노우라 빈티지 디깅</h3>
+                        <p class="text-sm text-gray-600 mt-1 mb-3 leading-relaxed">
+                            구마모토의 우라-하라주쿠.<br>
+                            상태 좋은 폴로 셔츠, 워크웨어 등 '득템'의 성공여부는 과연 어떻게 알 수 있을까요?
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 mb-10 relative z-10">
+                    <div class="timeline-line border-l-2 border-gray-700"></div>
+                    <div class="w-10 h-10 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center text-xs font-bold shrink-0 z-10">18:00</div>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-900">시모토리 드럭스토어</h3>
+                        <p class="text-sm text-gray-600 mt-1">
+                            필수 의약품 & 화장품 위치 쪽집게처럼 알려드립니다.<br>
+                            짐 정리 및 최종 면세 수속까지 하실 수 있게 도와드려요.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 mb-10 relative z-10">
+                    <div class="timeline-line border-l-2 border-gray-700"></div>
+                    <div class="w-10 h-10 rounded-full bg-[#5D5FEF] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">18:40</div>
+                    <div class="w-full">
+                        <h3 class="font-bold text-lg text-gray-900">구마모토성 야경</h3>
+                        <p class="text-sm text-gray-600 mt-1 mb-3">
+                            쇼핑 미션 완료 후 홀가분하게 즐기는 무료 전망.<br>
+                            낮에 직접 방문했던 구마모토성에 조명이 들어오기 시작합니다. 
+                        </p>
+                        <div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200">
+                            <img data-img="5" class="w-full h-full object-cover auto-img" alt="구마모토성 야경">
+                        </div>
                     </div>
                 </div>
 
                 <div class="flex gap-4 relative z-10 last-item">
-                    <div class="w-10 h-10 rounded-full bg-[#141719] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">19:30</div>
-                    <div>
-                        <h3 class="font-bold text-lg text-gray-900">맛집 안내 및 해산</h3>
-                        <p class="text-sm text-gray-600 mt-1">바사시(말고기), 야타이(포장마차) 등 찐 로컬 맛집 리스트 제공.</p>
+                    <div class="w-10 h-10 rounded-full bg-[#141719] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">19:00</div>
+                    <div class="w-full">
+                        <h3 class="font-bold text-lg text-gray-900">긴자거리 뒤풀이 안내</h3>
+                        <p class="text-sm text-gray-600 mt-1 mb-3">
+                            현지인의 밤을 즐기는 법! <br>
+                            말고기(바사시), 야타이 등 진짜 로컬 맛집으로 안내해드리고 후 해산합니다.
+                        </p>
+                        <div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200">
+                            <img data-img="6" class="w-full h-full object-cover auto-img" alt="긴자거리 맛집">
+                        </div>
                     </div>
                 </div>
 
@@ -241,8 +318,9 @@
         <div class="bg-white py-10 px-6 text-center">
             <span class="text-[#2A4700] font-bold text-[11px] uppercase border border-[#2A4700] px-2 py-0.5 rounded-full">HOST</span>
             <h2 class="text-xl font-bold mb-6 mt-3">구마모토 로컬 마스터</h2>
-            <img data-img="4" class="w-[120px] h-[120px] object-cover rounded-full mx-auto mb-5 shadow-lg border-4 border-white auto-img">
-            <p class="text-gray-600 text-sm keep-all">"남들 다 가는 곳도 가지만, 우리만의 의미도 찾아야 진짜 여행이죠." 역사와 쇼핑을 책임집니다.</p>
+            <img data-img="7" class="w-[120px] h-[120px] object-cover rounded-full mx-auto mb-5 shadow-lg border-4 border-white auto-img">
+            <p class="text-gray-600 text-sm keep-all">"남들 다 가는 곳도 가지만, 우리만의 의미도 찾아야 진짜 여행이죠."<br>
+            구마모토에서 나고자란 로컬 마스터의 노하우를 모아봤습니다. 이제 더이상 구마모토가 경유지로 느껴지지 않으실거예요. </p>
         </div>
 
         <div class="h-3 bg-[#F2F3F5]"></div>
@@ -252,15 +330,11 @@
                 <h3 class="font-bold text-gray-900 mb-2">✅ 예약 전 확인</h3>
                 <div class="border-b border-gray-200 pb-3">
                     <span class="block text-xs font-bold text-gray-500 mb-1">포함 사항</span>
-                    <p class="text-sm text-gray-800">전문 가이드, 로컬 맛집 리스트</p>
+                    <p class="text-sm text-gray-800">전문 가이드의 해설 및 로컬 큐레이션, 구마모토성 입장료(주간, 올데이 참여 한정) </p>
                 </div>
                 <div class="border-b border-gray-200 pb-3">
                     <span class="block text-xs font-bold text-gray-500 mb-1">불포함 사항</span>
-                    <p class="text-sm text-gray-800">식사비, 교통비(전차 등), 개인 쇼핑비</p>
-                </div>
-                <div>
-                    <span class="block text-xs font-bold text-gray-500 mb-1">참고 사항</span>
-                    <p class="text-sm text-gray-800">1부 종료 후 1시간 휴식 시간이 있습니다.</p>
+                    <p class="text-sm text-gray-800">식사비, 음료비, 개인 쇼핑비</p>
                 </div>
             </div>
         </div>
@@ -269,7 +343,7 @@
             <div class="mb-3">
                 <label class="text-xs font-bold text-gray-500 mb-1 block ml-1">옵션 선택</label>
                 <select id="price-option" onchange="updatePrice()" class="w-full bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-lg focus:ring-[#2A4700] focus:border-[#2A4700] block p-2.5">
-                    <option value="69000">✨ [BEST] 올데이 투어 (Day+Night)</option>
+                    <option value="59000">✨  올데이 투어 (Day+Night)</option>
                     <option value="49000">☀️ [DAY] 역사 산책 투어 (오전)</option>
                     <option value="29000">🌙 [NIGHT] 쇼핑 & 야경 투어 (오후)</option>
                 </select>
@@ -277,7 +351,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex flex-col">
                     <span class="text-xs text-gray-400">1인 가격</span>
-                    <span id="display-price" class="font-bold text-xl text-[#2A4700]">69,000원</span>
+                    <span id="display-price" class="font-bold text-xl text-[#2A4700]">59,000원</span>
                 </div>
                 <button onclick="alert('예약 페이지로 이동')" class="bg-[#2A4700] text-white font-bold py-3 px-10 rounded-xl hover:bg-[#1D2E01] transition active:scale-95 shadow-lg">
                     예약하기

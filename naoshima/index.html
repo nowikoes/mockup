@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>나오시마 워킹투어</title>
+    <title>나오시마 미식 워킹투어</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <style>
         body { font-family: "Pretendard Variable", Pretendard, sans-serif; }
         .hide-scroll::-webkit-scrollbar { display: none; }
         .keep-all { word-break: keep-all; word-wrap: break-word; }
+        /* 타임라인 스타일 */
         .timeline-line { position: absolute; left: 19px; top: 10px; bottom: -20px; width: 2px; background-color: #E5E7EB; z-index: 0; }
         .last-item .timeline-line { display: none; }
+        /* 이미지 로딩 전 스타일 */
         .auto-img { min-height: 50px; background-color: #E5E7EB; }
     </style>
 </head>
 <body class="bg-[#F2F3F5] min-h-screen flex justify-center">
 
-    <div class="w-full max-w-[430px] bg-white min-h-screen shadow-2xl relative pb-28">
+    <div class="w-full max-w-[430px] bg-white min-h-screen shadow-2xl relative pb-36">
 
         <div class="relative w-full h-[560px] bg-gray-200">
             <div class="absolute top-0 left-0 w-full z-20 flex justify-between p-5 pt-6 text-white">
@@ -27,12 +29,15 @@
                     <button>🔗</button>
                 </div>
             </div>
-            <img data-img="1" class="w-full h-full object-cover auto-img">
+
+            <img data-img="1" class="w-full h-full object-cover auto-img" alt="나오시마 메인">
+            
             <div class="absolute bottom-0 w-full h-[350px] bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+
             <div class="absolute bottom-10 left-6 right-6 text-white">
                 <div class="flex flex-wrap gap-2 mb-3">
                     <span class="bg-[#2A4700] text-[#B7D2B6] text-[11px] font-bold px-2 py-1 rounded border border-[#486326]">단독 한국어 투어</span>
-                    <span class="bg-white/20 backdrop-blur-md text-white text-[11px] font-bold px-2 py-1 rounded">건축+미식</span>
+                    <span class="bg-white/20 backdrop-blur-md text-white text-[11px] font-bold px-2 py-1 rounded border border-white/30">건축+미식</span>
                 </div>
                 <h1 class="text-[28px] font-bold leading-[1.3] mb-3 keep-all">
                     자연에 스며든 건축, 그 속의 예술<br>나오시마 미식 워킹투어
@@ -49,7 +54,7 @@
                 <div class="flex flex-col items-center gap-2 w-1/4">
                     <span class="text-2xl">🚢</span>
                     <span class="text-[13px] font-bold text-gray-700">미팅</span>
-                    <span class="text-[11px] text-gray-500">다카마쓰항<br>08:12</span>
+                    <span class="text-[11px] text-gray-500">다카마쓰항<br>08:00</span>
                 </div>
                 <div class="flex flex-col items-center gap-2 w-1/4">
                     <span class="text-2xl">⏳</span>
@@ -67,11 +72,12 @@
                     <span class="text-[11px] text-gray-500">한국어<br>전문</span>
                 </div>
             </div>
+
             <div class="mt-6 bg-[#F9FAFB] rounded-2xl p-5">
                 <span class="text-[#2A4700] font-bold text-xs mb-2 block">💡 이런 분들께 추천해요</span>
                 <ul class="text-sm text-gray-600 space-y-2">
                     <li class="flex items-start gap-2"><span>✔ 미술관만 찍는 '숙제 같은 여행'이 싫으신 분</span></li>
-                    <li class="flex items-start gap-2"><span>✔ 건축 의도를 한국어로 깊이 있게 듣고 싶은 분</span></li>
+                    <li class="flex items-start gap-2"><span>✔ 작품 배경과 건축 의도를 한국어로 듣고 싶은 분</span></li>
                     <li class="flex items-start gap-2"><span>✔ 편의점 빵 대신 제대로 된 현지 식사를 원하시는 분</span></li>
                 </ul>
             </div>
@@ -81,34 +87,32 @@
 
         <div class="bg-white py-10 px-6">
             <h2 class="text-[#2A4700] text-xl font-bold mb-6">왜 이 투어여야 할까요?</h2>
+            
             <div class="flex flex-col gap-8 relative">
                 <div class="absolute left-[38px] top-4 bottom-4 w-[1px] bg-gray-100"></div>
+
                 <div class="flex items-start gap-5 relative z-10">
                     <div class="w-[76px] h-[76px] rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center text-3xl z-10">🇰🇷</div>
                     <div class="pt-1">
                         <h3 class="font-bold text-[#141719] text-lg mb-1">유일무이 한국어 해설</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed keep-all">그냥 보면 '벽'이지만, 알고 보면 '감동'이 됩니다.</p>
+                        <p class="text-gray-500 text-sm leading-relaxed keep-all">그냥 보면 '벽'이지만, 알고 보면 '감동'이 됩니다. 안도 타다오와 모네의 이야기를 우리말로 생생하게.</p>
                     </div>
                 </div>
+
                 <div class="flex items-start gap-5 relative z-10">
                     <div class="w-[76px] h-[76px] rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center text-3xl z-10">⚖️</div>
                     <div class="pt-1">
                         <h3 class="font-bold text-[#141719] text-lg mb-1">선택과 집중의 미학</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed keep-all">오전엔 지중미술관 집중, 오후엔 마을 산책. 다리 아픈 강행군이 아닌 진짜 여행.</p>
+                        <p class="text-gray-500 text-sm leading-relaxed keep-all">오전엔 지중미술관 집중, 오후엔 마을 산책. 다리 아픈 강행군이 아닌 진짜 여행을 합니다.</p>
                     </div>
                 </div>
+
                 <div class="flex items-start gap-5 relative z-10">
                     <div class="w-[76px] h-[76px] rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center text-3xl z-10">🍽</div>
                     <div class="pt-1">
                         <h3 class="font-bold text-[#141719] text-lg mb-1">실패 없는 '혼무라 미식회'</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed keep-all">관광지 급식은 그만. 가이드 추천 로컬 맛집 리스트 제공.</p>
+                        <p class="text-gray-500 text-sm leading-relaxed keep-all">관광지 급식은 그만. 가이드 추천 로컬 맛집 리스트를 제공하고 자유 식사 시간을 보장합니다.</p>
                     </div>
-                </div>
-            </div>
-            <div class="mt-8 rounded-2xl overflow-hidden h-48 relative shadow-md bg-gray-200">
-                <img data-img="2" class="w-full h-full object-cover auto-img" alt="상세">
-                <div class="absolute bottom-0 left-0 w-full bg-black/50 p-3">
-                    <p class="text-white text-xs font-bold">📍 혼무라 지구의 여유로운 점심 시간</p>
                 </div>
             </div>
         </div>
@@ -116,29 +120,36 @@
         <div class="h-3 bg-[#F2F3F5]"></div>
 
         <div class="bg-white py-10 px-6">
-            <h2 class="text-xl font-bold mb-8">🗺️ 투어 코스 안내</h2>
+            <h2 class="text-xl font-bold mb-8 flex items-center gap-2">
+                🗺️ 투어 코스 안내
+                <span class="text-xs font-normal text-gray-400 ml-auto">Full Day</span>
+            </h2>
+            
             <div class="relative pl-2">
                 
                 <div class="flex gap-4 mb-10 relative z-10">
                     <div class="timeline-line"></div>
                     <div class="w-10 h-10 rounded-full bg-[#141719] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">08:12</div>
                     <div>
-                        <h3 class="font-bold text-lg text-gray-900">다카마쓰항 미팅</h3>
+                        <h3 class="font-bold text-lg text-gray-900">다카마쓰항 미팅 & 출항</h3>
                         <p class="text-sm text-gray-600 mt-1 leading-relaxed">
-                            갑판에서 바다 감상하며 사전 브리핑.<br>
-                            (작가 설명, 건축 배경 등)
+                            갑판에서 바다 감상하며 여행 기분 UP!<br>
+                            이동 중 <strong>작가 및 건축 배경 사전 브리핑</strong> 진행.
                         </p>
                     </div>
                 </div>
 
                 <div class="flex gap-4 mb-10 relative z-10">
                     <div class="timeline-line"></div>
-                    <div class="w-10 h-10 rounded-full bg-white border-2 border-[#141719] flex items-center justify-center text-xs font-bold shrink-0 z-10">09:02</div>
-                    <div>
-                        <h3 class="font-bold text-lg text-gray-900">나오시마 도착</h3>
-                        <p class="text-sm text-gray-600 mt-1">
-                            구사마 야요이의 '빨간 호박' & 'I♥YU' 목욕탕 관람 및 버스 탑승.
+                    <div class="w-10 h-10 rounded-full bg-white border-2 border-[#141719] flex items-center justify-center text-xs font-bold shrink-0 z-10">09:00</div>
+                    <div class="w-full">
+                        <h3 class="font-bold text-lg text-gray-900">나오시마 도착 & 빨간 호박</h3>
+                        <p class="text-sm text-gray-600 mt-1 mb-3">
+                            구사마 야요이의 '빨간 호박'과 'I♥YU' 목욕탕 앞 인증샷 타임 후 버스 이동.
                         </p>
+                        <div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200">
+                            <img data-img="2" class="w-full h-full object-cover auto-img" alt="미야노우라항">
+                        </div>
                     </div>
                 </div>
 
@@ -148,10 +159,10 @@
                     <div class="w-full">
                         <h3 class="font-bold text-lg text-[#2A4700]">지중 미술관 집중 관람</h3>
                         <p class="text-sm text-gray-600 mt-1 mb-3 leading-relaxed">
-                            자연광이 가장 아름다운 시간대에 <strong>모네와 제임스 터렐</strong>을 만납니다. 땅속에 지어진 안도 타다오의 건축 미학.
+                            자연광이 가장 아름다운 시간대에 <strong>모네와 제임스 터렐</strong>을 만납니다. 땅속에 지어진 안도 타다오의 건축 미학을 느껴보세요.
                         </p>
                         <div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200">
-                            <img data-img="3" class="w-full h-full object-cover auto-img">
+                            <img data-img="3" class="w-full h-full object-cover auto-img" alt="지중 미술관">
                         </div>
                     </div>
                 </div>
@@ -159,34 +170,44 @@
                 <div class="flex gap-4 mb-10 relative z-10">
                     <div class="timeline-line"></div>
                     <div class="w-10 h-10 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center text-xs font-bold shrink-0 z-10">11:30</div>
-                    <div>
+                    <div class="w-full">
                         <h3 class="font-bold text-lg text-gray-900">베네세 하우스 & 노란 호박</h3>
-                        <p class="text-sm text-gray-600 mt-1">
-                            바다 풍경 힐링 산책 & 노란 호박 인증샷.
+                        <p class="text-sm text-gray-600 mt-1 mb-3">
+                            바다 풍경을 보며 힐링 산책.<br>
+                            나오시마의 아이콘 '노란 호박' 앞에서 인생샷을 남깁니다.
                         </p>
+                        <div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200">
+                            <img data-img="4" class="w-full h-full object-cover auto-img" alt="노란 호박">
+                        </div>
                     </div>
                 </div>
 
                 <div class="flex gap-4 mb-10 relative z-10">
                     <div class="timeline-line"></div>
                     <div class="w-10 h-10 rounded-full bg-[#FFB44D] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">12:30</div>
-                    <div>
+                    <div class="w-full">
                         <h3 class="font-bold text-lg text-gray-900">혼무라 미식회 (자유식)</h3>
-                        <p class="text-sm text-gray-600 mt-1 leading-relaxed">
+                        <p class="text-sm text-gray-600 mt-1 mb-3 leading-relaxed">
                             <strong>100분의 여유로운 시간.</strong><br>
-                            가이드 추천 맛집 & 고민가 카페에서 휴식.
+                            가이드가 추천하는 맛집에서 식사하고, 고민가 카페에서 커피 한 잔의 여유를 즐기세요.
                         </p>
+                        <div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200">
+                            <img data-img="5" class="w-full h-full object-cover auto-img" alt="혼무라 런치">
+                        </div>
                     </div>
                 </div>
 
                 <div class="flex gap-4 mb-10 relative z-10">
                     <div class="timeline-line"></div>
                     <div class="w-10 h-10 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center text-xs font-bold shrink-0 z-10">14:10</div>
-                    <div>
-                        <h3 class="font-bold text-lg text-gray-900">이에(家) 프로젝트 산책</h3>
-                        <p class="text-sm text-gray-600 mt-1">
-                            오래된 빈집을 예술 작품으로 바꾼 골목길 탐방. (미나미데라, 고오 신사 등)
+                    <div class="w-full">
+                        <h3 class="font-bold text-lg text-gray-900">이에(家) 프로젝트 골목 산책</h3>
+                        <p class="text-sm text-gray-600 mt-1 mb-3">
+                            오래된 빈집을 예술 작품으로 바꾼 골목길을 탐방합니다. (미나미데라, 고오 신사 등 자율 관람)
                         </p>
+                        <div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200">
+                            <img data-img="6" class="w-full h-full object-cover auto-img" alt="골목 산책">
+                        </div>
                     </div>
                 </div>
 
@@ -194,7 +215,10 @@
                     <div class="w-10 h-10 rounded-full bg-[#141719] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">17:30</div>
                     <div>
                         <h3 class="font-bold text-lg text-gray-900">다카마쓰항 도착 및 해산</h3>
-                        <p class="text-sm text-gray-600 mt-1">혼무라항에서 고속선 탑승 후 복귀.</p>
+                        <p class="text-sm text-gray-600 mt-1">
+                            혼무라항에서 고속선 탑승 후 복귀.<br>
+                            수고하셨습니다! 즐거운 저녁 되세요.
+                        </p>
                     </div>
                 </div>
 
@@ -205,21 +229,37 @@
 
         <div class="bg-white py-10 px-6 text-center">
             <span class="text-[#2A4700] font-bold text-[11px] uppercase border border-[#2A4700] px-2 py-0.5 rounded-full">HOST</span>
-            <h2 class="text-xl font-bold mb-6 mt-3">예술을 사랑하는 가이드</h2>
-            <img data-img="4" class="w-[120px] h-[120px] object-cover rounded-full mx-auto mb-5 shadow-lg border-4 border-white auto-img">
-            <p class="text-gray-600 text-sm keep-all">"혼자 가면 30%밖에 보이지 않지만, 설명을 들으면 120%가 보입니다."</p>
+            <h2 class="text-xl font-bold mb-6 mt-3">건축과 예술을 사랑하는<br>전문 가이드입니다</h2>
+            
+            <img data-img="7" class="w-[120px] h-[120px] object-cover rounded-full mx-auto mb-5 shadow-lg border-4 border-white auto-img">
+            
+            <p class="text-gray-600 text-[15px] leading-relaxed keep-all">
+                "혼자 가면 30%밖에 보이지 않지만,<br>설명을 들으면 120%가 보입니다."<br><br>
+                다카마쓰 직항으로 오시는 여러분께<br>
+                나오시마의 진짜 매력을 알려드리고 싶어<br>
+                이 투어를 기획했습니다.
+            </p>
         </div>
 
-        <div class="bg-white px-6 pb-10">
+        <div class="h-3 bg-[#F2F3F5]"></div>
+
+        <div class="bg-white px-6 pb-10 pt-10">
             <div class="bg-[#F9FAFB] rounded-2xl p-5 space-y-3 text-left">
                 <h3 class="font-bold text-gray-900 mb-2">✅ 예약 전 확인</h3>
                 <div class="border-b border-gray-200 pb-3">
                     <span class="block text-xs font-bold text-gray-500 mb-1">포함 사항</span>
-                    <p class="text-sm text-gray-800">왕복 페리/고속선 승선권, 지중미술관 입장료, 섬 내 버스비, 전문 가이드</p>
+                    <p class="text-sm text-gray-800">왕복 페리/고속선 승선권, 지중 미술관 입장료, 섬 내 버스비, 전문 가이드</p>
                 </div>
                 <div class="border-b border-gray-200 pb-3">
                     <span class="block text-xs font-bold text-gray-500 mb-1">불포함 사항</span>
-                    <p class="text-sm text-gray-800">점심 식사 비용, 자유시간 중 기타 개인 경비</p>
+                    <p class="text-sm text-gray-800">점심 식사 비용, 자유관람 미술관, 기타 개인 경비</p>
+                </div>
+                <div>
+                    <span class="block text-xs font-bold text-gray-500 mb-1">참고 사항</span>
+                    <p class="text-sm text-gray-800">
+                        - 많이 걷는 투어입니다. 편한 신발을 착용해주세요.<br>
+                        - 우천 시에도 정상 진행됩니다. (실내 위주)
+                    </p>
                 </div>
             </div>
         </div>
@@ -229,7 +269,9 @@
                 <span class="text-xs text-gray-400 line-through">129,000원</span>
                 <span class="font-bold text-xl text-[#2A4700]">89,000원</span>
             </div>
-            <button onclick="alert('예약 페이지로 이동')" class="bg-[#2A4700] text-white font-bold py-3.5 px-8 rounded-xl hover:bg-[#1D2E01] transition active:scale-95 shadow-lg">예약하기</button>
+            <button onclick="alert('판매 승인 대기 중인 상품입니다.')" class="bg-[#2A4700] text-white font-bold py-3.5 px-8 rounded-xl hover:bg-[#1D2E01] transition active:scale-95 shadow-lg shadow-green-900/20">
+                예약하기
+            </button>
         </div>
 
     </div>
