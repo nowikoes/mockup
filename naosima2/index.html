@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>나오시마 워킹투어</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <style>
+        body { font-family: "Pretendard Variable", Pretendard, sans-serif; }
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .keep-all { word-break: keep-all; word-wrap: break-word; }
+        .timeline-line { position: absolute; left: 19px; top: 10px; bottom: -20px; width: 2px; background-color: #E5E7EB; z-index: 0; }
+        .last-item .timeline-line { display: none; }
+        .auto-img { min-height: 50px; background-color: #E5E7EB; }
+    </style>
+</head>
+<body class="bg-[#F2F3F5] min-h-screen flex justify-center">
+
+    <div class="w-full max-w-[430px] bg-white min-h-screen shadow-2xl relative pb-28">
+
+        <div class="relative w-full h-[560px] bg-gray-200">
+            <div class="absolute top-0 left-0 w-full z-20 flex justify-between p-5 pt-6 text-white">
+                <a href="../index.html" class="text-2xl drop-shadow-md cursor-pointer">←</a>
+                <div class="flex gap-4 drop-shadow-md">
+                    <button>♥</button>
+                    <button>🔗</button>
+                </div>
+            </div>
+
+            <img data-img="1" class="w-full h-full object-cover auto-img" alt="메인">
+            <div class="absolute bottom-0 w-full h-[350px] bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+
+            <div class="absolute bottom-10 left-6 right-6 text-white">
+                <div class="flex flex-wrap gap-2 mb-3">
+                    <span class="bg-[#2A4700] text-[#B7D2B6] text-[11px] font-bold px-2 py-1 rounded border border-[#486326]">단독 한국어 투어</span>
+                    <span class="bg-white/20 backdrop-blur-md text-white text-[11px] font-bold px-2 py-1 rounded">건축+미식</span>
+                </div>
+                <h1 class="text-[28px] font-bold leading-[1.3] mb-3 keep-all">
+                    자연에 스며든 건축, 그 속의 예술<br>나오시마 미식 워킹투어
+                </h1>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-t-[30px] -mt-6 relative z-10 px-6 pt-8 pb-6 shadow-sm">
+            <div class="flex justify-between items-start text-center border-b border-gray-100 pb-6">
+                <div class="flex flex-col items-center gap-2 w-1/4">
+                    <span class="text-2xl">🚢</span>
+                    <span class="text-[13px] font-bold text-gray-700">미팅</span>
+                    <span class="text-[11px] text-gray-500">다카마쓰항<br>08:12</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 w-1/4">
+                    <span class="text-2xl">⏳</span>
+                    <span class="text-[13px] font-bold text-gray-700">소요</span>
+                    <span class="text-[11px] text-gray-500">9시간<br>(Full)</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 w-1/4">
+                    <span class="text-2xl">👥</span>
+                    <span class="text-[13px] font-bold text-gray-700">인원</span>
+                    <span class="text-[11px] text-gray-500">최대 14명<br>소규모</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 w-1/4">
+                    <span class="text-2xl">🗣</span>
+                    <span class="text-[13px] font-bold text-gray-700">언어</span>
+                    <span class="text-[11px] text-gray-500">한국어<br>전문</span>
+                </div>
+            </div>
+            
+            <div class="mt-6 bg-[#F9FAFB] rounded-2xl p-5">
+                <span class="text-[#2A4700] font-bold text-xs mb-2 block">💡 이런 분들께 추천해요</span>
+                <ul class="text-sm text-gray-600 space-y-2">
+                    <li class="flex items-start gap-2"><span>✔ 미술관만 찍는 '숙제 같은 여행'이 싫으신 분</span></li>
+                    <li class="flex items-start gap-2"><span>✔ 건축 의도를 한국어로 깊이 있게 듣고 싶은 분</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="h-3 bg-[#F2F3F5]"></div>
+
+        <div class="bg-white py-10 px-6">
+            <h2 class="text-[#2A4700] text-xl font-bold mb-6">왜 이 투어여야 할까요?</h2>
+            <div class="flex flex-col gap-8 relative">
+                <div class="absolute left-[38px] top-4 bottom-4 w-[1px] bg-gray-100"></div>
+                <div class="flex items-start gap-5 relative z-10">
+                    <div class="w-[76px] h-[76px] rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center text-3xl z-10">🇰🇷</div>
+                    <div class="pt-1">
+                        <h3 class="font-bold text-[#141719] text-lg mb-1">유일무이 한국어 해설</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed keep-all">그냥 보면 '벽'이지만, 알고 보면 '감동'이 됩니다.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-5 relative z-10">
+                    <div class="w-[76px] h-[76px] rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center text-3xl z-10">🍽</div>
+                    <div class="pt-1">
+                        <h3 class="font-bold text-[#141719] text-lg mb-1">실패 없는 '혼무라 미식회'</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed keep-all">관광지 급식은 그만. 엄선한 로컬 맛집 리스트 제공.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 rounded-2xl overflow-hidden h-48 relative shadow-md bg-gray-200">
+                <img data-img="2" class="w-full h-full object-cover auto-img" alt="상세">
+            </div>
+        </div>
+
+        <div class="h-3 bg-[#F2F3F5]"></div>
+
+        <div class="bg-white py-10 px-6">
+            <h2 class="text-xl font-bold mb-8">🗺️ 투어 코스 안내</h2>
+            <div class="relative pl-2">
+                <div class="flex gap-4 mb-10 relative z-10">
+                    <div class="timeline-line"></div>
+                    <div class="w-10 h-10 rounded-full bg-[#141719] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">08:12</div>
+                    <div><h3 class="font-bold text-lg text-gray-900">다카마쓰항 미팅</h3><p class="text-sm text-gray-600 mt-1">이동 중 작가 및 건축 배경 사전 브리핑.</p></div>
+                </div>
+                <div class="flex gap-4 mb-10 relative z-10">
+                    <div class="timeline-line"></div>
+                    <div class="w-10 h-10 rounded-full bg-[#2A4700] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">09:55</div>
+                    <div class="w-full">
+                        <h3 class="font-bold text-lg text-[#2A4700]">지중 미술관 집중 관람</h3>
+                        <p class="text-sm text-gray-600 mt-1 mb-3">자연광이 가장 아름다운 시간대에 만납니다.</p>
+                        <div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200"><img data-img="3" class="w-full h-full object-cover auto-img"></div>
+                    </div>
+                </div>
+                <div class="flex gap-4 relative z-10 last-item">
+                    <div class="w-10 h-10 rounded-full bg-[#141719] text-white flex items-center justify-center text-xs font-bold shrink-0 z-10">17:30</div>
+                    <div><h3 class="font-bold text-lg text-gray-900">투어 종료</h3></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h-3 bg-[#F2F3F5]"></div>
+
+        <div class="bg-white py-10 px-6 text-center">
+            <span class="text-[#2A4700] font-bold text-[11px] uppercase border border-[#2A4700] px-2 py-0.5 rounded-full">HOST</span>
+            <h2 class="text-xl font-bold mb-6 mt-3">예술을 사랑하는 가이드</h2>
+            <img data-img="4" class="w-[120px] h-[120px] object-cover rounded-full mx-auto mb-5 shadow-lg border-4 border-white auto-img">
+            <p class="text-gray-600 text-sm keep-all">나오시마의 진짜 매력을 알려드리고 싶어 이 투어를 기획했습니다.</p>
+        </div>
+
+        <div class="fixed bottom-0 max-w-[430px] w-full bg-white border-t border-gray-100 p-4 pb-8 z-50 flex items-center justify-between shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+            <div class="flex flex-col">
+                <span class="text-xs text-gray-400 line-through">129,000원</span>
+                <span class="font-bold text-xl text-[#2A4700]">89,000원</span>
+            </div>
+            <button onclick="alert('예약 페이지로 이동')" class="bg-[#2A4700] text-white font-bold py-3.5 px-8 rounded-xl hover:bg-[#1D2E01] transition active:scale-95">예약하기</button>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelectorAll(".auto-img"),t=["jpg","png","jpeg","webp"];e.forEach(e=>{const n=e.getAttribute("data-img");if(!n)return;let r=0;!function o(){if(r>=t.length)return;const c=t[r],i=`./images/${n}.${c}`,a=new Image;a.src=i,a.onload=()=>{e.src=i},a.onerror=()=>{r++,o()}}()})});
+    </script>
+</body>
+</html>
