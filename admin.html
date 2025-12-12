@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상품 페이지 생성기 (V6.0)</title>
+    <title>상품 페이지 생성기 (V6.0 Style)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
     <style>
@@ -11,14 +11,35 @@
         .input-label { display: block; font-size: 0.9rem; font-weight: 700; color: #374151; margin-bottom: 5px; }
         .input-field { width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px; margin-bottom: 15px; }
         .section-box { background: white; padding: 25px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .color-picker { height: 50px; padding: 5px; cursor: pointer; }
     </style>
 </head>
 <body class="p-4 md:p-10 max-w-5xl mx-auto">
 
     <header class="mb-10 text-center">
-        <h1 class="text-3xl font-bold text-[#2A4700]">🛠️ 상품 페이지 생성기 V6.0</h1>
-        <p class="text-gray-500 mt-2">스크립트 충돌 방지 로직 적용 완료.</p>
+        <h1 class="text-3xl font-bold text-gray-800">🛠️ 상품 페이지 생성기 V6.0</h1>
+        <p class="text-gray-500 mt-2">스타일 커스텀 & 이미지 가이드 기능 탑재</p>
     </header>
+
+    <div class="section-box border-l-8 border-blue-500">
+        <h2 class="text-xl font-bold mb-4 border-b pb-2 flex items-center">🎨 0. 스타일 가이드 (테마 설정)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="input-label">메인 브랜드 컬러 (Primary Color)</label>
+                <div class="flex gap-2">
+                    <input type="color" id="theme_color" class="input-field color-picker w-20" value="#2A4700" onchange="updatePreviewColor(this.value)">
+                    <input type="text" id="theme_color_text" class="input-field w-full" value="#2A4700" readonly>
+                </div>
+                <p class="text-xs text-gray-500">* 버튼, 아이콘, 강조 텍스트의 색상이 이 색으로 변경됩니다.</p>
+            </div>
+            <div>
+                <label class="input-label">미리보기</label>
+                <button id="preview_btn" class="w-full text-white font-bold py-3 px-8 rounded-xl shadow-lg transition" style="background-color: #2A4700;">
+                    이런 색상으로 나옵니다
+                </button>
+            </div>
+        </div>
+    </div>
 
     <div class="section-box">
         <h2 class="text-xl font-bold mb-4 border-b pb-2">1. 기본 정보</h2>
@@ -48,15 +69,29 @@
         </div>
     </div>
 
+    <div class="section-box bg-gray-50 border border-gray-200">
+        <h2 class="text-xl font-bold mb-4 border-b pb-2">📷 2. 이미지 파일 준비 가이드</h2>
+        <p class="text-sm text-gray-600 mb-4">
+            아래 번호에 맞춰 이미지를 준비해서 <code>images</code> 폴더에 넣어주세요.<br>
+            <span class="text-red-500 font-bold">* 파일명 예시: 1.jpg, 2.png, 3.jpeg (확장자 무관)</span>
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm bg-white p-4 rounded-lg border">
+            <div class="p-2 border-b">📁 <strong>1번</strong> : 메인 상단 배너 (필수)</div>
+            <div class="p-2 border-b">📁 <strong>2번</strong> : 차별점(Kick) 섹션 이미지 (필수)</div>
+            <div class="p-2 border-b">📁 <strong>3번</strong> : 가이드 프로필 사진 (필수)</div>
+            <div class="p-2 border-b text-blue-600">📁 <strong>4번 ~ N번</strong> : 아래 타임라인에서 추가하는 순서대로 자동 할당</div>
+        </div>
+    </div>
+
     <div class="section-box">
-        <h2 class="text-xl font-bold mb-4 border-b pb-2">2. 추천 포인트 (3가지)</h2>
+        <h2 class="text-xl font-bold mb-4 border-b pb-2">3. 추천 포인트 (3가지)</h2>
         <input type="text" id="rec1" class="input-field" value="미술관만 찍는 숙제 같은 여행이 싫으신 분">
         <input type="text" id="rec2" class="input-field" value="작품 배경 설명이 필요한 분">
         <input type="text" id="rec3" class="input-field" value="맛있는 로컬 식사를 원하시는 분">
     </div>
 
     <div class="section-box">
-        <h2 class="text-xl font-bold mb-4 border-b pb-2">3. 핵심 차별점 (Kick)</h2>
+        <h2 class="text-xl font-bold mb-4 border-b pb-2">4. 핵심 차별점 (Kick)</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="bg-gray-50 p-3 rounded-lg">
                 <input type="text" id="k1_t" class="input-field" value="한국어 해설">
@@ -75,14 +110,15 @@
 
     <div class="section-box">
         <div class="flex justify-between items-center mb-4 border-b pb-2">
-            <h2 class="text-xl font-bold">4. 코스 타임라인</h2>
-            <button onclick="addTimeline()" class="bg-gray-200 px-3 py-1 rounded text-sm font-bold hover:bg-gray-300">+ 추가</button>
+            <h2 class="text-xl font-bold">5. 코스 타임라인</h2>
+            <button onclick="addTimeline()" class="bg-gray-200 px-3 py-1 rounded text-sm font-bold hover:bg-gray-300">+ 일정 추가</button>
         </div>
+        <p class="text-xs text-blue-600 mb-4">* '이미지 추가'를 체크할 때마다 4번부터 순서대로 파일 번호가 할당됩니다.</p>
         <div id="timeline_area" class="space-y-4"></div>
     </div>
 
     <div class="section-box">
-        <h2 class="text-xl font-bold mb-4 border-b pb-2">5. 가이드 및 안내</h2>
+        <h2 class="text-xl font-bold mb-4 border-b pb-2">6. 가이드 및 안내</h2>
         <label class="input-label">가이드 소개 타이틀</label>
         <input type="text" id="g_title" class="input-field" value="예술을 사랑하는 전문 가이드">
         <label class="input-label">가이드 멘트</label>
@@ -101,8 +137,8 @@
     </div>
 
     <div class="sticky bottom-5 z-50">
-        <button onclick="makeCode()" class="w-full bg-[#2A4700] text-white py-4 rounded-xl text-xl font-bold shadow-xl hover:bg-[#1f3500] transition">
-            코드 생성하기 (클릭)
+        <button onclick="makeCode()" id="gen_btn" class="w-full text-white py-4 rounded-xl text-xl font-bold shadow-xl transition transform active:scale-95" style="background-color: #2A4700;">
+            ✨ HTML 코드 생성하기
         </button>
     </div>
 
@@ -123,30 +159,61 @@
             addTimeline('12:00', '점심', '자유 식사', true);
         };
 
+        // 색상 프리뷰 업데이트
+        function updatePreviewColor(color) {
+            document.getElementById('theme_color_text').value = color;
+            document.getElementById('preview_btn').style.backgroundColor = color;
+            document.getElementById('gen_btn').style.backgroundColor = color;
+        }
+
         function addTimeline(time='', title='', desc='', check=false) {
             const div = document.createElement('div');
-            div.className = 'timeline-item border p-3 rounded-lg bg-gray-50';
+            div.className = 'timeline-item border p-3 rounded-lg bg-gray-50 relative';
             div.innerHTML = `
                 <div class="flex gap-2 mb-2">
                     <input type="text" class="input-field mb-0 w-1/4 t-time" placeholder="시간" value="${time}">
                     <input type="text" class="input-field mb-0 w-3/4 t-title" placeholder="일정 제목" value="${title}">
                 </div>
                 <textarea class="input-field mb-2 h-16 t-desc" placeholder="상세 내용">${desc}</textarea>
-                <div class="flex justify-between">
-                    <label class="flex items-center gap-2 text-sm cursor-pointer">
-                        <input type="checkbox" class="t-check accent-[#2A4700]" ${check ? 'checked' : ''}>
-                        <span>📸 이미지 추가 (자동 번호)</span>
+                <div class="flex justify-between items-center">
+                    <label class="flex items-center gap-2 text-sm cursor-pointer p-1 rounded hover:bg-gray-200">
+                        <input type="checkbox" class="t-check" ${check ? 'checked' : ''} onchange="updateImageLabels()">
+                        <span class="img-label font-bold text-gray-500">📸 이미지 추가</span>
                     </label>
-                    <button onclick="this.closest('.timeline-item').remove()" class="text-red-500 text-sm underline">삭제</button>
+                    <button onclick="deleteTimeline(this)" class="text-red-500 text-sm underline">삭제</button>
                 </div>
             `;
             document.getElementById('timeline_area').appendChild(div);
+            updateImageLabels();
+        }
+
+        function deleteTimeline(btn) {
+            btn.closest('.timeline-item').remove();
+            updateImageLabels();
+        }
+
+        // 이미지 번호 라벨 실시간 업데이트
+        function updateImageLabels() {
+            let imgCount = 4; // 1,2,3 고정 이후 4부터 시작
+            const checks = document.querySelectorAll('.t-check');
+            checks.forEach(chk => {
+                const label = chk.nextElementSibling;
+                if(chk.checked) {
+                    label.innerText = `📸 이미지 추가 (파일 번호: ${imgCount}번)`;
+                    label.classList.add('text-blue-600');
+                    label.classList.remove('text-gray-500');
+                    imgCount++;
+                } else {
+                    label.innerText = `📸 이미지 추가 (사용 안 함)`;
+                    label.classList.add('text-gray-500');
+                    label.classList.remove('text-blue-600');
+                }
+            });
         }
 
         function makeCode() {
-            // 오류 방지를 위한 태그 분리 (핵심 수정 사항)
-            const S_OPEN = '<' + 'script' + '>';
-            const S_CLOSE = '<' + '/' + 'script' + '>';
+            // 스타일 컬러 가져오기
+            const brandColor = document.getElementById('theme_color').value;
 
             // 데이터 수집
             const d = {
@@ -176,7 +243,7 @@
             };
 
             // 타임라인 HTML 조립
-            let imgIdx = 4; // 1,2,3은 고정 이미지
+            let imgIdx = 4; 
             const items = document.querySelectorAll('.timeline-item');
             let tlHtml = '';
 
@@ -187,11 +254,11 @@
                 const hasImg = item.querySelector('.t-check').checked;
                 const isLast = idx === items.length - 1 ? 'last-item' : '';
 
-                // 색상 로직
+                // 색상 로직 (테마 컬러 적용)
                 let clr = 'bg-white border-2 border-gray-300 text-gray-900';
-                if(title.includes('미팅') || title.includes('도착')) clr = 'bg-[#141719] text-white';
+                if(title.includes('미팅') || title.includes('도착')) clr = `bg-[${brandColor}] text-white`;
                 else if(title.includes('식사') || title.includes('중식')) clr = 'bg-[#FFB44D] text-white';
-                else if(title.includes('관람') || title.includes('투어')) clr = 'bg-[#2A4700] text-white';
+                else if(title.includes('관람') || title.includes('투어')) clr = `bg-[${brandColor}] text-white`;
                 else if(title.includes('종료')) clr = 'bg-gray-500 text-white';
 
                 let imgCode = '';
@@ -203,7 +270,7 @@
                 tlHtml += `
                 <div class="flex gap-4 mb-10 relative z-10 ${isLast}">
                     <div class="timeline-line"></div>
-                    <div class="w-10 h-10 rounded-full ${clr} flex items-center justify-center text-xs font-bold shrink-0 z-10">${time}</div>
+                    <div class="w-10 h-10 rounded-full ${clr} flex items-center justify-center text-xs font-bold shrink-0 z-10" style="${clr.includes('text-white') ? 'background-color:'+brandColor+'; border:none;' : ''}">${time}</div>
                     <div class="w-full">
                         <h3 class="font-bold text-lg text-gray-900">${title}</h3>
                         <p class="text-sm text-gray-600 mt-1 leading-relaxed mb-1">${desc}</p>
@@ -212,7 +279,11 @@
                 </div>`;
             });
 
-            // HTML 조립 (문자열 연결 방식 사용)
+            // 스크립트 분리
+            const S_OPEN = '<' + 'script' + '>';
+            const S_CLOSE = '<' + '/' + 'script' + '>';
+
+            // HTML 조립 (스타일 적용)
             let finalHtml = `<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -227,6 +298,9 @@
         .timeline-line { position: absolute; left: 19px; top: 10px; bottom: -20px; width: 2px; background-color: #E5E7EB; z-index: 0; }
         .last-item .timeline-line { display: none; }
         .auto-img { min-height: 50px; background-color: #E5E7EB; }
+        .brand-text { color: ${brandColor}; }
+        .brand-bg { background-color: ${brandColor}; }
+        .brand-border { border-color: ${brandColor}; }
     </style>
 </head>
 <body class="bg-[#F2F3F5] min-h-screen flex justify-center">
@@ -240,7 +314,7 @@
             <img data-img="1" class="w-full h-full object-cover auto-img">
             <div class="absolute bottom-0 w-full h-[300px] bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
             <div class="absolute bottom-10 left-6 right-6 text-white">
-                <span class="bg-[#2A4700] text-xs px-2 py-1 rounded border border-[#486326]">New Proposal</span>
+                <span class="brand-bg text-xs px-2 py-1 rounded border border-white/30">New Proposal</span>
                 <h1 class="text-[28px] font-bold leading-tight mt-2">${d.title}</h1>
                 <p class="text-[15px] opacity-90 mt-1">${d.sub}</p>
             </div>
@@ -248,7 +322,7 @@
 
         <div class="bg-white rounded-t-[30px] -mt-6 relative z-10 px-6 pt-8 pb-6 shadow-sm">
             <div class="bg-[#F9FAFB] rounded-2xl p-5">
-                <span class="text-[#2A4700] font-bold text-xs mb-2 block">💡 이런 분들께 추천해요</span>
+                <span class="brand-text font-bold text-xs mb-2 block">💡 이런 분들께 추천해요</span>
                 <ul class="text-sm text-gray-600 space-y-2">
                     <li>✔ ${d.rec[0]}</li>
                     <li>✔ ${d.rec[1]}</li>
@@ -259,7 +333,7 @@
         <div class="h-3 bg-[#F2F3F5]"></div>
 
         <div class="bg-white py-10 px-6">
-            <h2 class="text-[#2A4700] text-xl font-bold mb-6">왜 이 투어여야 할까요?</h2>
+            <h2 class="brand-text text-xl font-bold mb-6">왜 이 투어여야 할까요?</h2>
             <div class="flex flex-col gap-8 relative">
                 <div class="absolute left-[38px] top-4 bottom-4 w-[1px] bg-gray-100"></div>
                 <div class="flex items-start gap-5 relative z-10">
@@ -286,7 +360,7 @@
         <div class="h-3 bg-[#F2F3F5]"></div>
 
         <div class="bg-white py-10 px-6 text-center">
-            <span class="text-[#2A4700] border border-[#2A4700] px-2 py-0.5 rounded-full text-xs font-bold">HOST</span>
+            <span class="brand-text brand-border border px-2 py-0.5 rounded-full text-xs font-bold">HOST</span>
             <h2 class="text-xl font-bold mb-4 mt-3">${d.guide.t}</h2>
             <img data-img="${imgIdx}" class="w-[120px] h-[120px] object-cover rounded-full mx-auto mb-5 shadow-lg border-4 border-white auto-img">
             <p class="text-gray-600 text-sm leading-relaxed">${d.guide.d.replace(/\n/g, '<br>')}</p>
@@ -301,7 +375,7 @@
             </div>
         </div>
 
-        <div class="fixed bottom-0 max-w-[430px] w-full bg-white border-t p-4 pb-8 z-50 flex justify-between items-center shadow-lg"><div class="flex flex-col"><span class="text-xs text-gray-400 line-through">${d.price_o}원</span><span class="font-bold text-xl text-[#2A4700]">${d.price}원</span></div><button onclick="alert('준비중')" class="bg-[#2A4700] text-white font-bold py-3 px-8 rounded-xl shadow-lg">예약하기</button></div>
+        <div class="fixed bottom-0 max-w-[430px] w-full bg-white border-t p-4 pb-8 z-50 flex justify-between items-center shadow-lg"><div class="flex flex-col"><span class="text-xs text-gray-400 line-through">${d.price_o}원</span><span class="brand-text font-bold text-xl">${d.price}원</span></div><button class="brand-bg text-white font-bold py-3 px-8 rounded-xl shadow-lg">예약하기</button></div>
     </div>
 
     ${S_OPEN}
@@ -329,14 +403,14 @@
 
             document.getElementById('res_html').value = finalHtml;
 
-            // 카드 코드
+            // 카드 코드 (스타일 적용)
             const cardHtml = `<a href="./${d.folder}/index.html" class="block group">
-    <div class="bg-white border border-gray-200 rounded-2xl p-5 hover:border-blue-500 hover:shadow-md transition-all relative overflow-hidden">
+    <div class="bg-white border border-gray-200 rounded-2xl p-5 hover:border-[${brandColor}] transition shadow-sm hover:shadow-md">
         <div class="flex justify-between items-start mb-2">
             <span class="bg-blue-100 text-blue-600 text-[10px] font-bold px-2 py-1 rounded">New</span>
-            <span class="text-gray-300 group-hover:text-blue-500 transition">↗</span>
+            <span class="text-gray-300 group-hover:text-[${brandColor}] transition">↗</span>
         </div>
-        <h3 class="font-bold text-lg text-gray-800 mb-1 group-hover:text-blue-500">${d.title}</h3>
+        <h3 class="font-bold text-lg text-gray-800 mb-1 group-hover:text-[${brandColor}]">${d.title}</h3>
         <p class="text-xs text-gray-500">${d.sub}</p>
     </div>
 </a>`;
