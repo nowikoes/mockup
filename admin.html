@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 페이지 생성기 (V6.0)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        body { font-family: Pretendard, sans-serif; background-color: #f3f4f6; }
+        .input-label { display: block; font-size: 0.9rem; font-weight: 700; color: #374151; margin-bottom: 5px; }
+        .input-field { width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px; margin-bottom: 15px; }
+        .section-box { background: white; padding: 25px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body class="p-4 md:p-10 max-w-5xl mx-auto">
+
+    <header class="mb-10 text-center">
+        <h1 class="text-3xl font-bold text-[#2A4700]">🛠️ 상품 페이지 생성기 V6.0</h1>
+        <p class="text-gray-500 mt-2">스크립트 충돌 방지 로직 적용 완료.</p>
+    </header>
+
+    <div class="section-box">
+        <h2 class="text-xl font-bold mb-4 border-b pb-2">1. 기본 정보</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="input-label">상품 제목</label>
+                <input type="text" id="p_title" class="input-field" value="나오시마 미식 워킹투어">
+            </div>
+            <div>
+                <label class="input-label">서브 카피</label>
+                <input type="text" id="p_sub" class="input-field" value="예술과 미식이 함께하는 섬 여행">
+            </div>
+            <div>
+                <label class="input-label">폴더명 (영문 소문자)</label>
+                <input type="text" id="p_folder" class="input-field" value="naoshima_tour">
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+                <div>
+                    <label class="input-label">정가 (숫자만)</label>
+                    <input type="number" id="p_price_org" class="input-field" value="129000">
+                </div>
+                <div>
+                    <label class="input-label">판매가 (숫자만)</label>
+                    <input type="number" id="p_price" class="input-field" value="89000">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-box">
+        <h2 class="text-xl font-bold mb-4 border-b pb-2">2. 추천 포인트 (3가지)</h2>
+        <input type="text" id="rec1" class="input-field" value="미술관만 찍는 숙제 같은 여행이 싫으신 분">
+        <input type="text" id="rec2" class="input-field" value="작품 배경 설명이 필요한 분">
+        <input type="text" id="rec3" class="input-field" value="맛있는 로컬 식사를 원하시는 분">
+    </div>
+
+    <div class="section-box">
+        <h2 class="text-xl font-bold mb-4 border-b pb-2">3. 핵심 차별점 (Kick)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-gray-50 p-3 rounded-lg">
+                <input type="text" id="k1_t" class="input-field" value="한국어 해설">
+                <textarea id="k1_d" class="input-field h-20">작품의 깊이를 더해주는 전문 해설</textarea>
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg">
+                <input type="text" id="k2_t" class="input-field" value="여유로운 일정">
+                <textarea id="k2_d" class="input-field h-20">찍고 턴하는 여행이 아닌 힐링 여행</textarea>
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg">
+                <input type="text" id="k3_t" class="input-field" value="로컬 맛집">
+                <textarea id="k3_d" class="input-field h-20">관광지 식당이 아닌 찐 맛집 방문</textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-box">
+        <div class="flex justify-between items-center mb-4 border-b pb-2">
+            <h2 class="text-xl font-bold">4. 코스 타임라인</h2>
+            <button onclick="addTimeline()" class="bg-gray-200 px-3 py-1 rounded text-sm font-bold hover:bg-gray-300">+ 추가</button>
+        </div>
+        <div id="timeline_area" class="space-y-4"></div>
+    </div>
+
+    <div class="section-box">
+        <h2 class="text-xl font-bold mb-4 border-b pb-2">5. 가이드 및 안내</h2>
+        <label class="input-label">가이드 소개 타이틀</label>
+        <input type="text" id="g_title" class="input-field" value="예술을 사랑하는 전문 가이드">
+        <label class="input-label">가이드 멘트</label>
+        <textarea id="g_desc" class="input-field h-20">여러분에게 잊지 못할 추억을 선물하겠습니다.</textarea>
+        
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label class="input-label">포함 사항</label>
+                <textarea id="inc" class="input-field h-20">왕복 승선권, 입장료, 가이드</textarea>
+            </div>
+            <div>
+                <label class="input-label">불포함 사항</label>
+                <textarea id="exc" class="input-field h-20">식사비, 개인 경비</textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="sticky bottom-5 z-50">
+        <button onclick="makeCode()" class="w-full bg-[#2A4700] text-white py-4 rounded-xl text-xl font-bold shadow-xl hover:bg-[#1f3500] transition">
+            코드 생성하기 (클릭)
+        </button>
+    </div>
+
+    <div class="section-box mt-10">
+        <h2 class="text-xl font-bold mb-4">📤 생성 결과</h2>
+        <p class="mb-2 font-bold text-blue-600">A. 상품 페이지용 (index.html)</p>
+        <textarea id="res_html" class="input-field h-64 font-mono text-xs bg-slate-50" readonly></textarea>
+        
+        <p class="mb-2 font-bold text-blue-600 mt-4">B. 목록 페이지용 (카드)</p>
+        <textarea id="res_card" class="input-field h-32 font-mono text-xs bg-slate-50" readonly></textarea>
+    </div>
+
+    <script>
+        // 타임라인 초기화
+        window.onload = function() {
+            addTimeline('08:12', '미팅', '항구 집결', false);
+            addTimeline('09:00', '관람', '빨간 호박', true);
+            addTimeline('12:00', '점심', '자유 식사', true);
+        };
+
+        function addTimeline(time='', title='', desc='', check=false) {
+            const div = document.createElement('div');
+            div.className = 'timeline-item border p-3 rounded-lg bg-gray-50';
+            div.innerHTML = `
+                <div class="flex gap-2 mb-2">
+                    <input type="text" class="input-field mb-0 w-1/4 t-time" placeholder="시간" value="${time}">
+                    <input type="text" class="input-field mb-0 w-3/4 t-title" placeholder="일정 제목" value="${title}">
+                </div>
+                <textarea class="input-field mb-2 h-16 t-desc" placeholder="상세 내용">${desc}</textarea>
+                <div class="flex justify-between">
+                    <label class="flex items-center gap-2 text-sm cursor-pointer">
+                        <input type="checkbox" class="t-check accent-[#2A4700]" ${check ? 'checked' : ''}>
+                        <span>📸 이미지 추가 (자동 번호)</span>
+                    </label>
+                    <button onclick="this.closest('.timeline-item').remove()" class="text-red-500 text-sm underline">삭제</button>
+                </div>
+            `;
+            document.getElementById('timeline_area').appendChild(div);
+        }
+
+        function makeCode() {
+            // 오류 방지를 위한 태그 분리 (핵심 수정 사항)
+            const S_OPEN = '<' + 'script' + '>';
+            const S_CLOSE = '<' + '/' + 'script' + '>';
+
+            // 데이터 수집
+            const d = {
+                title: document.getElementById('p_title').value,
+                sub: document.getElementById('p_sub').value,
+                folder: document.getElementById('p_folder').value,
+                price_o: Number(document.getElementById('p_price_org').value).toLocaleString(),
+                price: Number(document.getElementById('p_price').value).toLocaleString(),
+                rec: [
+                    document.getElementById('rec1').value,
+                    document.getElementById('rec2').value,
+                    document.getElementById('rec3').value
+                ],
+                kicks: [
+                    { t: document.getElementById('k1_t').value, d: document.getElementById('k1_d').value },
+                    { t: document.getElementById('k2_t').value, d: document.getElementById('k2_d').value },
+                    { t: document.getElementById('k3_t').value, d: document.getElementById('k3_d').value }
+                ],
+                guide: {
+                    t: document.getElementById('g_title').value,
+                    d: document.getElementById('g_desc').value
+                },
+                check: {
+                    inc: document.getElementById('inc').value.replace(/\n/g, '<br>'),
+                    exc: document.getElementById('exc').value.replace(/\n/g, '<br>')
+                }
+            };
+
+            // 타임라인 HTML 조립
+            let imgIdx = 4; // 1,2,3은 고정 이미지
+            const items = document.querySelectorAll('.timeline-item');
+            let tlHtml = '';
+
+            items.forEach((item, idx) => {
+                const time = item.querySelector('.t-time').value;
+                const title = item.querySelector('.t-title').value;
+                const desc = item.querySelector('.t-desc').value.replace(/\n/g, '<br>');
+                const hasImg = item.querySelector('.t-check').checked;
+                const isLast = idx === items.length - 1 ? 'last-item' : '';
+
+                // 색상 로직
+                let clr = 'bg-white border-2 border-gray-300 text-gray-900';
+                if(title.includes('미팅') || title.includes('도착')) clr = 'bg-[#141719] text-white';
+                else if(title.includes('식사') || title.includes('중식')) clr = 'bg-[#FFB44D] text-white';
+                else if(title.includes('관람') || title.includes('투어')) clr = 'bg-[#2A4700] text-white';
+                else if(title.includes('종료')) clr = 'bg-gray-500 text-white';
+
+                let imgCode = '';
+                if(hasImg) {
+                    imgCode = `<div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200 mt-3 mb-3"><img data-img="${imgIdx}" class="w-full h-full object-cover auto-img"></div>`;
+                    imgIdx++;
+                }
+
+                tlHtml += `
+                <div class="flex gap-4 mb-10 relative z-10 ${isLast}">
+                    <div class="timeline-line"></div>
+                    <div class="w-10 h-10 rounded-full ${clr} flex items-center justify-center text-xs font-bold shrink-0 z-10">${time}</div>
+                    <div class="w-full">
+                        <h3 class="font-bold text-lg text-gray-900">${title}</h3>
+                        <p class="text-sm text-gray-600 mt-1 leading-relaxed mb-1">${desc}</p>
+                        ${imgCode}
+                    </div>
+                </div>`;
+            });
+
+            // HTML 조립 (문자열 연결 방식 사용)
+            let finalHtml = `<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${d.title}</title>
+    ${S_OPEN} src="https://cdn.tailwindcss.com">${S_CLOSE}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        body { font-family: Pretendard, sans-serif; }
+        .keep-all { word-break: keep-all; word-wrap: break-word; }
+        .timeline-line { position: absolute; left: 19px; top: 10px; bottom: -20px; width: 2px; background-color: #E5E7EB; z-index: 0; }
+        .last-item .timeline-line { display: none; }
+        .auto-img { min-height: 50px; background-color: #E5E7EB; }
+    </style>
+</head>
+<body class="bg-[#F2F3F5] min-h-screen flex justify-center">
+    <div class="w-full max-w-[430px] bg-white min-h-screen shadow-2xl relative pb-36">
+        
+        <div class="relative w-full h-[500px] bg-gray-200">
+            <div class="absolute top-0 left-0 w-full z-20 flex justify-between p-5 pt-6 text-white">
+                <a href="../index.html" class="text-2xl drop-shadow-md">←</a>
+                <div class="flex gap-4"><button>♥</button><button>🔗</button></div>
+            </div>
+            <img data-img="1" class="w-full h-full object-cover auto-img">
+            <div class="absolute bottom-0 w-full h-[300px] bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+            <div class="absolute bottom-10 left-6 right-6 text-white">
+                <span class="bg-[#2A4700] text-xs px-2 py-1 rounded border border-[#486326]">New Proposal</span>
+                <h1 class="text-[28px] font-bold leading-tight mt-2">${d.title}</h1>
+                <p class="text-[15px] opacity-90 mt-1">${d.sub}</p>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-t-[30px] -mt-6 relative z-10 px-6 pt-8 pb-6 shadow-sm">
+            <div class="bg-[#F9FAFB] rounded-2xl p-5">
+                <span class="text-[#2A4700] font-bold text-xs mb-2 block">💡 이런 분들께 추천해요</span>
+                <ul class="text-sm text-gray-600 space-y-2">
+                    <li>✔ ${d.rec[0]}</li>
+                    <li>✔ ${d.rec[1]}</li>
+                    <li>✔ ${d.rec[2]}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="h-3 bg-[#F2F3F5]"></div>
+
+        <div class="bg-white py-10 px-6">
+            <h2 class="text-[#2A4700] text-xl font-bold mb-6">왜 이 투어여야 할까요?</h2>
+            <div class="flex flex-col gap-8 relative">
+                <div class="absolute left-[38px] top-4 bottom-4 w-[1px] bg-gray-100"></div>
+                <div class="flex items-start gap-5 relative z-10">
+                    <div class="w-[76px] h-[76px] rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center text-3xl z-10">POINT</div>
+                    <div class="pt-1"><h3 class="font-bold text-lg mb-1">${d.kicks[0].t}</h3><p class="text-gray-500 text-sm">${d.kicks[0].d}</p></div>
+                </div>
+                <div class="flex items-start gap-5 relative z-10">
+                    <div class="w-[76px] h-[76px] rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center text-3xl z-10">POINT</div>
+                    <div class="pt-1"><h3 class="font-bold text-lg mb-1">${d.kicks[1].t}</h3><p class="text-gray-500 text-sm">${d.kicks[1].d}</p></div>
+                </div>
+            </div>
+            <div class="mt-8 rounded-2xl overflow-hidden h-48 bg-gray-200"><img data-img="2" class="w-full h-full object-cover auto-img"></div>
+            <div class="mt-8"><h3 class="font-bold text-lg mb-1">🍽 ${d.kicks[2].t}</h3><p class="text-gray-500 text-sm">${d.kicks[2].d}</p></div>
+            <div class="mt-4 rounded-2xl overflow-hidden h-40 bg-gray-200"><img data-img="3" class="w-full h-full object-cover auto-img"></div>
+        </div>
+        <div class="h-3 bg-[#F2F3F5]"></div>
+
+        <div class="bg-white py-10 px-6">
+            <h2 class="text-xl font-bold mb-8">🗺️ 투어 코스 안내</h2>
+            <div class="relative pl-2">
+                ${tlHtml}
+            </div>
+        </div>
+        <div class="h-3 bg-[#F2F3F5]"></div>
+
+        <div class="bg-white py-10 px-6 text-center">
+            <span class="text-[#2A4700] border border-[#2A4700] px-2 py-0.5 rounded-full text-xs font-bold">HOST</span>
+            <h2 class="text-xl font-bold mb-4 mt-3">${d.guide.t}</h2>
+            <img data-img="${imgIdx}" class="w-[120px] h-[120px] object-cover rounded-full mx-auto mb-5 shadow-lg border-4 border-white auto-img">
+            <p class="text-gray-600 text-sm leading-relaxed">${d.guide.d.replace(/\n/g, '<br>')}</p>
+        </div>
+        <div class="h-3 bg-[#F2F3F5]"></div>
+
+        <div class="bg-white px-6 pb-10 pt-10">
+            <div class="bg-[#F9FAFB] rounded-2xl p-5 space-y-3">
+                <h3 class="font-bold mb-2">✅ 예약 전 확인</h3>
+                <div class="border-b pb-3"><span class="font-bold text-xs block mb-1">포함</span><p class="text-sm">${d.check.inc}</p></div>
+                <div><span class="font-bold text-xs block mb-1">불포함</span><p class="text-sm">${d.check.exc}</p></div>
+            </div>
+        </div>
+
+        <div class="fixed bottom-0 max-w-[430px] w-full bg-white border-t p-4 pb-8 z-50 flex justify-between items-center shadow-lg"><div class="flex flex-col"><span class="text-xs text-gray-400 line-through">${d.price_o}원</span><span class="font-bold text-xl text-[#2A4700]">${d.price}원</span></div><button onclick="alert('준비중')" class="bg-[#2A4700] text-white font-bold py-3 px-8 rounded-xl shadow-lg">예약하기</button></div>
+    </div>
+
+    ${S_OPEN}
+        document.addEventListener("DOMContentLoaded",()=>{
+            const images = document.querySelectorAll(".auto-img");
+            const exts = ["jpg","png","jpeg","webp"];
+            images.forEach(img => {
+                const id = img.getAttribute("data-img");
+                if(!id) return;
+                let attempt = 0;
+                function tryLoad() {
+                    if(attempt >= exts.length) return;
+                    const src = "./images/" + id + "." + exts[attempt];
+                    const temp = new Image();
+                    temp.src = src;
+                    temp.onload = () => { img.src = src; };
+                    temp.onerror = () => { attempt++; tryLoad(); };
+                }
+                tryLoad();
+            });
+        });
+    ${S_CLOSE}
+</body>
+</html>`;
+
+            document.getElementById('res_html').value = finalHtml;
+
+            // 카드 코드
+            const cardHtml = `<a href="./${d.folder}/index.html" class="block group">
+    <div class="bg-white border border-gray-200 rounded-2xl p-5 hover:border-blue-500 hover:shadow-md transition-all relative overflow-hidden">
+        <div class="flex justify-between items-start mb-2">
+            <span class="bg-blue-100 text-blue-600 text-[10px] font-bold px-2 py-1 rounded">New</span>
+            <span class="text-gray-300 group-hover:text-blue-500 transition">↗</span>
+        </div>
+        <h3 class="font-bold text-lg text-gray-800 mb-1 group-hover:text-blue-500">${d.title}</h3>
+        <p class="text-xs text-gray-500">${d.sub}</p>
+    </div>
+</a>`;
+            document.getElementById('res_card').value = cardHtml;
+        }
+    </script>
+</body>
+</html>
