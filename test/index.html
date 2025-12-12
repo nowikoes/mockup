@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
     <style>
         body { font-family: Pretendard, sans-serif; }
+        .keep-all { word-break: keep-all; word-wrap: break-word; }
         .timeline-line { position: absolute; left: 19px; top: 10px; bottom: -20px; width: 2px; background-color: #E5E7EB; z-index: 0; }
         .last-item .timeline-line { display: none; }
         .auto-img { min-height: 50px; background-color: #E5E7EB; }
@@ -16,70 +17,117 @@
 <body class="bg-[#F2F3F5] min-h-screen flex justify-center">
     <div class="w-full max-w-[430px] bg-white min-h-screen shadow-2xl relative pb-36">
         
-        <div class="relative w-full h-[500px] bg-gray-200">
+        <div class="relative w-full h-[560px] bg-gray-200">
             <div class="absolute top-0 left-0 w-full z-20 flex justify-between p-5 pt-6 text-white">
                 <a href="../index.html" class="text-2xl drop-shadow-md">←</a>
                 <div class="flex gap-4"><button>♥</button><button>🔗</button></div>
             </div>
             <img data-img="1" class="w-full h-full object-cover auto-img">
-            <div class="absolute bottom-0 w-full h-[300px] bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+            <div class="absolute bottom-0 w-full h-[350px] bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
             <div class="absolute bottom-10 left-6 right-6 text-white">
-                <span class="text-xs px-2 py-1 rounded border border-white/30" style="background-color:#2a4700">New</span>
+                <div class="flex flex-wrap gap-2 mb-3">
+                    <span class="bg-[#2A4700] text-[#B7D2B6] text-[11px] font-bold px-2 py-1 rounded border border-[#486326]">단독 한국어 투어</span>
+                    <span class="bg-white/20 backdrop-blur-md text-white text-[11px] font-bold px-2 py-1 rounded">기획안</span>
+                </div>
                 <h1 class="text-[28px] font-bold leading-tight mt-2">test</h1>
-                <p class="text-[15px] opacity-90 mt-1">testtttttttttt</p>
+                <p class="text-[15px] opacity-90 mt-1 leading-relaxed">ㅅㄷㄴㅅ</p>
             </div>
         </div>
 
-        <div class="bg-white rounded-[40px] -mt-6 relative z-10 px-6 pt-8 pb-6 shadow-sm">
-            <div class="bg-[#F9FAFB] rounded-2xl p-5">
-                <span class="font-bold text-xs mb-2 block" style="color:#2a4700">💡 추천 포인트</span>
+        <div class="bg-white rounded-t-[30px] -mt-6 relative z-10 px-6 pt-8 pb-6 shadow-sm">
+            <div class="flex justify-between items-start text-center border-b border-gray-100 pb-6">
+                <div class="flex flex-col items-center gap-2 w-1/4"><span class="text-2xl">🚢</span><span class="text-[13px] font-bold text-gray-700">미팅</span><span class="text-[11px] text-gray-500">다카마쓰항<br>08:12 집결</span></div>
+                <div class="flex flex-col items-center gap-2 w-1/4"><span class="text-2xl">⏳</span><span class="text-[13px] font-bold text-gray-700">소요</span><span class="text-[11px] text-gray-500">약 9시간<br>(Full day)</span></div>
+                <div class="flex flex-col items-center gap-2 w-1/4"><span class="text-2xl">👥</span><span class="text-[13px] font-bold text-gray-700">인원</span><span class="text-[11px] text-gray-500">최대 14명<br>소규모 집중</span></div>
+                <div class="flex flex-col items-center gap-2 w-1/4"><span class="text-2xl">🗣</span><span class="text-[13px] font-bold text-gray-700">언어</span><span class="text-[11px] text-gray-500">한국어<br>전문 가이드</span></div>
+            </div>
+            <div class="mt-6 bg-[#F9FAFB] rounded-2xl p-5">
+                <span class="text-[#2A4700] font-bold text-xs mb-2 block">💡 이런 분들께 추천해요</span>
                 <ul class="text-sm text-gray-600 space-y-2">
-                    <li>✔ 미술관만 찍는 여행이 싫으신 분</li><li>✔ 작품 배경 설명이 필요한 분</li><li>✔ 맛있는 로컬 식사를 원하시는 분</li>
+                    <li class="flex items-start gap-2"><span class="text-green-600">✔</span><span>미술관만 찍는 '숙제 같은 여행'이 싫으신 분</span></li><li class="flex items-start gap-2"><span class="text-green-600">✔</span><span>작품의 배경과 건축 의도를 한국어로 듣고 싶은 분</span></li><li class="flex items-start gap-2"><span class="text-green-600">✔</span><span>편의점 빵 대신 제대로 된 현지 식사를 원하시는 분</span></li>
                 </ul>
             </div>
         </div>
         <div class="h-3 bg-[#F2F3F5]"></div>
 
         <div class="bg-white py-10 px-6">
-            <h2 class="text-xl font-bold mb-6" style="color:#2a4700">왜 이 투어여야 할까요?</h2>
-            <div class="mt-8 rounded-[40px] overflow-hidden h-48 bg-gray-200"><img data-img="2" class="w-full h-full object-cover auto-img"></div>
+            <h2 class="text-[#2A4700] text-xl font-bold mb-6">왜 이 투어여야 할까요?</h2>
+            <div class="flex flex-col gap-8 relative">
+                <div class="absolute left-[38px] top-4 bottom-4 w-[1px] bg-gray-100"></div>
+                
+                    <div class="flex items-start gap-5 relative z-10">
+                        <div class="w-[76px] h-[76px] rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center text-3xl z-10">🇰🇷</div>
+                        <div class="pt-1"><h3 class="font-bold text-[#141719] text-lg mb-1">유일무이 한국어 해설</h3><p class="text-gray-500 text-sm leading-relaxed keep-all">현재 시장에 전무한 한국어 가이드 투어.</p></div>
+                    </div>
+                    <div class="flex items-start gap-5 relative z-10">
+                        <div class="w-[76px] h-[76px] rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center text-3xl z-10">⚖️</div>
+                        <div class="pt-1"><h3 class="font-bold text-[#141719] text-lg mb-1">선택과 집중의 미학</h3><p class="text-gray-500 text-sm leading-relaxed keep-all">오전엔 지중미술관 집중, 오후엔 마을 산책.</p></div>
+                    </div>
+                    <div class="flex items-start gap-5 relative z-10">
+                        <div class="w-[76px] h-[76px] rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center text-3xl z-10">🍽</div>
+                        <div class="pt-1"><h3 class="font-bold text-[#141719] text-lg mb-1">실패 없는 '혼무라 미식회'</h3><p class="text-gray-500 text-sm leading-relaxed keep-all">가이드가 엄선한 로컬 맛집 리스트 제공.</p></div>
+                    </div>
+            </div>
+            <div class="mt-8 rounded-2xl overflow-hidden h-48 bg-gray-200 relative shadow-md">
+                <img data-img="2" class="w-full h-full object-cover auto-img">
+                <div class="absolute bottom-0 left-0 w-full bg-black/50 p-3"><p class="text-white text-xs font-bold">📍 투어의 하이라이트</p></div>
+            </div>
         </div>
         <div class="h-3 bg-[#F2F3F5]"></div>
 
         <div class="bg-white py-10 px-6">
-            <h2 class="text-xl font-bold mb-8">🗺️ 코스 안내</h2>
+            <h2 class="text-xl font-bold mb-8 flex items-center gap-2">🗺️ 투어 코스 안내</h2>
             <div class="relative pl-2">
                 <div class="flex gap-4 mb-10 relative z-10 ">
                     <div class="timeline-line"></div>
-                    <div class="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold shrink-0 z-10" style="background-color: #2a4700; border: none; color: white;">09:00</div>
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold shrink-0 z-10 bg-[#141719] text-white border-none">08:12</div>
                     <div class="w-full">
-                        <h3 class="font-bold text-lg text-gray-900">미팅</h3>
-                        <p class="text-sm text-gray-600 mt-1 leading-relaxed">항구에서 만나요</p>
-                        <div class="rounded-[40px] overflow-hidden shadow-sm h-40 bg-gray-200 mt-3 mb-3"><img data-img="4" class="w-full h-full object-cover auto-img"></div>
+                        <h3 class="font-bold text-lg text-gray-900">미팅 및 출발</h3>
+                        <p class="text-sm text-gray-600 mt-1 leading-relaxed mb-1">항구에서 만나 일정을 시작합니다.</p>
+                        <div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200 mt-3 mb-3"><img data-img="4" class="w-full h-full object-cover auto-img"></div>
+                    </div>
+                </div>
+                <div class="flex gap-4 mb-10 relative z-10 ">
+                    <div class="timeline-line"></div>
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold shrink-0 z-10 bg-[#2A4700] text-white border-none">09:00</div>
+                    <div class="w-full">
+                        <h3 class="font-bold text-lg text-gray-900">오전 투어</h3>
+                        <p class="text-sm text-gray-600 mt-1 leading-relaxed mb-1">주요 명소를 둘러봅니다.</p>
+                        <div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200 mt-3 mb-3"><img data-img="5" class="w-full h-full object-cover auto-img"></div>
                     </div>
                 </div>
                 <div class="flex gap-4 mb-10 relative z-10 last-item">
                     <div class="timeline-line"></div>
-                    <div class="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold shrink-0 z-10" style="background-color: white; border: 2px solid #d1d5db; color: #111827;">10:00</div>
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold shrink-0 z-10 bg-[#FFB44D] text-white border-none">12:00</div>
                     <div class="w-full">
-                        <h3 class="font-bold text-lg text-gray-900">오전 투어</h3>
-                        <p class="text-sm text-gray-600 mt-1 leading-relaxed">주요 명소를 봅니다.</p>
-                        <div class="rounded-[40px] overflow-hidden shadow-sm h-40 bg-gray-200 mt-3 mb-3"><img data-img="5" class="w-full h-full object-cover auto-img"></div>
+                        <h3 class="font-bold text-lg text-gray-900">점심 식사</h3>
+                        <p class="text-sm text-gray-600 mt-1 leading-relaxed mb-1">자유 식사 및 휴식</p>
+                        <div class="rounded-xl overflow-hidden shadow-sm h-40 bg-gray-200 mt-3 mb-3"><img data-img="6" class="w-full h-full object-cover auto-img"></div>
                     </div>
                 </div></div>
         </div>
         <div class="h-3 bg-[#F2F3F5]"></div>
 
         <div class="bg-white py-10 px-6 text-center">
-            <span class="border px-2 py-0.5 rounded-full text-xs font-bold" style="color:#2a4700; border-color:#2a4700">HOST</span>
-            <h2 class="text-xl font-bold mb-4 mt-3">전문 가이드</h2>
+            <span class="text-[#2A4700] border border-[#2A4700] px-2 py-0.5 rounded-full text-xs font-bold uppercase">HOST</span>
+            <h2 class="text-xl font-bold mb-6 mt-3">전문 가이드</h2>
             <img data-img="3" class="w-[120px] h-[120px] object-cover rounded-full mx-auto mb-5 shadow-lg border-4 border-white auto-img">
-            <p class="text-gray-600 text-sm">건축과 예술을 사랑하는 가이드입니다.</p>
+            <p class="text-gray-600 text-[15px] leading-relaxed keep-all">건축과 예술을 사랑하는 가이드입니다.</p>
+        </div>
+        <div class="h-3 bg-[#F2F3F5]"></div>
+
+        <div class="bg-white px-6 pb-10 pt-10">
+            <div class="bg-[#F9FAFB] rounded-2xl p-5 space-y-4">
+                <h3 class="text-xl font-bold mb-2">✅ 예약 전 확인해주세요</h3>
+                <div class="border-b border-gray-200 pb-3"><span class="block text-xs font-bold text-gray-500 mb-1">포함 사항</span><p class="text-sm text-gray-800">왕복 페리/고속선 승선권, 지중미술관 입장료, 가이드</p></div>
+                <div class="border-b border-gray-200 pb-3"><span class="block text-xs font-bold text-gray-500 mb-1">불포함 사항</span><p class="text-sm text-gray-800">점심 식사 비용, 기타 개인 경비</p></div>
+                <div><span class="block text-xs font-bold text-gray-500 mb-1">참고 사항</span><p class="text-sm text-gray-800">- 많이 걷는 투어입니다.<br>\n- 우천 시에도 정상 진행됩니다.</p></div>
+            </div>
         </div>
 
-        <div class="fixed bottom-0 max-w-[430px] w-full bg-white border-t p-4 pb-8 z-50 flex justify-between items-center shadow-lg">
-            <div class="flex flex-col"><span class="text-xs text-gray-400">판매가</span><span class="font-bold text-xl" style="color:#2a4700">89,000원</span></div>
-            <button class="text-white font-bold py-3 px-8 rounded-xl shadow-lg" style="background-color:#2a4700">예약하기</button>
+        <div class="fixed bottom-0 max-w-[430px] w-full bg-white border-t border-gray-100 p-4 pb-8 z-50 flex items-center justify-between shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+            <div class="flex flex-col"><span class="text-xs text-gray-400 line-through">129,000원</span><span class="font-bold text-xl text-[#2A4700]">89,000원</span></div>
+            <button onclick="alert('준비중')" class="bg-[#2A4700] text-white font-bold py-3.5 px-8 rounded-xl hover:bg-[#1D2E01] transition active:scale-95 shadow-lg shadow-green-900/20">예약하기</button>
         </div>
     </div>
 
