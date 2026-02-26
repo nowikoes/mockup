@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q4 2025 파리·런던 T&A 실적 부진 원인 분석</title>
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --accent: #e94560;
+    --blue: #0f3460;
+    --light-bg: #f8f9fc;
+    --border: #e2e8f0;
+    --text: #2d3748;
+    --muted: #718096;
+    --paris: #6c63ff;
+    --london: #e94560;
+    --positive: #38a169;
+    --negative: #e53e3e;
+    --warning: #dd6b20;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f2f7;
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 14px;
+  }
+
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  /* Header */
+  .report-header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 48px 48px 40px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .report-header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .report-header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 200px;
+    width: 300px; height: 300px;
+    background: rgba(233,69,96,0.08);
+    border-radius: 50%;
+  }
+  .report-header .tag {
+    display: inline-block;
+    background: rgba(233,69,96,0.25);
+    color: #ff8fa3;
+    border: 1px solid rgba(233,69,96,0.4);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .report-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .report-header .subtitle {
+    color: rgba(255,255,255,0.55);
+    font-size: 13px;
+  }
+  .report-header .meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    flex-wrap: wrap;
+  }
+  .report-header .meta-item {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+  .report-header .meta-item strong {
+    color: rgba(255,255,255,0.85);
+    display: block;
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+
+  /* Section */
+  .section {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+  }
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .num {
+    background: var(--primary);
+    color: white;
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* Summary cards */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .city-card {
+    border-radius: 12px;
+    padding: 24px;
+    border: 2px solid;
+    position: relative;
+    overflow: hidden;
+  }
+  .city-card.paris {
+    border-color: var(--paris);
+    background: linear-gradient(135deg, #f5f3ff 0%, #fff 100%);
+  }
+  .city-card.london {
+    border-color: var(--london);
+    background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+  }
+  .city-card .city-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .city-card.paris .city-name { color: var(--paris); }
+  .city-card.london .city-name { color: var(--london); }
+  .city-card .city-sub { font-size: 11px; color: var(--muted); margin-bottom: 16px; }
+  .city-card .metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .city-card .metric-item { }
+  .city-card .metric-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
+  .city-card .metric-value { font-size: 22px; font-weight: 800; }
+  .city-card .metric-value.neg { color: var(--negative); }
+  .city-card .metric-value.pos { color: var(--positive); }
+  .city-card .metric-value.warn { color: var(--warning); }
+  .city-card .diagnosis {
+    background: rgba(0,0,0,0.04);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .city-card .diagnosis strong { color: var(--primary); }
+
+  /* Alert box */
+  .alert {
+    display: flex;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 13px;
+  }
+  .alert.error { background: #fff5f5; border-left: 4px solid var(--negative); color: #742a2a; }
+  .alert.warning { background: #fffaf0; border-left: 4px solid var(--warning); color: #744210; }
+  .alert.info { background: #ebf8ff; border-left: 4px solid #3182ce; color: #2a4365; }
+  .alert .icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 0;
+  }
+  thead tr {
+    background: var(--primary);
+    color: white;
+  }
+  thead th {
+    padding: 11px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  thead th:first-child { border-radius: 6px 0 0 0; }
+  thead th:last-child { border-radius: 0 6px 0 0; }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:hover { background: var(--light-bg); }
+  tbody td { padding: 10px 14px; }
+  tbody td:first-child { font-weight: 500; }
+  .tag-neg { color: var(--negative); font-weight: 700; }
+  .tag-pos { color: var(--positive); font-weight: 700; }
+  .tag-warn { color: var(--warning); font-weight: 600; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge-red { background: #fff5f5; color: var(--negative); border: 1px solid #feb2b2; }
+  .badge-green { background: #f0fff4; color: var(--positive); border: 1px solid #9ae6b4; }
+  .badge-orange { background: #fffaf0; color: var(--warning); border: 1px solid #fbd38d; }
+  .badge-gray { background: #f7fafc; color: #718096; border: 1px solid #e2e8f0; }
+
+  /* Cause breakdown */
+  .cause-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .cause-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .cause-card .cause-header {
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cause-card.paris-card .cause-header { background: #f0edff; color: var(--paris); }
+  .cause-card.london-card .cause-header { background: #fff0f2; color: var(--london); }
+  .cause-card .cause-body { padding: 16px; }
+  .cause-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .cause-item:last-child { border-bottom: none; }
+  .cause-item .rank {
+    width: 20px; height: 20px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .cause-item .cause-text { flex: 1; }
+  .cause-item .cause-title { font-weight: 600; font-size: 12px; margin-bottom: 2px; }
+  .cause-item .cause-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .cause-item .cause-impact {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--negative);
+    flex-shrink: 0;
+  }
+
+  /* Gap analysis */
+  .gap-box {
+    background: var(--light-bg);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-top: 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 2;
+    border: 1px solid var(--border);
+  }
+  .gap-box .gap-title { font-family: inherit; font-weight: 700; font-size: 13px; margin-bottom: 8px; color: var(--primary); }
+  .gap-line { color: var(--muted); }
+  .gap-line strong { color: var(--text); }
+  .gap-line.highlight { color: var(--negative); font-weight: 700; }
+
+  /* External factors */
+  .ext-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .ext-card {
+    background: var(--light-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .ext-card .ext-icon { font-size: 20px; margin-bottom: 6px; }
+  .ext-card .ext-title { font-weight: 700; font-size: 12px; color: var(--primary); margin-bottom: 4px; }
+  .ext-card .ext-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .ext-card .ext-impact { margin-top: 8px; font-size: 11px; font-weight: 600; }
+
+  /* Action table */
+  .action-row td:nth-child(3) { font-size: 12px; }
+
+  /* Partner section */
+  .partner-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .partner-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .partner-card .partner-city {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .partner-card.paris-p .partner-city { color: var(--paris); }
+  .partner-card.london-p .partner-city { color: var(--london); }
+  .partner-item { font-size: 12px; padding: 4px 0; display: flex; align-items: flex-start; gap: 6px; }
+  .partner-item::before { content: '·'; color: var(--muted); flex-shrink: 0; }
+
+  /* Footer */
+  .report-footer {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 32px;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-sources { font-size: 11px; color: var(--muted); line-height: 2; }
+  .footer-sources strong { color: var(--text); display: block; margin-bottom: 4px; font-size: 12px; }
+  .footer-note { font-size: 11px; color: var(--muted); text-align: right; }
+
+  /* CM Rate visual */
+  .cm-visual {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  .cm-bar-wrap { flex: 1; background: #f0f2f7; border-radius: 4px; height: 8px; overflow: hidden; }
+  .cm-bar { height: 100%; border-radius: 4px; transition: width 0.3s; }
+  .cm-label { font-weight: 700; min-width: 35px; }
+
+  @media (max-width: 700px) {
+    .summary-grid, .cause-grid, .ext-grid, .partner-grid { grid-template-columns: 1fr; }
+    .report-header { padding: 32px 24px; }
+    .report-header h1 { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="report-header">
+    <div class="tag">T&amp;A 사업실 분석 리포트</div>
+    <h1>Q4 2025 파리·런던 T&amp;A 실적 부진<br>원인 분석 — 최종본</h1>
+    <p class="subtitle">3개 에이전트 교차검증 완료 · 비상계엄 오류 수정 반영</p>
+    <div class="meta">
+      <div class="meta-item"><strong>분석 기준일</strong>2026-02-26</div>
+      <div class="meta-item"><strong>Redash 쿼리</strong>Q31456 (2026-02-26 실행)</div>
+      <div class="meta-item"><strong>인천공항 시트</strong>2025년 1~9월 (Q4 미집계)</div>
+      <div class="meta-item"><strong>내부 문서</strong>영국 파헤치기 · 중부유럽 주간회의록</div>
+    </div>
+  </div>
+
+  <!-- Alert: 비상계엄 오류 수정 -->
+  <div class="alert error">
+    <div class="icon">⚠️</div>
+    <div><strong>이전 분석 오류 수정</strong> — 비상계엄(2024.12.03)은 Q4 2024에 발생한 사건으로, Q4 2025(2025년 10~12월) 분석에서 원인으로 포함하는 것은 사실 오류입니다. 본 최종본에서는 계엄 영향을 제거하고 실증 데이터 기반으로 수정하였습니다.</div>
+  </div>
+
+  <!-- 1. 결론 요약 -->
+  <div class="section">
+    <div class="section-title"><span class="num">1</span>핵심 요약</div>
+    <div class="summary-grid">
+      <!-- Paris -->
+      <div class="city-card paris">
+        <div class="city-name">🗼 파리 (CDG)</div>
+        <div class="city-sub">중부유럽팀 담당</div>
+        <div class="metrics">
+          <div class="metric-item">
+            <div class="metric-label">GMV YoY (Q4)</div>
+            <div class="metric-value neg">-16~17%</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">CM_RATE 변화</div>
+            <div class="metric-value warn">13% → 27%</div>
+          </div>
+        </div>
+        <div style="margin-bottom:14px;">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">CM_RATE 추이</div>
+          <div class="cm-visual">
+            <span style="color:var(--muted);font-size:11px;">2024</span>
+            <div class="cm-bar-wrap"><div class="cm-bar" style="width:13%;background:#fed7d7;"></div></div>
+            <span class="cm-label tag-neg">13.5%</span>
+          </div>
+          <div class="cm-visual">
+            <span style="color:var(--muted);font-size:11px;">2025</span>
+            <div class="cm-bar-wrap"><div class="cm-bar" style="width:27%;background:#c6f6d5;"></div></div>
+            <span class="cm-label tag-pos">26.6%</span>
+          </div>
+        </div>
+        <div class="diagnosis">
+          <strong>핵심 진단:</strong> 경쟁사 가격 공략과 세미패키지 유입 붕괴로 GMV 감소. CM_RATE 개선은 저마진 상품 이탈의 부산물이며, <strong>수익 구조 개선 신호가 아님.</strong>
+        </div>
+      </div>
+      <!-- London -->
+      <div class="city-card london">
+        <div class="city-name">🎡 런던 (LHR)</div>
+        <div class="city-sub">서유럽팀 담당</div>
+        <div class="metrics">
+          <div class="metric-item">
+            <div class="metric-label">GMV YoY (Q4)</div>
+            <div class="metric-value neg">-28~34%</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">CM_RATE 변화</div>
+            <div class="metric-value neg">29% → 11%</div>
+          </div>
+        </div>
+        <div style="margin-bottom:14px;">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">CM_RATE 추이</div>
+          <div class="cm-visual">
+            <span style="color:var(--muted);font-size:11px;">2024</span>
+            <div class="cm-bar-wrap"><div class="cm-bar" style="width:29%;background:#c6f6d5;"></div></div>
+            <span class="cm-label tag-pos">28.9%</span>
+          </div>
+          <div class="cm-visual">
+            <span style="color:var(--muted);font-size:11px;">2025</span>
+            <div class="cm-bar-wrap"><div class="cm-bar" style="width:11%;background:#fed7d7;"></div></div>
+            <span class="cm-label tag-neg">10.7%</span>
+          </div>
+        </div>
+        <div class="diagnosis">
+          <strong>핵심 진단:</strong> EPL 축구(-47.6%)와 뮤지컬(-47.0%) — Q4 핵심 카테고리 2개가 동시에 무너진 <strong>구조적 타격.</strong> 가격 경쟁 압박까지 더해 CM_RATE 붕괴.
+        </div>
+      </div>
+    </div>
+
+    <!-- GMV 수치 테이블 -->
+    <table>
+      <thead>
+        <tr>
+          <th>도시</th><th>월</th><th>2024 GMV</th><th>2025 GMV</th><th>YoY</th><th>2024 CM_RATE</th><th>2025 CM_RATE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2" style="vertical-align:middle;font-weight:700;color:var(--paris);">파리</td>
+          <td>11월</td><td>21.05억</td><td>17.18억</td><td class="tag-neg">-18.4%</td>
+          <td class="tag-warn">13.5%</td><td class="tag-pos">26.6%</td>
+        </tr>
+        <tr>
+          <td>12월</td><td>26.68억</td><td>22.50억</td><td class="tag-neg">-15.7%</td>
+          <td>24.3%</td><td>25.1%</td>
+        </tr>
+        <tr>
+          <td rowspan="2" style="vertical-align:middle;font-weight:700;color:var(--london);">런던</td>
+          <td>11월</td><td>16.55억</td><td>11.87억</td><td class="tag-neg">-28.3%</td>
+          <td class="tag-pos">28.9%</td><td class="tag-neg">10.7%</td>
+        </tr>
+        <tr>
+          <td>12월</td><td>19.70억</td><td>12.92억</td><td class="tag-neg">-34.4%</td>
+          <td class="tag-pos">28.9%</td><td class="tag-neg">12.7%</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:var(--muted);margin-top:8px;">출처: Redash Q31456 (2026-02-26 실행)</p>
+  </div>
+
+  <!-- 2. 수요 지표 -->
+  <div class="section">
+    <div class="section-title"><span class="num">2</span>수요 지표 — 인천공항 출국자 수</div>
+    <div class="alert info">
+      <div class="icon">ℹ️</div>
+      <div>Q4 2025(10~12월) 출국자 수는 시트 미집계. 1~9월 추세 기준 Q4도 약 <strong>-2~4%</strong> 수준으로 추정.</div>
+    </div>
+    <table>
+      <thead>
+        <tr><th>노선</th><th>2023 Q4</th><th>2024 Q4</th><th>2024 YoY</th><th>2025 1~9월</th><th>2024 동기</th><th>YoY</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:700;color:var(--london);">런던 (LHR)</td>
+          <td>38,687명</td><td>38,752명</td><td>+0.2%</td>
+          <td>149,153명</td><td>152,093명</td><td class="tag-neg">-1.9%</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--paris);">파리 (CDG)</td>
+          <td>68,121명</td><td>71,733명</td><td class="tag-pos">+5.3%</td>
+          <td>226,412명</td><td>234,237명</td><td class="tag-neg">-3.3%</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:var(--muted);margin-top:8px;">출처: 인천공항_마이리얼트립 22.1~25.12 국제선 운송실적 (Google Sheets)</p>
+
+    <div class="gap-box" style="margin-top:20px;">
+      <div class="gap-title">수요 감소 vs GMV 감소 격차 분석</div>
+      <div class="gap-line"><strong>출국자 감소(−2~3%)</strong>가 예측하는 GMV 영향: −2~4%</div>
+      <div class="gap-line">실제 GMV 감소: <strong>파리 −16~18% / 런던 −28~34%</strong></div>
+      <div class="gap-line highlight">설명되지 않는 격차: 파리 −12~15%p / 런던 −25~30%p</div>
+      <div class="gap-line" style="margin-top:8px;">→ 수요(출국자) 감소보다 <strong>공급·가격·상품 구조 문제</strong>가 훨씬 큰 영향</div>
+    </div>
+  </div>
+
+  <!-- 3. 파리 원인 분석 -->
+  <div class="section">
+    <div class="section-title"><span class="num">3</span>파리 — 경쟁 열세 + 유입 붕괴</div>
+    <div class="alert warning">
+      <div class="icon">📌</div>
+      <div><strong>CM_RATE 27% 개선 재해석:</strong> 수익 구조가 좋아진 것이 아니다. 저마진 세미패키지(-44.71% 유입)가 빠지고 고마진 티켓(ASP +52.1%) 비중이 올라간 <strong>상품 믹스 악화의 부산물</strong>이다. 절대 매출이 줄어드는 상황에서의 마진율 상향일 뿐.</div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>카테고리</th><th>GMV YoY</th><th>주요 수치</th><th>원인</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>파리 티켓</td><td class="tag-pos">+40.7%</td><td>ASP +52.1%, UV -16%</td><td>고마진 상품 ASP 상승</td></tr>
+        <tr><td>디즈니랜드</td><td class="tag-neg">-47.0%</td><td>UV -42.5%, CVR -2.2%p</td><td>MRT 가격 경쟁사 대비 +13% 고가</td></tr>
+        <tr><td>박물관·미술 투어</td><td class="tag-neg">-33.6%</td><td>UV -27.1%</td><td>외부 유입 약세</td></tr>
+        <tr><td>몽생미셸</td><td class="tag-neg">-24.8%</td><td>UV -28.9%</td><td>유입 감소</td></tr>
+        <tr><td>베르사유·지베르니</td><td class="tag-neg">-24.7%</td><td>UV -29.4%</td><td>유입 감소</td></tr>
+        <tr><td>세미패키지</td><td class="tag-neg">-24.2억원</td><td>외부 유입 -44.71%</td><td>네이버쇼핑 -88.9%, MRT앱 -44%</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:var(--muted);margin-top:8px;">출처: Confluence 중부유럽 주간회의록 (2025년 11월 4일·11일)</p>
+
+    <div style="margin-top:20px;">
+      <div style="font-size:13px;font-weight:700;margin-bottom:12px;">GMV -16~17% 요인 분해</div>
+      <table>
+        <thead>
+          <tr><th>순위</th><th>원인</th><th>영향도 추정</th><th>근거</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="badge badge-red">1순위</span></td><td>경쟁사 가격 공략</td><td class="tag-neg">-7~8%p</td><td>디즈니랜드: MRT vs 클룩/GYG +13% 고가 → UV -42.5%</td></tr>
+          <tr><td><span class="badge badge-red">2순위</span></td><td>세미패키지·기타 유입 붕괴</td><td class="tag-neg">-5~6%p</td><td>외부 유입 -44.71%, 네이버쇼핑 -88.9%</td></tr>
+          <tr><td><span class="badge badge-orange">3순위</span></td><td>출국자 감소</td><td class="tag-neg">-3~4%p</td><td>CDG 출국자 -3.3% (인천공항 시트)</td></tr>
+          <tr><td><span class="badge badge-gray">4순위</span></td><td>Fun.T EP 이슈 (일시적)</td><td class="tag-neg">-1~2%p</td><td>전사 EP 노출 이슈, 주요 카테고리 순위 하락</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 4. 런던 원인 분석 -->
+  <div class="section">
+    <div class="section-title"><span class="num">4</span>런던 — Q4 핵심 카테고리 2개 동시 붕괴</div>
+    <div class="alert error">
+      <div class="icon">🔴</div>
+      <div>런던 Q4는 <strong>영국축구 + 뮤지컬</strong>이 연간 중 가장 강한 성수기. 이 두 카테고리가 각각 -47.6%, -47.0%로 동시에 무너지며 CM_RATE 29% → 11% 붕괴를 유발했다.</div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>카테고리</th><th>Q4 역할</th><th>GMV YoY</th><th>원인</th><th>공급 이슈</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:700;">영국축구(EPL)</td>
+          <td><span class="badge badge-red">핵심 성수기</span></td>
+          <td class="tag-neg">-47.6%</td>
+          <td>손흥민·빅6 성적 하락, 외부 유입 -67.1%, 시장 성장률 -52.6%</td>
+          <td><span class="badge badge-green">정상</span> (API 연동 완료)</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;">뮤지컬</td>
+          <td><span class="badge badge-red">핵심 성수기</span></td>
+          <td class="tag-neg">-47.0%</td>
+          <td>외부 검색 -39%, 티켓히어 단일 의존, 타 OTA(프리비아·투어비스) 저가 공세</td>
+          <td><span class="badge badge-orange">경쟁력 저하</span></td>
+        </tr>
+        <tr>
+          <td>근교투어</td>
+          <td><span class="badge badge-gray">비수기</span></td>
+          <td class="tag-neg">부진</td>
+          <td>덤핑가 경쟁 심화 (더트리퍼 등), 런던소풍 관계 악화</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:var(--muted);margin-top:8px;">출처: Confluence 영국 파헤치기·12월 주간회의록 (2026-02-11 최종 수정)</p>
+
+    <div style="background:#fff5f5;border-radius:10px;padding:18px 20px;margin-top:20px;border:1px solid #feb2b2;">
+      <div style="font-weight:700;font-size:13px;color:var(--negative);margin-bottom:10px;">CM_RATE 붕괴 구조</div>
+      <div style="font-size:12px;line-height:2;font-family:monospace;">
+        고마진 EPL·뮤지컬 GMV 급락 → 마진 기여 소멸<br>
+        + 가격 경쟁 대응으로 판매가 하락 → CM_RATE 추가 압박<br>
+        = 28.9% <strong>→</strong> 10.7% (62% 붕괴)
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;">※ EPL 공급 계약(Champions Travel, API 연동)은 정상 → 공급 이슈가 아닌 수요 붕괴</div>
+    </div>
+  </div>
+
+  <!-- 5. 외부 환경 -->
+  <div class="section">
+    <div class="section-title"><span class="num">5</span>외부 환경 요인</div>
+    <div class="ext-grid">
+      <div class="ext-card">
+        <div class="ext-icon">💶</div>
+        <div class="ext-title">EUR/KRW 환율 상승</div>
+        <div class="ext-desc">2025년 Q4 평균 약 1,670~1,685원. 전년 대비 약 +7~10% 상승.</div>
+        <div class="ext-impact tag-neg">프리미엄 유럽 목적지 수요 억제</div>
+      </div>
+      <div class="ext-card">
+        <div class="ext-icon">🛂</div>
+        <div class="ext-title">EES 시행 (2025.10.12)</div>
+        <div class="ext-desc">EU 신규 생체인식 입국 시스템 도입. 입국 절차 복잡화로 여행 진입장벽 상승.</div>
+        <div class="ext-impact tag-neg">Q4 초반 단기 수요 위축</div>
+      </div>
+      <div class="ext-card">
+        <div class="ext-icon">📉</div>
+        <div class="ext-title">파리 관광 수요 약세</div>
+        <div class="ext-desc">2025년 10월 파리 국제 관광객 YoY -4.6%. 올림픽 후 관광 정상화 과정.</div>
+        <div class="ext-impact tag-neg">시장 자체 수요 약세 확인</div>
+      </div>
+    </div>
+    <div class="alert warning" style="margin-top:16px;margin-bottom:0;">
+      <div class="icon">✓</div>
+      <div><strong>비상계엄(2024.12.03) 영향 제외:</strong> 계엄은 2024년 12월에 발생했으므로 Q4 2025(2025년 10~12월)와 무관. 계엄 여파는 2025년 1~3월 실적 분석에만 해당.</div>
+    </div>
+  </div>
+
+  <!-- 6. 파트너 액션 영향 -->
+  <div class="section">
+    <div class="section-title"><span class="num">6</span>파트너 액션 영향</div>
+    <table>
+      <thead>
+        <tr><th>도시</th><th>파트너 이슈</th><th>Q4 영향</th><th>확인 방법</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--london);font-weight:700;">런던</td>
+          <td>런던소풍 관계 악화 (타사 어뷰징), 빨간바지·솔앤비 덤핑가 경쟁</td>
+          <td>근교투어 마진 압박</td>
+          <td><span class="badge badge-green">Confluence 미팅록 확인</span></td>
+        </tr>
+        <tr>
+          <td style="color:var(--london);font-weight:700;">런던</td>
+          <td>뮤지컬 티켓히어 단일 의존 → 프리비아·투어비스 저가 공세</td>
+          <td>뮤지컬 CM_RATE 악화</td>
+          <td><span class="badge badge-green">Confluence 확인</span></td>
+        </tr>
+        <tr>
+          <td style="color:var(--paris);font-weight:700;">파리</td>
+          <td>클룩/GYG 디즈니랜드 저가 공세 → MRT +13% 고가 방치</td>
+          <td>UV -42.5% 직결</td>
+          <td><span class="badge badge-green">회의록 가격 비교 확인</span></td>
+        </tr>
+        <tr>
+          <td style="color:var(--paris);font-weight:700;">파리</td>
+          <td>확정률 전용 Redash 쿼리 미등록</td>
+          <td>정량 검증 불가</td>
+          <td><span class="badge badge-orange">데이터 공백</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 7. 권고사항 -->
+  <div class="section">
+    <div class="section-title"><span class="num">7</span>권고사항</div>
+    <table>
+      <thead>
+        <tr><th>도시</th><th>우선순위</th><th>액션</th><th>기대 효과</th></tr>
+      </thead>
+      <tbody class="action-row">
+        <tr>
+          <td style="color:var(--paris);font-weight:700;">파리</td>
+          <td><span class="badge badge-red">즉시</span></td>
+          <td>디즈니랜드 가격 경쟁력 회복: 클룩 공급가 비교 후 MSP 재조정 또는 직계약 전환</td>
+          <td>UV 회복 → GMV 반등</td>
+        </tr>
+        <tr>
+          <td style="color:var(--paris);font-weight:700;">파리</td>
+          <td><span class="badge badge-red">즉시</span></td>
+          <td>세미패키지 유입 채널 점검: 네이버쇼핑 EP 재정비, MRT_APP 노출 개선</td>
+          <td>저마진 상품도 회복 시 GMV+CM 동반 개선</td>
+        </tr>
+        <tr>
+          <td style="color:var(--london);font-weight:700;">런던</td>
+          <td><span class="badge badge-red">즉시</span></td>
+          <td>EPL API 연동 공급사 다양화: Champions Travel 외 추가 공급사 확보로 가격·공급 안정성 강화</td>
+          <td>CM_RATE 회복</td>
+        </tr>
+        <tr>
+          <td style="color:var(--london);font-weight:700;">런던</td>
+          <td><span class="badge badge-orange">단기</span></td>
+          <td>뮤지컬 현지 공급사 직계약: 좌석선택 옵션 + 취소정책 개선 (이미 액션 중)</td>
+          <td>클룩 대비 가격·옵션 경쟁력 확보</td>
+        </tr>
+        <tr>
+          <td>공통</td>
+          <td><span class="badge badge-orange">단기</span></td>
+          <td>카테고리별 월별 CM_RATE 목표 별도 설정: 전체 GMV 목표만으로는 구조 문제 탐지 불가</td>
+          <td>조기 경고 체계 구축</td>
+        </tr>
+        <tr>
+          <td>공통</td>
+          <td><span class="badge badge-gray">중기</span></td>
+          <td>확정률 Redash 쿼리 신규 등록 요청: 현재 도시별 확정률 데이터 공백</td>
+          <td>분석 신뢰도 제고</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <div class="report-footer">
+    <div class="footer-sources">
+      <strong>데이터 출처</strong>
+      Redash Q31456 — 매출추정용 해외 T&A 도시 구분별 거래액 (중부유럽) · 실행: 2026-02-26<br>
+      인천공항 운송실적 시트 — 22.1~25.12 국제선 노선별 출국자 수 (2025년 1~9월까지 집계)<br>
+      Confluence — 영국 파헤치기 (250417) · 런던 도시 다운로드 · 중부유럽 주간회의록 11/4·11/11<br>
+      빨간바지투어 파트너 미팅 (2026-01-29) · Tavily 외부 리서치
+    </div>
+    <div class="footer-note">
+      작성: Claude (PBrain MCP)<br>
+      검증: 3개 에이전트 교차검증 완료<br>
+      2026-02-26
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
