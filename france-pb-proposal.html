@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0F172A">
+  <title>파리·남부 프랑스 PB 협업 제안</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="https://nowikoes.github.io/naoshima-lunch/pbrain-design.css">
+  <style>
+    body {
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: var(--color-bg);
+      color: var(--color-text);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ── 타임라인 ── */
+    .timeline {
+      position: relative;
+      padding: 0 0 8px 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--color-border);
+    }
+    .tl-item {
+      position: relative;
+      padding: 0 0 24px 52px;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-dot {
+      position: absolute;
+      left: 12px;
+      top: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      border: 3px solid var(--color-bg);
+      box-sizing: border-box;
+    }
+    .tl-dot--gray {
+      background: var(--color-text-sub);
+    }
+    .tl-date {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--color-accent);
+      margin-bottom: 4px;
+      letter-spacing: 0.02em;
+    }
+    .tl-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 4px;
+    }
+    .tl-desc {
+      font-size: 13.5px;
+      color: var(--color-text-sub);
+      line-height: 1.55;
+    }
+
+    /* ── 상품 카드 ── */
+    .product-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .product-card {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      background: var(--color-surface);
+      box-shadow: var(--shadow-sm);
+    }
+    .product-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .product-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .product-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+    .role-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .role-box {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+    .role-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .role-item {
+      font-size: 13px;
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    /* ── 질문지 ── */
+    .q-block {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+    .q-header {
+      background: var(--color-surface);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .q-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--color-text);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .q-product-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+    .q-body {
+      background: var(--color-bg);
+      padding: 14px 20px;
+    }
+    .q-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 12px 0 6px;
+    }
+    .q-section-label:first-child { margin-top: 0; }
+    .q-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 14px;
+      color: var(--color-text);
+      line-height: 1.5;
+    }
+    .q-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .q-check {
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--color-border);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── 푸터 ── */
+    .pb-footer {
+      padding: 32px 20px calc(env(safe-area-inset-bottom) + 32px);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="pb-wrap">
+
+  <!-- 헤더 -->
+  <header class="pb-header" style="padding-top: calc(env(safe-area-inset-top) + 20px);">
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+      <span class="pb-header-badge">마이리얼트립 PB</span>
+      <span class="pb-header-badge">2026</span>
+    </div>
+    <h1 style="font-size:24px; font-weight:800; color:#fff; margin:0 0 6px; line-height:1.3;">
+      파리·남부 프랑스<br>PB 상품 협업 제안
+    </h1>
+    <p style="font-size:14px; color:rgba(255,255,255,0.6); margin:0;">
+      정희태 가이드님께 · 2026년 3월
+    </p>
+  </header>
+
+  <!-- 개요 -->
+  <div class="pb-section">
+    <p class="pb-section-title">협업 개요</p>
+    <div class="pb-card">
+      <p style="font-size:14px; color:var(--color-text); line-height:1.7; margin:0 0 12px;">
+        마이리얼트립 PB팀은 파리·남부 프랑스 지역에서 <strong>정희태 가이드님과 단독 PB 상품</strong>을 기획합니다.
+        이미 오픈되었거나 준비 중인 상품이 있다면 그것도 포함해서,
+        <strong>형식에 구애받지 않고 최대한 많은 정보를 먼저 모아놓고 함께 상의</strong>하는 것이 1차 목표입니다.
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:6px;">
+        <span class="pb-tag--accent">5개 상품</span>
+        <span class="pb-tag--neutral">파리 3종</span>
+        <span class="pb-tag--neutral">남부 2종</span>
+        <span class="pb-tag--ok">2026 상반기 오픈 목표</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pb-divider"></div>
+
+  <!-- 기획 상품 목록 -->
+  <div class="pb-section">
+    <p class="pb-section-title">기획 상품</p>
+    <div class="product-list">
+
+      <div class="product-card">
+        <div class="product-header">
+          <div class="product-num">1</div>
+          <div>
+            <div class="product-name">부르고뉴 와인투어</div>
+            <div style="font-size:12px; color:var(--color-text-sub); margin-top:2px;">파리 출발 당일 · 풀데이</div>
+          </div>
+          <span class="pb-tag--neutral" style="margin-left:auto;">파리 기반</span>
+        </div>
+        <div style="font-size:13px; color:var(--color-text-sub); line-height:1.6;">
+          와이너리 2~3곳 방문, 포도밭 산책, 테이스팅 포함. TGV로 파리에서 1시간 40분.
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-header">
+          <div class="product-num">2</div>
+          <div>
+            <div class="product-name">니스 구시가지 워킹투어</div>
+            <div style="font-size:12px; color:var(--color-text-sub); margin-top:2px;">2시간 30분~3시간</div>
+          </div>
+          <span class="pb-tag--accent" style="margin-left:auto;">남부 체류</span>
+        </div>
+        <div style="font-size:13px; color:var(--color-text-sub); line-height:1.6;">
+          메세나 광장 → 가리발디 광장 → 젤라토 맛집 → 생트라파라트 대성당 → 소카 맛집 → 살레아 광장
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-header">
+          <div class="product-num">3</div>
+          <div>
+            <div class="product-name">샤갈·마티스 미술관</div>
+            <div style="font-size:12px; color:var(--color-text-sub); margin-top:2px;">사전설명 진행 · 3시간</div>
+          </div>
+          <span class="pb-tag--accent" style="margin-left:auto;">남부 체류</span>
+        </div>
+        <div style="font-size:13px; color:var(--color-text-sub); line-height:1.6;">
+          미술관 입장 전 작가 배경·작품 해설. 자유관람 후 투어 마무리.
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-header">
+          <div class="product-num">4</div>
+          <div>
+            <div class="product-name">외방전교회 투어</div>
+            <div style="font-size:12px; color:var(--color-text-sub); margin-top:2px;">파리 · 역사 스토리텔링</div>
+          </div>
+          <span class="pb-tag--neutral" style="margin-left:auto;">파리 기반</span>
+        </div>
+        <div style="font-size:13px; color:var(--color-text-sub); line-height:1.6;">
+          한국 근현대사와 연결된 파리 외방전교회. 역사 스토리텔링 중심.
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-header">
+          <div class="product-num">5</div>
+          <div>
+            <div class="product-name">로댕미술관 투어</div>
+            <div style="font-size:12px; color:var(--color-text-sub); margin-top:2px;">파리 · 사전설명형</div>
+          </div>
+          <span class="pb-tag--neutral" style="margin-left:auto;">파리 기반</span>
+        </div>
+        <div style="font-size:13px; color:var(--color-text-sub); line-height:1.6;">
+          작품 감상 전 배경 해설로 깊이 있는 관람 경험 제공.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="pb-divider"></div>
+
+  <!-- 전체 타임라인 -->
+  <div class="pb-section">
+    <p class="pb-section-title">전체 타임라인</p>
+    <div class="pb-card">
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">3월 1주 · 지금</div>
+          <div class="tl-title">정보 공유 & 사전 논의</div>
+          <div class="tl-desc">가이드님께 상품별 필요 정보 요청<br>양측 방향성 사전 확인</div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">3월 2~3주</div>
+          <div class="tl-title">1차 논의</div>
+          <div class="tl-desc">서기원 + 정희태 가이드<br>상품 구조 · 수익 모델 · 운영 조건 합의</div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">3월 4주</div>
+          <div class="tl-title">2차 합의</div>
+          <div class="tl-desc">도시 담당자 + 지역 팀장 합류<br>플랫폼 노출 구좌 · 수수료 구조 최종 확정</div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">4월 1~2주</div>
+          <div class="tl-title">기획서 작성 + MRT 상품 등록</div>
+          <div class="tl-desc">5개 상품 동시 진행<br>상품 페이지 · 가격 · 일정 세팅</div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">4월 말</div>
+          <div class="tl-title">파리 3종 첫 판매 오픈</div>
+          <div class="tl-desc">외방전교회 · 로댕 · 부르고뉴<br>쿠폰 + 노출 구좌 동시 가동</div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot--gray tl-dot"></div>
+          <div class="tl-date">5월 (남부 체류 일정 맞춰)</div>
+          <div class="tl-title">남부 2종 첫 판매 오픈</div>
+          <div class="tl-desc">니스 구시가지 · 샤갈·마티스<br>체류 일정 확정 후 출발일 세팅</div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot--gray tl-dot"></div>
+          <div class="tl-date">8월~</div>
+          <div class="tl-title">부르고뉴 수확철 시즌 집중</div>
+          <div class="tl-desc">9~11월 수확철 시즌 대응<br>성수기 예약 마케팅</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="pb-divider"></div>
+
+  <!-- R&R -->
+  <div class="pb-section">
+    <p class="pb-section-title">역할 분담</p>
+    <p class="pb-subtitle">5개 상품 공통</p>
+    <div class="role-row" style="margin-top:12px;">
+      <div class="role-box">
+        <div class="role-label">정희태 가이드님</div>
+        <div class="role-item">투어 코스 기획<br>예상 원가 산출<br>오픈 후 예약 관리 및 상담<br>기존 타 파트너 중복 여부 확인<br>전체 스토리 기획<br>타겟 고객 설정</div>
+      </div>
+      <div class="role-box">
+        <div class="role-label">마이리얼트립</div>
+        <div class="role-item">상품 페이지 디자인<br>노출 구좌 확보<br>마케팅 기획 및 집행<br>쿠폰 운영</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pb-divider"></div>
+
+  <!-- 정보 요청 질문지 -->
+  <div class="pb-section">
+    <p class="pb-section-title">가이드님께 필요한 정보</p>
+    <div class="pb-alert--accent" style="margin-bottom:16px;">
+      형식 무관하게 알고 계신 정보 최대한 많이 공유해주시면, 그걸 바탕으로 MRT가 전략을 짜겠습니다.
+    </div>
+
+    <!-- 공통 -->
+    <div class="q-block">
+      <div class="q-header">
+        <div style="font-size:13px; font-weight:700; color:var(--color-text);">공통 (5개 상품 동일)</div>
+      </div>
+      <div class="q-body">
+        <div class="q-item"><div class="q-check"></div>현재 운영 중 / 준비 중 / 신규 여부</div>
+        <div class="q-item"><div class="q-check"></div>이미 오픈된 상품이 있다면 현재 예약 현황</div>
+        <div class="q-item"><div class="q-check"></div>인당 희망 가격</div>
+        <div class="q-item"><div class="q-check"></div>최소 출발 인원 / 최대 인원</div>
+        <div class="q-item"><div class="q-check"></div>소요 시간</div>
+        <div class="q-item"><div class="q-check"></div>운영 가능 요일 / 주 몇 회</div>
+        <div class="q-item"><div class="q-check"></div>취소 기준</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-header">
+        <div class="q-num">1</div>
+        <div class="q-product-name">부르고뉴 와인투어</div>
+      </div>
+      <div class="q-body">
+        <div class="q-item"><div class="q-check"></div>이동 수단 (버스 전세 가능? 기차+현지 차량?)</div>
+        <div class="q-item"><div class="q-check"></div>방문 예정 와이너리 2~3곳 (섭외된 곳 있는지)</div>
+        <div class="q-item"><div class="q-check"></div>시음 비용 포함 여부</div>
+        <div class="q-item"><div class="q-check"></div>파리 출발 예상 시간</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-header">
+        <div class="q-num">2</div>
+        <div class="q-product-name">니스 구시가지 워킹투어</div>
+      </div>
+      <div class="q-body">
+        <div class="q-item"><div class="q-check"></div>루트 최종 확정본 (변경 있는지)</div>
+        <div class="q-item"><div class="q-check"></div>젤라토·소카 시식 포함 여부</div>
+        <div class="q-item"><div class="q-check"></div>남부 체류 일정 (월 몇 회, 어느 요일)</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-header">
+        <div class="q-num">3</div>
+        <div class="q-product-name">샤갈·마티스 미술관</div>
+      </div>
+      <div class="q-body">
+        <div class="q-item"><div class="q-check"></div>사전설명 장소 (미술관 외부 / 내부 입장 후)</div>
+        <div class="q-item"><div class="q-check"></div>입장권 포함 여부</div>
+        <div class="q-item"><div class="q-check"></div>니스 체류 중 운영 가능 날짜 패턴</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-header">
+        <div class="q-num">4</div>
+        <div class="q-product-name">외방전교회 투어</div>
+      </div>
+      <div class="q-body">
+        <div class="q-item"><div class="q-check"></div>내부 입장 가능 여부 (허가 필요한지)</div>
+        <div class="q-item"><div class="q-check"></div>투어 루트 개요 (출발지 ~ 종료)</div>
+        <div class="q-item"><div class="q-check"></div>소요 시간</div>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-header">
+        <div class="q-num">5</div>
+        <div class="q-product-name">로댕미술관 투어</div>
+      </div>
+      <div class="q-body">
+        <div class="q-item"><div class="q-check"></div>진행 방식 (사전설명 후 자유관람 / 가이드 동행)</div>
+        <div class="q-item"><div class="q-check"></div>입장권 포함 여부</div>
+        <div class="q-item"><div class="q-check"></div>소요 시간</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 푸터 -->
+  <div class="pb-footer">
+    <p class="pb-note">마이리얼트립 PB사업팀 · 서기원</p>
+    <p class="pb-note" style="margin-top:2px;">kiwon.seo@myrealtrip.com</p>
+  </div>
+
+</div>
+
+</body>
+</html>
