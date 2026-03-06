@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0F172A">
+  <title>Claude Code 스킬 가이드</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <style>
+    :root {
+      --color-accent: #2563EB;
+      --color-text: #18181B;
+      --color-text-sub: #71717A;
+      --color-border: #E4E4E7;
+      --color-bg: #FFFFFF;
+      --color-bg-sub: #F4F4F5;
+      --color-slate-900: #0F172A;
+      --color-zinc-400: #A1A1AA;
+      --radius: 12px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Pretendard Variable', -apple-system, sans-serif;
+      background: var(--color-slate-900);
+      color: var(--color-text);
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    /* Slide container */
+    .slides {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 64px;
+      background: var(--color-bg);
+      overflow-y: auto;
+    }
+    .slide.active { display: flex; }
+    .slide.dark {
+      background: var(--color-slate-900);
+      color: #fff;
+    }
+    .slide.dark .sub { color: var(--color-zinc-400); }
+
+    /* Typography */
+    .title { font-size: 38px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.25; margin-bottom: 14px; }
+    .subtitle { font-size: 18px; font-weight: 500; color: var(--color-text-sub); line-height: 1.5; margin-bottom: 28px; }
+    .dark .subtitle { color: var(--color-zinc-400); }
+    .heading { font-size: 24px; font-weight: 700; margin-bottom: 18px; letter-spacing: -0.3px; }
+    .sub { font-size: 14px; color: var(--color-text-sub); line-height: 1.6; }
+    .accent { color: var(--color-accent); }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(37,99,235,0.1);
+      color: var(--color-accent);
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+    .dark .badge { background: rgba(37,99,235,0.3); }
+
+    /* Grid layouts */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 8px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 8px; }
+
+    /* Cards */
+    .card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .dark .card {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.1);
+    }
+    .card-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .card-body { font-size: 14px; color: var(--color-text-sub); line-height: 1.6; }
+    .dark .card-body { color: var(--color-zinc-400); }
+
+    /* Flow diagram */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 16px 0;
+      flex-wrap: wrap;
+    }
+    .flow-step {
+      background: var(--color-bg-sub);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .dark .flow-step { background: rgba(255,255,255,0.08); }
+    .flow-arrow { color: var(--color-zinc-400); font-size: 18px; }
+
+    /* Trigger keywords */
+    .keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .keyword {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--color-bg-sub);
+      color: var(--color-text);
+    }
+    .dark .keyword { background: rgba(255,255,255,0.08); color: #fff; }
+
+    /* Example box */
+    .example {
+      background: var(--color-bg-sub);
+      border-left: 3px solid var(--color-accent);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .dark .example { background: rgba(37,99,235,0.1); }
+    .example-label { font-size: 11px; font-weight: 700; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+
+    /* Table */
+    .tbl { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 12px; }
+    .tbl th { text-align: left; padding: 10px 12px; font-weight: 600; border-bottom: 2px solid var(--color-border); font-size: 13px; color: var(--color-text-sub); }
+    .tbl td { padding: 10px 12px; border-bottom: 1px solid var(--color-border); }
+    .dark .tbl th { border-color: rgba(255,255,255,0.1); color: var(--color-zinc-400); }
+    .dark .tbl td { border-color: rgba(255,255,255,0.06); }
+
+    /* Output preview (mock terminal / document) */
+    .output-preview {
+      background: #1E1E1E;
+      border-radius: 10px;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: #D4D4D4;
+      max-height: 420px;
+      overflow-y: auto;
+    }
+    .output-bar {
+      background: #2D2D2D;
+      padding: 8px 16px;
+      font-size: 11px;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: sticky;
+      top: 0;
+    }
+    .output-bar .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .output-bar .dot-r { background: #FF5F57; }
+    .output-bar .dot-y { background: #FEBC2E; }
+    .output-bar .dot-g { background: #28C840; }
+    .output-body { padding: 16px 20px; }
+    .output-body .oh1 { color: #fff; font-weight: 700; font-size: 14px; margin: 12px 0 6px; }
+    .output-body .oh2 { color: #569CD6; font-weight: 600; font-size: 13px; margin: 10px 0 4px; }
+    .output-body .oh3 { color: #9CDCFE; font-weight: 600; font-size: 12.5px; margin: 8px 0 4px; }
+    .output-body .o-accent { color: #4FC1FF; }
+    .output-body .o-green { color: #6A9955; }
+    .output-body .o-yellow { color: #DCDCAA; }
+    .output-body .o-orange { color: #CE9178; }
+    .output-body .o-dim { color: #666; }
+    .output-body .o-bold { color: #fff; font-weight: 600; }
+    .output-body .o-table { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 11.5px; }
+    .output-body .o-table th { text-align: left; padding: 4px 8px; color: #569CD6; border-bottom: 1px solid #333; font-weight: 600; }
+    .output-body .o-table td { padding: 4px 8px; border-bottom: 1px solid #2A2A2A; }
+    .output-body .o-mermaid {
+      background: #252526;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin: 8px 0;
+      color: #9CDCFE;
+      font-size: 11.5px;
+    }
+
+    /* HTML preview (mini browser) */
+    .html-preview {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .html-preview-bar {
+      background: var(--color-bg-sub);
+      padding: 8px 16px;
+      font-size: 11px;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .html-preview-body {
+      padding: 0;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+    /* mini page inside preview */
+    .mini-header { background: var(--color-slate-900); color: #fff; padding: 16px 20px; text-align: center; }
+    .mini-header h3 { font-size: 14px; font-weight: 700; margin: 0; }
+    .mini-header p { font-size: 10px; color: var(--color-zinc-400); margin: 4px 0 0; }
+    .mini-section { padding: 14px 20px; }
+    .mini-section-title { font-size: 12px; font-weight: 700; color: var(--color-text); margin-bottom: 8px; }
+    .mini-card {
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      font-size: 11px;
+      color: var(--color-text-sub);
+      line-height: 1.5;
+    }
+    .mini-card strong { color: var(--color-text); }
+    .mini-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 9px;
+      font-weight: 600;
+      background: rgba(37,99,235,0.1);
+      color: var(--color-accent);
+    }
+    .mini-divider { height: 6px; background: var(--color-bg-sub); }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      bottom: 32px;
+      right: 40px;
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .nav-btn {
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      background: var(--color-slate-900);
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.15s;
+    }
+    .nav-btn:hover { opacity: 0.8; }
+    .page-num {
+      position: fixed;
+      bottom: 40px;
+      left: 40px;
+      font-size: 13px;
+      color: var(--color-zinc-400);
+      z-index: 10;
+    }
+
+    /* Screenshot gallery */
+    .screenshot-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      overflow-x: auto;
+    }
+    .screenshot-frame {
+      flex-shrink: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      background: #fff;
+    }
+    .dark .screenshot-frame {
+      border-color: rgba(255,255,255,0.1);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+    .screenshot-frame img {
+      display: block;
+      height: 400px;
+      width: auto;
+      object-fit: cover;
+      object-position: top;
+    }
+    .screenshot-label {
+      padding: 8px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-text-sub);
+      background: var(--color-bg-sub);
+      text-align: center;
+    }
+    .dark .screenshot-label {
+      background: rgba(255,255,255,0.05);
+      color: var(--color-zinc-400);
+    }
+
+    /* Architecture diagram */
+    .arch-diagram {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .arch-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .arch-box {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      flex: 1;
+    }
+    .arch-box.user { background: var(--color-bg-sub); color: var(--color-text); border: 1px solid var(--color-border); }
+    .arch-box.claude { background: var(--color-accent); color: #fff; }
+    .arch-box.tool { background: rgba(37,99,235,0.08); color: var(--color-accent); border: 1px solid rgba(37,99,235,0.2); }
+    .arch-box.config { background: var(--color-bg-sub); color: var(--color-text-sub); border: 1px dashed var(--color-border); font-size: 11px; }
+    .dark .arch-box.user { background: rgba(255,255,255,0.05); color: #fff; border-color: rgba(255,255,255,0.1); }
+    .dark .arch-box.tool { background: rgba(37,99,235,0.15); border-color: rgba(37,99,235,0.3); }
+    .dark .arch-box.config { background: rgba(255,255,255,0.03); color: var(--color-zinc-400); border-color: rgba(255,255,255,0.08); }
+    .arch-arrow { color: var(--color-zinc-400); font-size: 16px; text-align: center; }
+    .arch-label { font-size: 10px; color: var(--color-text-sub); text-align: center; margin-top: 2px; }
+    .dark .arch-label { color: var(--color-zinc-400); }
+
+    /* 14" MacBook (1512x982 effective at 2x) */
+    @media (max-height: 820px) {
+      .slide { padding: 32px 56px; }
+      .title { font-size: 34px; }
+      .heading { font-size: 22px; margin-bottom: 14px; }
+      .card { padding: 14px 16px; }
+      .card-title { font-size: 14px; }
+      .card-body { font-size: 13px; }
+      .screenshot-frame img { height: 320px; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .slide { padding: 40px 24px; }
+      .title { font-size: 28px; }
+      .heading { font-size: 22px; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="slides" id="slides">
+
+    <!-- Slide 1: Cover -->
+    <div class="slide dark active">
+      <div class="badge">Claude Code + MCP + Skills</div>
+      <h1 class="title">Claude Code 스킬 가이드</h1>
+      <p class="subtitle">PBrain에서 사용하는 7개 스킬의 패턴과 사용 사례</p>
+      <p class="sub" style="margin-top: 40px;">화살표 키 또는 하단 버튼으로 이동</p>
+    </div>
+
+    <!-- Slide: Claude Code 구조 -->
+    <div class="slide">
+      <div class="badge">How it works</div>
+      <h2 class="heading">Claude Code는 어떻게 작동하나요?</h2>
+      <div class="grid-2" style="gap: 32px;">
+        <!-- 왼쪽: 프로세스 다이어그램 -->
+        <div>
+          <p class="sub" style="margin-bottom: 16px;">VS Code 사이드바 또는 터미널에서 자연어로 질문하면, Claude가 아래 순서로 작동합니다.</p>
+          <!-- Process flow: numbered steps -->
+          <div style="display:flex; flex-direction:column; gap:0;">
+            <!-- Step 1 -->
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:var(--color-accent);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+              <div class="arch-box user" style="flex:1; text-align:left; padding:10px 14px; font-size:13px;">
+                <strong>VS Code</strong>에서 질문 입력 <span style="color:var(--color-text-sub); font-size:11px;">(사이드바 채팅 또는 터미널 <code style="font-size:11px;">claude</code>)</span>
+              </div>
+            </div>
+            <div style="margin-left:13px; border-left:2px solid var(--color-border); height:8px;"></div>
+            <!-- Step 2 -->
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:var(--color-accent);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+              <div class="arch-box" style="flex:1; text-align:left; padding:10px 14px; font-size:13px; background:rgba(37,99,235,0.06); border:1px solid rgba(37,99,235,0.15); color:var(--color-text);">
+                <strong style="color:var(--color-accent);">CLAUDE.md</strong> 자동 읽기 &mdash; 프로젝트 규칙, 톤, 데이터 접근 방식 로드
+              </div>
+            </div>
+            <div style="margin-left:13px; border-left:2px solid var(--color-border); height:8px;"></div>
+            <!-- Step 3 -->
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:var(--color-accent);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+              <div class="arch-box" style="flex:1; text-align:left; padding:10px 14px; font-size:13px; background:rgba(37,99,235,0.06); border:1px solid rgba(37,99,235,0.15); color:var(--color-text);">
+                <strong style="color:var(--color-accent);">Memory</strong> 참조 &mdash; 이전 대화에서 학습한 패턴/규칙 불러오기
+              </div>
+            </div>
+            <div style="margin-left:13px; border-left:2px solid var(--color-border); height:8px;"></div>
+            <!-- Step 4 -->
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:var(--color-accent);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
+              <div class="arch-box" style="flex:1; text-align:left; padding:10px 14px; font-size:13px; background:rgba(37,99,235,0.06); border:1px solid rgba(37,99,235,0.15); color:var(--color-text);">
+                <strong style="color:var(--color-accent);">Skill</strong> 키워드 감지 &mdash; "플랜 짜줘" &rarr; plan-builder 자동 실행
+              </div>
+            </div>
+            <div style="margin-left:13px; border-left:2px solid var(--color-border); height:8px;"></div>
+            <!-- Step 5 -->
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:var(--color-accent);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">5</div>
+              <div class="arch-box" style="flex:1; text-align:left; padding:10px 14px; font-size:13px; background:rgba(37,99,235,0.06); border:1px solid rgba(37,99,235,0.15); color:var(--color-text);">
+                <strong style="color:var(--color-accent);">MCP + Plugin</strong> 호출 &mdash; Confluence 검색, Sheets 조회, 웹 리서치 병렬 실행
+              </div>
+            </div>
+            <div style="margin-left:13px; border-left:2px solid var(--color-border); height:8px;"></div>
+            <!-- Step 6 -->
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:var(--color-slate-900);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">6</div>
+              <div class="arch-box user" style="flex:1; text-align:left; padding:10px 14px; font-size:13px;">
+                <strong>결과물 출력</strong> &mdash; 리포트, HTML 페이지, Confluence 발행
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 오른쪽: 비유 카드 -->
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div class="card" style="border-left: 3px solid var(--color-accent);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <span style="font-size:24px;">&#128218;</span>
+              <div class="card-title" style="margin-bottom:0;">CLAUDE.md = 업무 매뉴얼</div>
+            </div>
+            <div class="card-body">"한국어로 답변해" "Sheets URL은 read_sheet로" 같은 프로젝트 규칙을 정의. 대화 시작 시 자동 로드.</div>
+          </div>
+          <div class="card" style="border-left: 3px solid var(--color-accent);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <span style="font-size:24px;">&#128295;</span>
+              <div class="card-title" style="margin-bottom:0;">MCP = 업무 도구함</div>
+            </div>
+            <div class="card-body">Confluence, Sheets, 웹 검색 등 외부 시스템 접근권. .mcp.json에 어떤 도구를 쓸지 정의.</div>
+          </div>
+          <div class="card" style="border-left: 3px solid var(--color-accent);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <span style="font-size:24px;">&#128196;</span>
+              <div class="card-title" style="margin-bottom:0;">Skills = 업무 SOP</div>
+            </div>
+            <div class="card-body">"의사결정 분석은 이 순서로 해" 같은 워크플로우. 키워드 감지 시 자동 실행.</div>
+          </div>
+          <div class="card" style="border-left: 3px solid var(--color-accent);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <span style="font-size:24px;">&#127981;</span>
+              <div class="card-title" style="margin-bottom:0;">Plugins = 앱스토어</div>
+            </div>
+            <div class="card-body">Atlassian, GitHub, Slack 등 공식 연동. 한 줄 설치, OAuth 인증 자동.</div>
+          </div>
+          <div class="card" style="background:var(--color-bg-sub); border:none; box-shadow:none;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <span style="font-size:24px;">&#128421;</span>
+              <div class="card-title" style="margin-bottom:0; color:var(--color-accent);">VS Code 연동</div>
+            </div>
+            <div class="card-body">사이드바에서 바로 채팅. 코드 선택 후 질문, 파일 탐색기 연동, 터미널 실행까지 하나의 화면에서.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide: 파일 구조 -->
+    <div class="slide dark">
+      <div class="badge">File Structure</div>
+      <h2 class="heading">프로젝트 폴더 구조</h2>
+      <div class="grid-2">
+        <div class="output-preview" style="max-height: 360px;">
+          <div class="output-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span>~/Desktop/myproject/</span>
+          </div>
+          <div class="output-body">
+            <div class="o-bold">CLAUDE.md</div>
+            <div class="o-dim">&nbsp;&nbsp;└ 프로젝트 지시서 (자동 로드)</div>
+            <br>
+            <div class="o-bold">.mcp.json</div>
+            <div class="o-dim">&nbsp;&nbsp;└ MCP 서버 설정 (어떤 도구를 쓸지)</div>
+            <br>
+            <div class="o-bold">.claude/</div>
+            <div class="o-dim">&nbsp;&nbsp;├ skills/</div>
+            <div class="o-dim">&nbsp;&nbsp;│&nbsp;&nbsp;├ my-skill-1/SKILL.md</div>
+            <div class="o-dim">&nbsp;&nbsp;│&nbsp;&nbsp;└ my-skill-2/SKILL.md</div>
+            <div class="o-dim">&nbsp;&nbsp;└ memory/</div>
+            <div class="o-dim">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└ MEMORY.md <span class="o-green">(대화 간 기억)</span></div>
+            <br>
+            <div class="o-bold" style="color: #569CD6;">~/.claude/</div>
+            <div class="o-dim">&nbsp;&nbsp;├ mcp_server_configs.json <span class="o-green">(전역 MCP)</span></div>
+            <div class="o-dim">&nbsp;&nbsp;└ plugins/ <span class="o-green">(마켓플레이스)</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="card-title">프로젝트 레벨 vs 유저 레벨</div>
+            <div class="card-body">
+              <strong>프로젝트</strong> (<code style="font-size:12px;">.mcp.json</code>): 이 폴더에서만 사용하는 MCP<br><br>
+              <strong>유저</strong> (<code style="font-size:12px;">~/.claude/</code>): 어디서든 사용하는 MCP, 플러그인
+            </div>
+          </div>
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="card-title">플러그인</div>
+            <div class="card-body">마켓플레이스에서 설치하는 공식 연동. <code style="font-size:12px;">/install-plugin atlassian</code> 으로 설치. MCP와 비슷하지만 설정이 더 간편합니다.</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Memory</div>
+            <div class="card-body">대화가 끝나도 기억할 내용을 저장. "이 시트는 이렇게 파싱해" 같은 패턴을 학습합니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide: Plugin 개념 -->
+    <div class="slide">
+      <div class="badge">Plugins</div>
+      <h2 class="heading">Plugin vs MCP &mdash; 무엇이 다른가?</h2>
+      <p class="sub" style="margin-bottom: 20px;">둘 다 Claude에게 외부 도구를 연결하지만, 설치 방식과 관리 범위가 다릅니다.</p>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title" style="color:var(--color-accent);">Plugin (마켓플레이스)</div>
+          <div class="card-body">
+            <table class="tbl" style="margin-top:0;">
+              <tr><td><strong>설치</strong></td><td><code style="font-size:12px;">/install-plugin atlassian</code></td></tr>
+              <tr><td><strong>인증</strong></td><td>OAuth 자동 (브라우저 팝업)</td></tr>
+              <tr><td><strong>범위</strong></td><td>유저 레벨 (모든 프로젝트)</td></tr>
+              <tr><td><strong>업데이트</strong></td><td>자동</td></tr>
+              <tr><td><strong>설정 파일</strong></td><td>없음 (내부 관리)</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">MCP 서버 (수동 설정)</div>
+          <div class="card-body">
+            <table class="tbl" style="margin-top:0;">
+              <tr><td><strong>설치</strong></td><td>.mcp.json에 직접 작성</td></tr>
+              <tr><td><strong>인증</strong></td><td>API 토큰 수동 입력</td></tr>
+              <tr><td><strong>범위</strong></td><td>프로젝트 또는 유저 레벨</td></tr>
+              <tr><td><strong>업데이트</strong></td><td>수동</td></tr>
+              <tr><td><strong>설정 파일</strong></td><td>.mcp.json / mcp_server_configs.json</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 20px;">
+        <div class="card-title">사용 가능한 주요 Plugin</div>
+        <div class="card-body">
+          <div class="keywords" style="margin: 8px 0 0;">
+            <span class="keyword" style="background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2);">Atlassian</span>
+            <span class="keyword" style="background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2);">GitHub</span>
+            <span class="keyword" style="background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2);">Slack</span>
+            <span class="keyword">Linear</span>
+            <span class="keyword">Notion</span>
+            <span class="keyword">Sentry</span>
+            <span class="keyword">Datadog</span>
+          </div>
+          <div style="font-size:12px; color:var(--color-text-sub); margin-top:8px;">
+            파란색 = PBrain에서 설치 권장 &nbsp;|&nbsp; 회색 = 필요 시 추가 가능
+          </div>
+        </div>
+      </div>
+      <div class="example" style="margin-top: 16px;">
+        <div class="example-label">언제 뭘 쓰나?</div>
+        공식 Plugin이 있으면 Plugin 사용 (설치 간편, 인증 자동). 커스텀 서버(PBrain MCP 등)나 공식 지원이 없는 도구는 MCP로 직접 설정.
+      </div>
+    </div>
+
+    <!-- Slide: Plugin FAQ -->
+    <div class="slide">
+      <div class="badge">Plugins FAQ</div>
+      <h2 class="heading">Plugin 자주 묻는 질문</h2>
+      <p class="sub" style="margin-bottom: 24px;">Plugin과 MCP에 대해 가장 많이 궁금해하는 3가지.</p>
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div class="card" style="border-left: 3px solid var(--color-accent);">
+          <div class="card-title">Q. Plugin으로 설치하는 게 맞나요?</div>
+          <div class="card-body">
+            <strong style="color:var(--color-accent);">네, Plugin이 있으면 Plugin이 정답입니다.</strong><br>
+            설치 한 번이면 끝, OAuth 자동 인증, 자동 업데이트로 유지보수가 없습니다.<br>
+            MCP가 필요한 경우는 두 가지뿐:
+            <div class="keywords" style="margin-top:8px;">
+              <span class="keyword">Plugin이 없는 서비스 (PBrain MCP, Redash 등)</span>
+              <span class="keyword">더 세밀한 커스텀 제어가 필요할 때</span>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="border-left: 3px solid var(--color-accent);">
+          <div class="card-title">Q. Plugin도 읽기/쓰기 다 되나요?</div>
+          <div class="card-body">
+            <strong style="color:var(--color-accent);">네, MCP와 동일한 수준으로 읽기·쓰기 모두 지원합니다.</strong><br>
+            <table class="tbl" style="margin-top:8px;">
+              <tr><td style="width:120px;"><strong>GitHub</strong></td><td>PR 생성·머지, 코멘트, 파일 수정, 이슈 관리</td></tr>
+              <tr><td><strong>Atlassian</strong></td><td>Confluence 페이지 읽기·생성·수정, Jira 이슈 생성·코멘트</td></tr>
+              <tr><td><strong>Slack</strong></td><td>메시지 읽기·전송, 채널 관리</td></tr>
+            </table>
+            <div class="sub" style="margin-top:8px;">권한 범위는 OAuth 동의 시 설정한 scope에 따라 결정되며, 실행 전 사용자 승인 프롬프트가 동일하게 표시됩니다.</div>
+          </div>
+        </div>
+        <div class="card" style="border-left: 3px solid var(--color-accent);">
+          <div class="card-title">Q. 토큰 사용량 차이가 있나요?</div>
+          <div class="card-body">
+            <strong style="color:var(--color-accent);">차이 없습니다.</strong>
+            Plugin이든 MCP든 Claude 입장에서는 동일한 "tool call"입니다.<br>
+            토큰 사용량은 연결 방식이 아니라 <strong>요청·응답 데이터 크기</strong>에 따라 결정됩니다.
+            <div class="example" style="margin-top:12px; margin-bottom:0;">
+              <div class="example-label">예시</div>
+              Confluence 페이지 전체를 읽으면 Plugin이든 MCP든 같은 토큰을 소비합니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide: 분석 업무 흐름 -->
+    <div class="slide">
+      <div class="badge">For Analysts</div>
+      <h2 class="heading">분석 업무에서의 활용 흐름</h2>
+      <p class="sub" style="margin-bottom: 20px;">데이터를 모으고, 분석하고, 문서화하는 전 과정을 Claude Code가 수행합니다.</p>
+      <div class="flow" style="justify-content: center; margin-bottom: 28px;">
+        <div class="flow-step" style="background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2);">질문</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">내부 데이터 수집<br><span style="font-size:11px;color:var(--color-text-sub);">Confluence &bull; Sheets</span></div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">외부 리서치<br><span style="font-size:11px;color:var(--color-text-sub);">Tavily 웹 검색</span></div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">분석 & 종합<br><span style="font-size:11px;color:var(--color-text-sub);">프레임워크 적용</span></div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step" style="background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2);">결과물</div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">MCP가 연결하는 데이터 소스</div>
+          <table class="tbl">
+            <tr><td><strong>Confluence</strong></td><td>회의록, BP, 전략 문서</td></tr>
+            <tr><td><strong>Google Sheets</strong></td><td>운영 실적, 비용, 정산</td></tr>
+            <tr><td><strong>Tavily</strong></td><td>시장 트렌드, 경쟁사, 벤치마크</td></tr>
+            <tr><td><strong>GitHub</strong></td><td>코드, PR, 이슈 (개발 시)</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-title">결과물 형태</div>
+          <table class="tbl">
+            <tr><td><strong>채팅 내 리포트</strong></td><td>마크다운 구조화 문서</td></tr>
+            <tr><td><strong>Confluence 페이지</strong></td><td>Mermaid 다이어그램 포함</td></tr>
+            <tr><td><strong>HTML 페이지</strong></td><td>제안서, 가이드, 랜딩</td></tr>
+            <tr><td><strong>스프레드시트 분석</strong></td><td>데이터 파싱 + 요약</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Overview -->
+    <div class="slide">
+      <div class="badge">Overview</div>
+      <h2 class="heading">스킬이란?</h2>
+      <p class="sub" style="margin-bottom: 24px;">스킬은 Claude Code에게 <strong>특정 상황에서 따라야 할 워크플로우</strong>를 정의한 것입니다.<br>트리거 키워드가 감지되면 자동으로 실행됩니다.</p>
+      <div class="flow">
+        <div class="flow-step">사용자 질문</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">키워드 감지</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">스킬 자동 실행</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">병렬 리서치</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">구조화된 결과물</div>
+      </div>
+      <div class="grid-3" style="margin-top: 32px;">
+        <div class="card">
+          <div class="card-title">7개 스킬</div>
+          <div class="card-body">분석 5 + 디자인 1 + 발행 1</div>
+        </div>
+        <div class="card">
+          <div class="card-title">병렬 서브에이전트</div>
+          <div class="card-body">3~4개 동시 실행으로 속도와 깊이 확보</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Confluence 자동 발행</div>
+          <div class="card-body">분석 완료 후 한 번에 문서화</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Architecture -->
+    <div class="slide dark">
+      <div class="badge">Architecture</div>
+      <h2 class="heading">스킬 실행 구조</h2>
+      <p class="sub" style="margin-bottom: 32px;">분석 스킬은 모두 같은 패턴을 따릅니다</p>
+      <div class="grid-2">
+        <div>
+          <div class="flow" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+            <div class="flow-step" style="width: 100%;">Step 0. 범위 파악 &mdash; 불명확하면 질문</div>
+            <div class="flow-step" style="width: 100%; background: rgba(37,99,235,0.15); color: var(--color-accent);">Step 1. 서브에이전트 병렬 실행 (핵심)</div>
+            <div class="flow-step" style="width: 100%;">Step 2. 프레임워크 적용 &mdash; 분석/종합</div>
+            <div class="flow-step" style="width: 100%;">Step 3. 리포트 출력</div>
+            <div class="flow-step" style="width: 100%;">Step 4. Confluence 발행 (선택)</div>
+          </div>
+        </div>
+        <div>
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="card-title">서브에이전트 A</div>
+            <div class="card-body">내부 데이터 &mdash; Confluence 회의록, Sheets 실적</div>
+          </div>
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="card-title">서브에이전트 B</div>
+            <div class="card-body">외부 리서치 &mdash; Tavily 웹 검색 (한국어 + 영어/현지어)</div>
+          </div>
+          <div class="card">
+            <div class="card-title">서브에이전트 C</div>
+            <div class="card-body">운영 데이터 &mdash; Gemini 이력, 비용 시뮬레이션</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Skill Map -->
+    <div class="slide">
+      <div class="badge">Skill Map</div>
+      <h2 class="heading">7개 스킬 한눈에 보기</h2>
+      <table class="tbl">
+        <thead>
+          <tr><th>스킬</th><th>용도</th><th>서브에이전트</th><th>핵심 결과물</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>decision-dive</strong></td><td>의사결정 분석</td><td>3개</td><td>찬반 논거 + 옵션 비교 + 권장안</td></tr>
+          <tr><td><strong>plan-builder</strong></td><td>전략 플랜 수립</td><td>3개</td><td>KPI + 전략 + 실행계획 + 타임라인</td></tr>
+          <tr><td><strong>biz-expansion-scout</strong></td><td>사업 기회 탐색</td><td>4개</td><td>기회 매트릭스 (수요 x 실현성 x 역량)</td></tr>
+          <tr><td><strong>partner-pitch-builder</strong></td><td>파트너 제안서</td><td>4개</td><td>제안서 초안 + 수익 모델 시뮬레이션</td></tr>
+          <tr><td><strong>quarterly-growth-planner</strong></td><td>분기 OKR 설계</td><td>4개</td><td>OKR 테이블 + 성과 관리 사이클</td></tr>
+          <tr><td><strong>pbrain-design</strong></td><td>HTML 디자인 표준</td><td>없음</td><td>완성된 HTML (모바일 우선)</td></tr>
+          <tr><td><strong>publish-analysis</strong></td><td>Confluence 발행</td><td>없음</td><td>Mermaid 다이어그램 포함 문서</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Slide 5: decision-dive -->
+    <div class="slide">
+      <div class="badge">Skill 1</div>
+      <h2 class="heading">decision-dive &mdash; 의사결정 분석</h2>
+      <p class="sub">사업 판단이 필요할 때, 내부 데이터 + 외부 리서치를 합쳐 구조화된 의사결정 리포트를 생성합니다.</p>
+      <div class="keywords">
+        <span class="keyword">~할까요?</span>
+        <span class="keyword">~해야 할까?</span>
+        <span class="keyword">검토해줘</span>
+        <span class="keyword">비교해줘</span>
+        <span class="keyword">A vs B</span>
+        <span class="keyword">리스크</span>
+      </div>
+      <div class="example">
+        <div class="example-label">사용 예시</div>
+        "구마모토 워킹투어를 정규 상품으로 출시해야 할까? 나오시마 대비 장단점 비교해줘"
+      </div>
+      <div class="grid-2" style="margin-top: 8px;">
+        <div class="card">
+          <div class="card-title">결과물 구조</div>
+          <div class="card-body">현황 요약 &rarr; 찬성 논거 &rarr; 반대 논거/리스크 &rarr; 옵션 비교 (2~3개) &rarr; 권장안 &rarr; 다음 액션</div>
+        </div>
+        <div class="card">
+          <div class="card-title">핵심 원칙</div>
+          <div class="card-body">추측 금지, 데이터 없으면 "데이터 없음" 명시. 내부(Confluence) + 외부(Tavily) 교차 검증.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide: decision-dive OUTPUT -->
+    <div class="slide dark">
+      <div class="badge">Skill 1 &mdash; 실제 결과물</div>
+      <h2 class="heading">decision-dive 출력 예시</h2>
+      <div class="grid-2">
+        <div class="output-preview">
+          <div class="output-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span>decision-dive output</span>
+          </div>
+          <div class="output-body">
+            <div class="oh1">의사결정 딥다이브: 구마모토 워킹투어 정규 출시</div>
+            <div class="o-dim">분석일: 2026-02-28 | 내부 5건 | 외부 8건</div>
+            <br>
+            <div class="oh2">현황</div>
+            <div>나오시마 투어 월 평균 <span class="o-accent">32명</span> 운영 중.<br>구마모토는 1회 파일럿 완료, 참가자 <span class="o-accent">6명/8명</span> 만석.</div>
+            <br>
+            <div class="oh2">찬성 논거</div>
+            <div><span class="o-bold">1. 수요 검증 완료</span> &mdash; 파일럿 만족도 4.8/5.0<br>
+            <span class="o-bold">2. 원가 우위</span> &mdash; 가이드 위탁비 나오시마 대비 20% 저렴<br>
+            <span class="o-bold">3. 계절 보완</span> &mdash; 나오시마 비수기(겨울)에 구마모토 운영 가능</div>
+            <br>
+            <div class="oh2">반대 논거 / 리스크</div>
+            <div><span class="o-orange">1. 교통 접근성</span> &mdash; 인천-구마모토 직항 주 3회뿐<br>
+            <span class="o-orange">2. 리소스 분산</span> &mdash; 1인 운영 체제에서 2개 목적지 병행 부담</div>
+            <br>
+            <div class="oh2">옵션 비교</div>
+            <table class="o-table">
+              <tr><th>옵션</th><th>내용</th><th>리스크</th></tr>
+              <tr><td class="o-accent">A. 즉시 출시</td><td>3월부터 정규 운영</td><td>리소스 분산</td></tr>
+              <tr><td>B. 조건부 출시</td><td>나오시마 비수기만 운영</td><td>브랜딩 약화</td></tr>
+              <tr><td>C. 보류</td><td>Q3까지 데이터 추가 수집</td><td>시장 선점 실패</td></tr>
+            </table>
+            <br>
+            <div class="oh2">권장안</div>
+            <div><span class="o-bold">옵션 B 권장.</span> 나오시마 비수기(12~2월)에 구마모토를 운영해 리소스 분산 없이 계절 보완 효과를 검증.</div>
+          </div>
+        </div>
+        <div>
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="card-title">결과물 특징</div>
+            <div class="card-body">
+              &bull; 찬반 논거에 <strong>수치 근거</strong> 필수<br>
+              &bull; 옵션은 항상 2~3개 (Go/Conditional/Hold)<br>
+              &bull; 권장안에 명확한 이유 1~2문장<br>
+              &bull; 출처(Confluence URL, Sheets명) 표기
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">데이터 흐름</div>
+            <div class="card-body">
+              <span class="accent">Confluence</span> &rarr; 파일럿 레슨런, 회의록<br>
+              <span class="accent">Sheets</span> &rarr; 비용 시뮬레이션, 운영 데이터<br>
+              <span class="accent">Tavily</span> &rarr; 구마모토 관광 트렌드, 직항 현황
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: plan-builder -->
+    <div class="slide dark">
+      <div class="badge">Skill 2</div>
+      <h2 class="heading">plan-builder &mdash; 전략 플랜 수립</h2>
+      <p class="sub">전략 방향, 로드맵, 실행 계획이 필요할 때. Mermaid gantt 타임라인까지 자동 생성합니다.</p>
+      <div class="keywords">
+        <span class="keyword">전략</span>
+        <span class="keyword">플랜</span>
+        <span class="keyword">로드맵</span>
+        <span class="keyword">기획해줘</span>
+        <span class="keyword">분기 계획</span>
+      </div>
+      <div class="example">
+        <div class="example-label">사용 예시</div>
+        "2Q PB 사업 전략 플랜을 잡아줘. 나오시마 안정화 + 신규 목적지 탐색 방향으로"
+      </div>
+      <div class="grid-2" style="margin-top: 8px;">
+        <div class="card">
+          <div class="card-title">결과물 구조</div>
+          <div class="card-body">현황 & 문제 정의 &rarr; 목표 & KPI 테이블 &rarr; 전략 방향 (3~5개, Why/How) &rarr; 실행 계획 &rarr; Mermaid gantt &rarr; 리스크 대응</div>
+        </div>
+        <div class="card">
+          <div class="card-title">decision-dive와 차이</div>
+          <div class="card-body">decision-dive는 "할까 말까"의 판단,<br>plan-builder는 "어떻게 할까"의 실행 계획.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide: plan-builder OUTPUT -->
+    <div class="slide">
+      <div class="badge">Skill 2 &mdash; 실제 결과물</div>
+      <h2 class="heading">plan-builder 출력 예시</h2>
+      <div class="grid-2">
+        <div class="output-preview">
+          <div class="output-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span>plan-builder output</span>
+          </div>
+          <div class="output-body">
+            <div class="oh1">2Q PB 사업 전략 플랜</div>
+            <div class="o-dim">기간: 2026.04~06 | 내부 7건 | 외부 12건</div>
+            <br>
+            <div class="oh2">목표 & KPI</div>
+            <table class="o-table">
+              <tr><th>KPI</th><th>현재</th><th>목표</th><th>측정</th></tr>
+              <tr><td>월 참가자 수</td><td class="o-accent">32명</td><td class="o-accent">50명</td><td>Sheets 집계</td></tr>
+              <tr><td>투어 만족도</td><td>4.7</td><td>4.8+</td><td>설문</td></tr>
+              <tr><td>신규 목적지</td><td>0</td><td class="o-accent">1개 파일럿</td><td>출시 여부</td></tr>
+            </table>
+            <br>
+            <div class="oh2">전략 방향</div>
+            <div class="oh3">전략 1: 나오시마 확장</div>
+            <div><span class="o-green">Why:</span> 월 32명 → 50명 성장 여력 존재<br>
+            <span class="o-green">How:</span> 주말 회차 추가, 마케팅 채널 다변화</div>
+            <br>
+            <div class="oh3">전략 2: 신규 목적지 파일럿</div>
+            <div><span class="o-green">Why:</span> 계절 리스크 분산 필요<br>
+            <span class="o-green">How:</span> 다카마쓰 또는 구마모토 1회 파일럿</div>
+            <br>
+            <div class="oh2">타임라인</div>
+            <div class="o-mermaid">
+              gantt<br>
+              &nbsp;&nbsp;title 2Q 실행 타임라인<br>
+              &nbsp;&nbsp;section 나오시마 확장<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;주말 회차 추가 :a1, 2026-04-01, 14d<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;마케팅 테스트 :a2, after a1, 30d<br>
+              &nbsp;&nbsp;section 신규 목적지<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;목적지 선정 :b1, 2026-04-07, 21d<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;파일럿 실행 :b2, 2026-05-15, 14d
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="card-title">decision-dive와 차이</div>
+            <div class="card-body">
+              decision-dive: <strong>"할까 말까"</strong> → 옵션 비교 + 권장안<br><br>
+              plan-builder: <strong>"어떻게 할까"</strong> → KPI + 전략 + 실행 + 타임라인
+            </div>
+          </div>
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="card-title">Mermaid gantt 자동 생성</div>
+            <div class="card-body">타임라인이 Mermaid gantt 코드로 출력되며, Confluence 발행 시 SVG 이미지로 자동 변환됩니다.</div>
+          </div>
+          <div class="card">
+            <div class="card-title">핵심 원칙</div>
+            <div class="card-body">
+              &bull; KPI는 반드시 <strong>측정 가능한 수치</strong><br>
+              &bull; 전략은 3개 기본 (최대 5개)<br>
+              &bull; gantt 날짜는 오늘 기준 현실적 일정<br>
+              &bull; 담당자: "서기원" 또는 "PB팀"
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: biz-expansion-scout -->
+    <div class="slide">
+      <div class="badge">Skill 3</div>
+      <h2 class="heading">biz-expansion-scout &mdash; 사업 기회 탐색</h2>
+      <p class="sub">새로운 상품이나 목적지를 탐색할 때. 글로벌 벤치마크 + 한국인 수요 + 현지 환경을 4개 에이전트로 병렬 분석합니다.</p>
+      <div class="keywords">
+        <span class="keyword">어떤 상품</span>
+        <span class="keyword">어떤 투어</span>
+        <span class="keyword">사업 기회</span>
+        <span class="keyword">벤치마킹</span>
+        <span class="keyword">GYG 분석</span>
+        <span class="keyword">시장 분석</span>
+      </div>
+      <div class="example">
+        <div class="example-label">사용 예시</div>
+        "오사카에서 어떤 한국어 투어를 만들면 좋을까? GYG랑 에어비앤비 체험 벤치마킹해줘"
+      </div>
+      <div class="card" style="margin-top: 16px;">
+        <div class="card-title">사업 기회 매트릭스</div>
+        <div class="card-body">수요 (한국인 여행자 니즈) x 실현 가능성 (현지 파트너 환경) x PB 역량 (운영 가능 여부)의 3축으로 우선순위를 매깁니다. 목적지 언어로 현지 검색을 병행하는 것이 핵심.</div>
+      </div>
+    </div>
+
+    <!-- Slide 8: partner-pitch-builder -->
+    <div class="slide dark">
+      <div class="badge">Skill 4</div>
+      <h2 class="heading">partner-pitch-builder &mdash; 파트너 제안서</h2>
+      <p class="sub">현지 오퍼레이터나 시설에 협업을 제안할 때. 수익 모델 시뮬레이션까지 포함된 제안서 초안을 생성합니다.</p>
+      <div class="keywords">
+        <span class="keyword">파트너 제안</span>
+        <span class="keyword">제안서</span>
+        <span class="keyword">수익 모델</span>
+        <span class="keyword">수수료</span>
+        <span class="keyword">어떻게 설득</span>
+      </div>
+      <div class="example">
+        <div class="example-label">사용 예시</div>
+        "나오시마 베네세 측에 파트너십을 제안하고 싶어. 수익 모델이랑 제안서 초안 만들어줘"
+      </div>
+      <div class="grid-2" style="margin-top: 8px;">
+        <div class="card">
+          <div class="card-title">결과물</div>
+          <div class="card-body">파트너 유형별 가치 제안 &rarr; 수익 시뮬레이션 (판매가/변동비/고정비/배분율) &rarr; 제안서 초안 &rarr; Mermaid 수익 흐름도</div>
+        </div>
+        <div class="card">
+          <div class="card-title">특징</div>
+          <div class="card-body">Sheets의 비용 시뮬레이션 데이터를 직접 참조해 실제 숫자 기반으로 작성. 파트너/PB 양쪽 관점 균형.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 9: quarterly-growth-planner -->
+    <div class="slide">
+      <div class="badge">Skill 5</div>
+      <h2 class="heading">quarterly-growth-planner &mdash; 분기 OKR 설계</h2>
+      <p class="sub">분기별 성장 목표와 성과 관리 사이클을 설계합니다. 목표 설정 + 측정 + 리뷰까지 한 번에.</p>
+      <div class="keywords">
+        <span class="keyword">OKR</span>
+        <span class="keyword">분기 목표</span>
+        <span class="keyword">Q2 플랜</span>
+        <span class="keyword">성과 관리</span>
+        <span class="keyword">올해 계획</span>
+      </div>
+      <div class="example">
+        <div class="example-label">사용 예시</div>
+        "Q2 OKR을 설계해줘. 나오시마 안정화와 신규 목적지 파일럿 런칭이 핵심이야"
+      </div>
+      <div class="card" style="margin-top: 16px;">
+        <div class="card-title">plan-builder와 차이</div>
+        <div class="card-body">plan-builder는 전략 방향 + 실행 계획 중심이고, quarterly-growth-planner는 <strong>측정 가능한 OKR + 성과 관리 루프(월간 체크포인트, 분기 리뷰)</strong> 중심입니다. "무엇을 측정할지"에 집중합니다.</div>
+      </div>
+    </div>
+
+    <!-- Slide: partner-pitch-builder OUTPUT -->
+    <div class="slide dark">
+      <div class="badge">Skill 4 &mdash; 실제 결과물</div>
+      <h2 class="heading">partner-pitch-builder 출력 예시</h2>
+      <div class="grid-2">
+        <div class="output-preview">
+          <div class="output-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span>partner-pitch-builder output</span>
+          </div>
+          <div class="output-body">
+            <div class="oh1">파트너 제안서: 베네세 아트사이트 나오시마</div>
+            <div class="o-dim">대상: 시설 파트너 | 목적지: 나오시마</div>
+            <br>
+            <div class="oh2">파트너 가치 제안</div>
+            <div><span class="o-bold">한국인 방문객 안정적 유입:</span> 월 32명 → 50명 목표<br>
+            <span class="o-bold">한국어 해설 품질 보장:</span> 전문 가이드 위탁 운영<br>
+            <span class="o-bold">비수기 수요 창출:</span> 12~2월 프로그램 운영</div>
+            <br>
+            <div class="oh2">수익 모델 시뮬레이션</div>
+            <table class="o-table">
+              <tr><th>항목</th><th>보수적</th><th>기본</th><th>낙관적</th></tr>
+              <tr><td>월 참가자</td><td>24명</td><td class="o-accent">32명</td><td>48명</td></tr>
+              <tr><td>객단가</td><td colspan="3" style="text-align:center">89,000원</td></tr>
+              <tr><td>월 매출</td><td>2.1M</td><td class="o-accent">2.8M</td><td>4.3M</td></tr>
+              <tr><td>파트너 배분</td><td>315K</td><td class="o-accent">420K</td><td>645K</td></tr>
+            </table>
+            <br>
+            <div class="oh2">수익 흐름</div>
+            <div class="o-mermaid">
+              graph LR<br>
+              &nbsp;&nbsp;A[고객 결제] --> B[PB 정산]<br>
+              &nbsp;&nbsp;B --> C[가이드 위탁비 40%]<br>
+              &nbsp;&nbsp;B --> D[파트너 시설비 15%]<br>
+              &nbsp;&nbsp;B --> E[PB 수익 45%]
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="card-title">실제 전달 가능한 수준</div>
+            <div class="card-body">제안서 초안은 그대로 파트너에게 보낼 수 있는 수준으로 작성됩니다. 배경/제안 내용/기대사항/수익 구조/운영 방식이 모두 포함.</div>
+          </div>
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="card-title">시나리오 분석</div>
+            <div class="card-body">보수적/기본/낙관적 3개 시나리오로 수익을 시뮬레이션. Sheets의 비용 데이터를 직접 참조합니다.</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Mermaid 수익 흐름도</div>
+            <div class="card-body">graph LR로 돈의 흐름을 시각화. Confluence 발행 시 SVG로 자동 변환.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 10: pbrain-design -->
+    <div class="slide dark">
+      <div class="badge">Skill 6</div>
+      <h2 class="heading">pbrain-design &mdash; HTML 디자인 표준</h2>
+      <p class="sub">HTML 페이지를 만들 때 자동 적용. apple.com 스타일의 Clean & Minimal 디자인.</p>
+      <div class="keywords">
+        <span class="keyword">페이지 만들어</span>
+        <span class="keyword">HTML</span>
+        <span class="keyword">랜딩 페이지</span>
+        <span class="keyword">디자인 개선</span>
+        <span class="keyword">UI 개선</span>
+      </div>
+      <div class="example">
+        <div class="example-label">사용 예시</div>
+        "나오시마 점심 가이드 HTML 페이지를 만들어줘" &rarr; 자동으로 pbrain-design 원칙 적용
+      </div>
+      <div class="grid-3" style="margin-top: 16px;">
+        <div class="card">
+          <div class="card-title">색상 절제</div>
+          <div class="card-body">포인트 색 1개만. 나머지는 그레이 계열.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">여백이 콘텐츠</div>
+          <div class="card-body">섹션 간 32px, 카드 내 20px. 빡빡한 레이아웃 금지.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">모바일 최우선</div>
+          <div class="card-body">max-width 520px. 버튼 52px 터치 영역.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide: pbrain-design OUTPUT -->
+    <div class="slide">
+      <div class="badge">Skill 6 &mdash; 실제 결과물</div>
+      <h2 class="heading">pbrain-design으로 만든 실제 HTML 페이지</h2>
+      <p class="sub" style="margin-bottom: 16px;">모두 동일한 디자인 원칙(색상 1색, 여백 중심, 모바일 520px)으로 제작된 실제 서비스 페이지입니다.</p>
+      <div class="screenshot-row" style="margin-bottom: 20px;">
+        <a href="https://nowikoes.github.io/naoshima-lunch/" target="_blank" class="screenshot-frame" style="text-decoration:none; cursor:pointer;">
+          <img src="screenshots/naoshima-lunch.png" alt="나오시마 점심 가이드">
+          <div class="screenshot-label">나오시마 점심 가이드 <span style="color:var(--color-accent);">&#8599;</span></div>
+        </a>
+        <a href="https://nowikoes.github.io/naoshima-lunch/guide/" target="_blank" class="screenshot-frame" style="text-decoration:none; cursor:pointer;">
+          <img src="screenshots/naoshima-guide.png" alt="나오시마 투어 가이드">
+          <div class="screenshot-label">나오시마 투어 가이드 <span style="color:var(--color-accent);">&#8599;</span></div>
+        </a>
+        <a href="france-pb-proposal.html" target="_blank" class="screenshot-frame" style="text-decoration:none; cursor:pointer;">
+          <img src="screenshots/france-proposal.png" alt="프랑스 PB 제안서">
+          <div class="screenshot-label">프랑스 PB 사업 제안서 <span style="color:var(--color-accent);">&#8599;</span></div>
+        </a>
+        <a href="claude-code-setup-survey.html" target="_blank" class="screenshot-frame" style="text-decoration:none; cursor:pointer;">
+          <img src="screenshots/setup-survey.png" alt="Claude Code 세팅 설문">
+          <div class="screenshot-label">Claude Code 세팅 설문 <span style="color:var(--color-accent);">&#8599;</span></div>
+        </a>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title">디자인 원칙</div>
+          <div class="card-body">
+            포인트 색 <span style="color:#2563EB;font-weight:700;">#2563EB</span> 1색<br>
+            섹션 제목 이모지 없음<br>
+            max-width: 520px 모바일 우선
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">CSS 토큰</div>
+          <div class="card-body">pbrain-design.css CDN 참조<br>pb-* 접두사 클래스 네이밍<br>Pretendard + safe-area-inset</div>
+        </div>
+        <div class="card">
+          <div class="card-title">자동 적용</div>
+          <div class="card-body">"HTML 만들어줘"만 말하면<br>pbrain-design 스킬이 자동 감지<br>디자인 원칙을 강제 적용</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 11: publish-analysis -->
+    <div class="slide">
+      <div class="badge">Skill 7</div>
+      <h2 class="heading">publish-analysis &mdash; Confluence 발행</h2>
+      <p class="sub">분석이 끝나면 이 스킬로 Confluence에 바로 발행. Mermaid 다이어그램도 SVG로 자동 변환됩니다.</p>
+      <div class="keywords">
+        <span class="keyword">Confluence에 발행</span>
+        <span class="keyword">저장해줘</span>
+        <span class="keyword">문서화해줘</span>
+        <span class="keyword">올려줘</span>
+      </div>
+      <div class="flow" style="margin: 20px 0;">
+        <div class="flow-step">마크다운 작성</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">Mermaid &rarr; SVG</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">페이지 생성</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">SVG 첨부</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">URL 반환</div>
+      </div>
+      <div class="example">
+        <div class="example-label">사용 예시</div>
+        (분석 완료 후) "이거 Confluence에 발행해줘. 제목은 '구마모토 투어 시장 분석'"
+      </div>
+      <div class="card" style="margin-top: 12px;">
+        <div class="card-title">자주 쓰는 부모 페이지</div>
+        <div class="card-body">Draft (임시) / PB 메인 / 회의록 모음 / 4Q BP &mdash; 발행 시 부모를 지정하면 해당 페이지 하위에 생성됩니다.</div>
+      </div>
+    </div>
+
+    <!-- Slide: publish-analysis OUTPUT -->
+    <div class="slide dark">
+      <div class="badge">Skill 7 &mdash; 실제 결과물</div>
+      <h2 class="heading">publish-analysis로 발행된 Confluence 페이지</h2>
+      <div class="grid-2">
+        <div class="output-preview">
+          <div class="output-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span>/tmp/content.md &rarr; Confluence</span>
+          </div>
+          <div class="output-body">
+            <div class="oh1">나오시마 워킹투어 레슨런</div>
+            <br>
+            <div class="oh2">개요</div>
+            <div>2026년 1월부터 운영한 나오시마 워킹투어의 운영 데이터와 개선 사항을 정리합니다.</div>
+            <br>
+            <div class="oh2">핵심 구조</div>
+            <div class="o-mermaid">
+              graph TD<br>
+              &nbsp;&nbsp;A[예약 접수] --> B[사전 안내]<br>
+              &nbsp;&nbsp;B --> C[페리 내 해설]<br>
+              &nbsp;&nbsp;C --> D[미술관 투어]<br>
+              &nbsp;&nbsp;D --> E[자유시간 + 점심]<br>
+              &nbsp;&nbsp;E --> F[복귀 페리]
+            </div>
+            <div class="o-dim" style="font-size:11px;">↑ SVG로 자동 변환되어 Confluence에 이미지로 삽입</div>
+            <br>
+            <div class="oh2">운영 데이터</div>
+            <table class="o-table">
+              <tr><th>지표</th><th>1월</th><th>2월</th></tr>
+              <tr><td>참가자</td><td>28명</td><td class="o-accent">36명</td></tr>
+              <tr><td>만족도</td><td>4.6</td><td>4.8</td></tr>
+              <tr><td>재방문 의향</td><td>78%</td><td class="o-accent">85%</td></tr>
+            </table>
+            <br>
+            <div class="oh2">다음 액션</div>
+            <div>☐ 주말 회차 테스트 (3월)<br>☐ 점심 가이드 페이지 제작<br>☐ FAQ 업데이트</div>
+          </div>
+        </div>
+        <div>
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="card-title">발행 프로세스</div>
+            <div class="card-body" style="font-size: 13px;">
+              1. 마크다운으로 분석 결과 작성<br>
+              2. Mermaid 코드 블록 포함<br>
+              3. <code style="font-size:11px;">publish-page.mjs</code> 실행<br>
+              4. Mermaid → SVG 자동 렌더링<br>
+              5. Confluence 페이지 생성 + 첨부<br>
+              6. URL 반환
+            </div>
+          </div>
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="card-title">지원하는 마크다운</div>
+            <div class="card-body">H1~H3 제목, 굵기/기울임, 목록, 파이프 테이블, 코드 블록, Mermaid 다이어그램</div>
+          </div>
+          <div class="card">
+            <div class="card-title">실제 발행된 Confluence 페이지</div>
+            <div class="card-body" style="font-size:12px;">
+              &bull; <a href="https://myrealtrip.atlassian.net/wiki/spaces/TA/pages/5625905163" target="_blank" style="color:var(--color-accent);text-decoration:none;">나오시마 워킹투어 레슨런 &#8599;</a><br>
+              &bull; <a href="https://myrealtrip.atlassian.net/wiki/spaces/TA/pages/5626069034" target="_blank" style="color:var(--color-accent);text-decoration:none;">구마모토 워킹투어 레슨런 &#8599;</a><br>
+              &bull; <a href="https://myrealtrip.atlassian.net/wiki/spaces/TA/pages/5631377736" target="_blank" style="color:var(--color-accent);text-decoration:none;">나오시마 FAQ &#8599;</a><br>
+              &bull; <a href="https://myrealtrip.atlassian.net/wiki/spaces/TA/pages/5218861057" target="_blank" style="color:var(--color-accent);text-decoration:none;">PB 메인 페이지 &#8599;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 12: Combo patterns -->
+    <div class="slide dark">
+      <div class="badge">Patterns</div>
+      <h2 class="heading">스킬 콤보 패턴</h2>
+      <p class="sub" style="margin-bottom: 24px;">실제 업무에서는 스킬을 연결해서 사용합니다</p>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">탐색 &rarr; 결정 &rarr; 계획</div>
+          <div class="card-body">
+            1. <strong>biz-expansion-scout</strong>로 기회 탐색<br>
+            2. <strong>decision-dive</strong>로 Go/No-Go 판단<br>
+            3. <strong>plan-builder</strong>로 실행 계획 수립<br>
+            4. <strong>publish-analysis</strong>로 발행
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">목표 &rarr; 파트너 &rarr; 실행</div>
+          <div class="card-body">
+            1. <strong>quarterly-growth-planner</strong>로 분기 OKR<br>
+            2. <strong>partner-pitch-builder</strong>로 파트너 확보<br>
+            3. <strong>plan-builder</strong>로 상세 로드맵<br>
+            4. <strong>publish-analysis</strong>로 발행
+          </div>
+        </div>
+      </div>
+      <div class="example" style="margin-top: 24px;">
+        <div class="example-label">실전 흐름</div>
+        "다카마쓰에서 어떤 투어를 하면 좋을까?" &rarr; (기회 탐색) &rarr; "우동 체험이 괜찮아 보이는데, 출시해야 할까?" &rarr; (의사결정) &rarr; "좋아, Q2에 파일럿으로 넣자. 플랜 짜줘" &rarr; (플랜) &rarr; "현지 우동 장인에게 제안서 만들어줘" &rarr; (제안서)
+      </div>
+    </div>
+
+    <!-- Slide 13: MCP tools -->
+    <div class="slide">
+      <div class="badge">MCP Tools</div>
+      <h2 class="heading">스킬이 사용하는 MCP 도구</h2>
+      <table class="tbl">
+        <thead>
+          <tr><th>MCP 서버</th><th>도구</th><th>용도</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Atlassian</strong></td><td>search_confluence, get_confluence_page</td><td>회의록, BP, 전략 문서 검색</td></tr>
+          <tr><td><strong>Tavily</strong></td><td>tavily-search</td><td>외부 시장 리서치 (한국어 + 영어/현지어)</td></tr>
+          <tr><td><strong>PBrain</strong></td><td>search_documents, read_sheet</td><td>Gemini 이력, Sheets 실적 데이터</td></tr>
+          <tr><td><strong>GitHub</strong></td><td>PR, issue, code search</td><td>코드 관리 (개발 작업 시)</td></tr>
+          <tr><td><strong>Chrome DevTools</strong></td><td>screenshot, navigate</td><td>HTML 결과물 확인, 디버깅</td></tr>
+        </tbody>
+      </table>
+      <div class="card" style="margin-top: 24px;">
+        <div class="card-title">병렬 검색 원칙</div>
+        <div class="card-body">모든 분석 스킬에서 Confluence + Tavily는 <strong>항상 병렬</strong>로 실행됩니다. 내부 데이터와 외부 시장 정보를 동시에 가져와 교차 검증합니다.</div>
+      </div>
+    </div>
+
+    <!-- Slide 14: Tips -->
+    <div class="slide dark">
+      <div class="badge">Tips</div>
+      <h2 class="heading">잘 쓰는 팁</h2>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">구체적으로 질문하기</div>
+          <div class="card-body">"플랜 짜줘" 보다는<br>"Q2 나오시마 안정화 + 다카마쓰 파일럿 방향으로 플랜 짜줘"가 훨씬 좋은 결과.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">콤보로 깊이 있게</div>
+          <div class="card-body">하나의 스킬 결과를 다음 스킬의 입력으로 연결하면 점점 구체화됩니다.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">발행은 마지막에</div>
+          <div class="card-body">분석 &rarr; 수정 &rarr; 보완을 반복한 후, 최종본만 publish-analysis로 발행.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">데이터 출처 확인</div>
+          <div class="card-body">모든 수치에는 출처가 표기됩니다. Redash는 executed_at, 추정치는 "약~"으로 구분.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 15: End -->
+    <div class="slide dark">
+      <div style="text-align: center;">
+        <div class="badge">Setup</div>
+        <h1 class="title" style="margin-top: 8px;">시작하기</h1>
+        <p class="subtitle">터미널에서 claude 실행 후 자연어로 질문하면 됩니다</p>
+        <div style="display: inline-flex; flex-direction: column; gap: 12px; text-align: left; margin-top: 24px;">
+          <div class="flow-step" style="font-size: 16px;">"구마모토 투어 출시해야 할까?"</div>
+          <div class="flow-step" style="font-size: 16px;">"Q2 플랜 짜줘"</div>
+          <div class="flow-step" style="font-size: 16px;">"베네세에 제안서 만들어줘"</div>
+          <div class="flow-step" style="font-size: 16px;">"Confluence에 발행해줘"</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Navigation -->
+  <div class="page-num" id="pageNum">1 / 16</div>
+  <div class="nav">
+    <button class="nav-btn" onclick="prev()">&larr;</button>
+    <button class="nav-btn" onclick="next()">&rarr;</button>
+  </div>
+
+  <script>
+    let current = 0;
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+
+    function show(idx) {
+      slides.forEach(s => s.classList.remove('active'));
+      slides[idx].classList.add('active');
+      document.getElementById('pageNum').textContent = `${idx + 1} / ${total}`;
+    }
+
+    function next() {
+      if (current < total - 1) { current++; show(current); }
+    }
+
+    function prev() {
+      if (current > 0) { current--; show(current); }
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+    });
+
+    // Touch swipe
+    let startX = 0;
+    document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+    document.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); }
+    });
+  </script>
+</body>
+</html>
