@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0F172A">
+  <title>구마모토 워킹투어 파트너십 제안서</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://nowikoes.github.io/naoshima-lunch/pbrain-design.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--color-bg);
+      font-family: 'Pretendard Variable', -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      color: var(--color-text);
+    }
+
+    .pb-wrap {
+      max-width: 520px;
+      margin: 0 auto;
+      padding-bottom: calc(40px + env(safe-area-inset-bottom));
+    }
+
+    /* Header */
+    .pb-header {
+      background: var(--color-slate-900, #0F172A);
+      color: #fff;
+      padding: calc(60px + env(safe-area-inset-top)) 20px 32px;
+      text-align: center;
+    }
+    .pb-header-badge {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 600;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.8);
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+    .pb-header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin: 0 0 8px;
+    }
+    .pb-header p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Sections */
+    .pb-section {
+      padding: 32px 20px 0;
+    }
+    .pb-section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-text);
+      margin: 0 0 16px;
+      line-height: 1.4;
+    }
+    .pb-section-desc {
+      font-size: 15px;
+      color: var(--color-text-sub, #71717A);
+      line-height: 1.7;
+      margin: 0 0 20px;
+    }
+
+    /* Cards */
+    .pb-card {
+      background: #fff;
+      border: 1px solid var(--color-border, #E4E4E7);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.05));
+      margin-bottom: 12px;
+    }
+    .pb-card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0 0 12px;
+      color: var(--color-text);
+    }
+    .pb-card p {
+      font-size: 14px;
+      color: var(--color-text-sub, #71717A);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Info rows */
+    .pb-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-border, #E4E4E7);
+      font-size: 14px;
+    }
+    .pb-info-row:last-child { border-bottom: none; }
+    .pb-info-label {
+      color: var(--color-text-sub, #71717A);
+      flex-shrink: 0;
+      margin-right: 12px;
+    }
+    .pb-info-value {
+      text-align: right;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    /* Tags */
+    .pb-tag--accent {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 600;
+      background: var(--color-accent-light, #EFF6FF);
+      color: var(--color-accent, #2563EB);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+    .pb-tag--ok {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 600;
+      background: #F0FDF4;
+      color: #16A34A;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    /* Divider */
+    .pb-divider {
+      height: 8px;
+      background: var(--color-bg, #FAFAFA);
+      margin: 32px 0 0;
+    }
+
+    /* Table */
+    .pb-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .pb-table th {
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--color-text-sub, #71717A);
+      padding: 8px 0;
+      border-bottom: 2px solid var(--color-border, #E4E4E7);
+    }
+    .pb-table td {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-border, #E4E4E7);
+      color: var(--color-text);
+      vertical-align: top;
+    }
+    .pb-table tr:last-child td { border-bottom: none; }
+    .pb-table tr:hover td {
+      background: var(--color-bg, #FAFAFA);
+    }
+    .pb-table .num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .pb-table .highlight {
+      font-weight: 600;
+      color: var(--color-accent, #2563EB);
+    }
+
+    /* Comparison */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 12px;
+    }
+    .compare-card {
+      background: #fff;
+      border: 1px solid var(--color-border, #E4E4E7);
+      padding: 20px 16px;
+      border-radius: 14px;
+    }
+    .compare-card--dark {
+      background: var(--color-slate-900, #0F172A);
+      border-color: transparent;
+      color: #fff;
+    }
+    .compare-card--dark .compare-label {
+      color: rgba(255,255,255,0.5);
+    }
+    .compare-card--dark .compare-value {
+      color: #fff;
+    }
+    .compare-label {
+      font-size: 12px;
+      color: var(--color-text-sub, #71717A);
+      margin-bottom: 4px;
+    }
+    .compare-value {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    /* Steps */
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .step-item {
+      background: #fff;
+      border: 1px solid var(--color-border, #E4E4E7);
+      padding: 16px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .step-item:first-child { border-radius: 16px 16px 4px 4px; }
+    .step-item:last-child { border-radius: 4px 4px 16px 16px; }
+    .step-item:only-child { border-radius: 16px; }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--color-accent, #2563EB);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step-content h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 2px 0 4px;
+    }
+    .step-content p {
+      font-size: 13px;
+      color: var(--color-text-sub, #71717A);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Alert */
+    .pb-alert--accent {
+      background: var(--color-accent-light, #EFF6FF);
+      border-left: 3px solid var(--color-accent, #2563EB);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+    }
+    .pb-alert--accent p {
+      font-size: 14px;
+      color: var(--color-text);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .pb-alert--accent strong {
+      font-weight: 600;
+    }
+
+    /* Note */
+    .pb-note {
+      font-size: 12px;
+      color: var(--color-text-sub, #71717A);
+      line-height: 1.6;
+      margin-top: 12px;
+    }
+
+    /* Benefit list */
+    .benefit-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--color-border, #E4E4E7);
+    }
+    .benefit-item:last-child { border-bottom: none; }
+    .benefit-item h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0 0 4px;
+    }
+    .benefit-item p {
+      font-size: 14px;
+      color: var(--color-text-sub, #71717A);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .pb-header h1 {
+      animation: fadeUp 0.6s ease both;
+    }
+    .pb-header p {
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+    .pb-header-badge {
+      animation: fadeUp 0.6s ease 0.05s both;
+    }
+  </style>
+</head>
+<body>
+
+<div class="pb-wrap">
+
+  <!-- Header -->
+  <div class="pb-header">
+    <span class="pb-header-badge">마이리얼트립 PB사업팀</span>
+    <h1>구마모토 워킹투어<br>파트너십 제안서</h1>
+    <p>김은주 가이드님께 | 2026년 3월 6일</p>
+  </div>
+
+  <!-- 1. 구마모토 시장 기회 -->
+  <div class="pb-section">
+    <h2 class="pb-section-title">1. 구마모토, 왜 지금인가</h2>
+    <p class="pb-section-desc">
+      구마모토에는 매월 약 8,800명의 한국인 여행자가 방문하고 있습니다.
+      그런데 한국어로 진행하는 구마모토 시내·구마모토성 워킹투어는 단 하나도 없습니다.
+    </p>
+
+    <div class="compare-grid">
+      <div class="compare-card compare-card--dark">
+        <div class="compare-label">월 한국인 방문자</div>
+        <div class="compare-value">약 8,800명</div>
+      </div>
+      <div class="compare-card">
+        <div class="compare-label">한국어 시내 워킹투어</div>
+        <div class="compare-value">0개</div>
+      </div>
+    </div>
+
+    <div class="pb-card">
+      <p class="pb-card-title">왜 아직 없었을까</p>
+      <p>
+        구마모토를 찾는 한국인 여행자는 대부분 골프나 아소산 자연 관광이 목적이었습니다.
+        그래서 시내를 깊이 걸으며 도시의 이야기를 듣는 투어에 대한 시도 자체가 없었습니다.
+      </p>
+      <div style="margin-top: 16px;">
+        <p>
+          하지만 구마모토성 복원 완료, 2016년 지진 이후의 재건 서사, 깊은 온천 문화 등
+          걸으면서 이야기할 소재는 충분합니다. 부족했던 것은 소재가 아니라,
+          이 이야기를 한국어로 전해줄 수 있는 가이드님이었습니다.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pb-divider"></div>
+
+  <!-- 2. 나오시마 검증 사례 -->
+  <div class="pb-section">
+    <h2 class="pb-section-title">2. 나오시마에서 검증된 모델</h2>
+    <p class="pb-section-desc">
+      마이리얼트립이 같은 구조로 운영 중인 나오시마 워킹투어의 성과입니다.
+      구마모토에도 이 모델을 그대로 적용하려 합니다.
+    </p>
+
+    <div class="pb-card">
+      <div class="pb-info-row">
+        <span class="pb-info-label">누적 완료 인원</span>
+        <span class="pb-info-value">254명 <span class="pb-tag--ok">12~2월</span></span>
+      </div>
+      <div class="pb-info-row">
+        <span class="pb-info-label">평균 만족도</span>
+        <span class="pb-info-value">4.93 / 5.0</span>
+      </div>
+      <div class="pb-info-row">
+        <span class="pb-info-label">3월 예약</span>
+        <span class="pb-info-value">136명 확정</span>
+      </div>
+      <div class="pb-info-row">
+        <span class="pb-info-label">4월 가격 인상</span>
+        <span class="pb-info-value">119,000원에도 수요 유지</span>
+      </div>
+    </div>
+
+    <p class="pb-note">
+      나오시마는 89,000원으로 시작해 3개월 만에 119,000원으로 인상했습니다.
+      수요가 검증되면 가격 인상이 자연스럽게 따라오는 구조입니다.
+    </p>
+  </div>
+
+  <div class="pb-divider"></div>
+
+  <!-- 3. 김은주 가이드님의 강점 -->
+  <div class="pb-section">
+    <h2 class="pb-section-title">3. 김은주 가이드님이시기에 가능한 일</h2>
+    <p class="pb-section-desc">
+      구마모토 시내 워킹투어가 그동안 없었던 이유는 이 투어를 해줄 수 있는 분이 없었기 때문입니다.
+      가이드님의 이력이 이 공백을 채울 수 있다고 판단했습니다.
+    </p>
+
+    <div class="pb-card">
+      <div class="pb-info-row">
+        <span class="pb-info-label">현지 거주</span>
+        <span class="pb-info-value">일본 약 30년 (구마모토 약 20년)</span>
+      </div>
+      <div class="pb-info-row">
+        <span class="pb-info-label">언어</span>
+        <span class="pb-info-value">한국어·일본어 이중 네이티브</span>
+      </div>
+      <div class="pb-info-row">
+        <span class="pb-info-label">전공</span>
+        <span class="pb-info-value">건축공학 (성·역사건축 해설 강점)</span>
+      </div>
+      <div class="pb-info-row">
+        <span class="pb-info-label">가이드 경력</span>
+        <span class="pb-info-value">아소산·유후인·크루즈 버스 가이드</span>
+      </div>
+      <div class="pb-info-row">
+        <span class="pb-info-label">현지 네트워크</span>
+        <span class="pb-info-value">구마모토성 연수 강사, 대학 강사</span>
+      </div>
+      <div class="pb-info-row">
+        <span class="pb-info-label">자격증</span>
+        <span class="pb-info-value">여행 수배 관리자, 온천 소물리에</span>
+      </div>
+    </div>
+
+    <div class="pb-alert--accent">
+      <p>
+        <strong>구마모토 20년 거주자만 들려줄 수 있는 이야기가 있습니다.</strong>
+        지진 이후 달라진 도시의 맥락, 건축 전공자가 읽어내는 구마모토성 복원 서사,
+        관광 안내서에는 나오지 않는 동네 이야기. 이것이 이 투어의 핵심 가치입니다.
+      </p>
+    </div>
+  </div>
+
+  <div class="pb-divider"></div>
+
+  <!-- 4. 파트너십 구조 -->
+  <div class="pb-section">
+    <h2 class="pb-section-title">4. 파트너십 구조</h2>
+    <p class="pb-section-desc">
+      중간 단계 없이, 마이리얼트립과 가이드님이 직접 파트너십을 맺는 구조입니다.
+    </p>
+
+    <div class="pb-card">
+      <p class="pb-card-title">역할 분담</p>
+      <div class="benefit-item">
+        <h4>김은주 가이드님</h4>
+        <p>투어 코스 공동 기획, 소그룹 투어 진행 (최대 14명/회), 현지 식당·시설 사전 소통, 고객 상담·문의 대응, 현장 대응</p>
+      </div>
+      <div class="benefit-item">
+        <h4>마이리얼트립</h4>
+        <p>상품 공동 기획, 마케팅 (플랫폼 노출·광고·CRM), 예약·결제·정산 시스템 전담</p>
+      </div>
+    </div>
+
+    <div class="pb-card">
+      <p class="pb-card-title">수익 구조 — 매출별 차등 수수료</p>
+      <div class="pb-info-row">
+        <span class="pb-info-label">판매가 (안)</span>
+        <span class="pb-info-value" style="font-weight: 700;">49,000원 내외</span>
+      </div>
+      <div class="pb-info-row">
+        <span class="pb-info-label">고정 급여</span>
+        <span class="pb-info-value">없음 (건당 정산)</span>
+      </div>
+    </div>
+
+    <div class="pb-card">
+      <p class="pb-card-title">월 판매량에 따른 수수료 구간 (안)</p>
+      <div class="pb-info-row">
+        <span class="pb-info-label">월 50명 이하 (안)</span>
+        <span class="pb-info-value" style="color: var(--color-accent); font-weight: 700;">수수료 0% — 가이드님 전액 수취</span>
+      </div>
+      <div class="pb-info-row">
+        <span class="pb-info-label">월 51~100명 (안)</span>
+        <span class="pb-info-value">수수료 20% — 가이드님 39,200원/인</span>
+      </div>
+      <div class="pb-info-row">
+        <span class="pb-info-label">월 101명 이상 (안)</span>
+        <span class="pb-info-value">수수료 30%~ — 가이드님 34,300원/인~</span>
+      </div>
+    </div>
+
+    <div class="pb-alert--accent">
+      <p>
+        <strong>판매가 저조할 때는 가이드님이 부담하시면 안 됩니다.</strong>
+        고객이 적다는 것은 마이리얼트립이 마케팅을 더 열심히 해야 한다는 뜻입니다.
+        그래서 월 50명 이하 구간에서는 수수료를 받지 않습니다.
+        반대로 크게 성공하면, 그 성공을 함께 나누는 구조입니다.
+      </p>
+    </div>
+
+    <p class="pb-note">
+      * 구간 기준과 판매가는 코스 확정 후 함께 조율해 나갈 예정입니다.
+    </p>
+  </div>
+
+  <div class="pb-divider"></div>
+
+  <!-- 5. 가이드님이 얻으시는 것 -->
+  <div class="pb-section">
+    <h2 class="pb-section-title">5. 가이드님이 얻으시는 것</h2>
+
+    <div class="pb-card">
+      <div class="benefit-item">
+        <h4>구마모토 유일의 한국어 시내 워킹투어 가이드</h4>
+        <p>현재 이 자리에 아무도 없습니다. 선점하시는 분이 곧 대표 가이드가 됩니다.</p>
+      </div>
+      <div class="benefit-item">
+        <h4>마이리얼트립 에디션 브랜드</h4>
+        <p>수요 검증 후 MRT 에디션 배지가 적용됩니다. 검색 상단 노출, 브랜드 페이지, 광고 지원이 함께 제공됩니다.</p>
+      </div>
+      <div class="benefit-item">
+        <h4>코스 기획에 직접 참여</h4>
+        <p>정해진 코스를 읽는 것이 아니라, 20년 거주 경험을 살려 직접 코스를 설계하시는 구조입니다. 가이드님의 색깔을 낼 수 있습니다.</p>
+      </div>
+      <div class="benefit-item">
+        <h4>고객 확보는 마이리얼트립이</h4>
+        <p>마케팅·예약·결제는 마이리얼트립이 전담합니다. 가이드님은 투어에만 집중하시면 됩니다.</p>
+      </div>
+      <div class="benefit-item">
+        <h4>워킹투어를 넘어서는 확장</h4>
+        <p>시내 워킹투어는 시작점입니다. 수요가 검증되면 온천 투어, 미식 투어, 시즌 한정 코스 등
+          가이드님의 전문성을 살린 다양한 투어로 함께 확장해 나갈 수 있습니다.
+          워킹투어는 구마모토 라인업의 첫 번째 셀렉션입니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pb-divider"></div>
+
+  <!-- 6. 입점 조건 -->
+  <div class="pb-section">
+    <h2 class="pb-section-title">6. 입점 조건 요약</h2>
+
+    <div class="pb-card">
+      <div class="pb-info-row">
+        <span class="pb-info-label">입점 형태</span>
+        <span class="pb-info-value">마이리얼트립 파트너 입점</span>
+      </div>
+      <div class="pb-info-row">
+        <span class="pb-info-label">수수료 구조</span>
+        <span class="pb-info-value">매출별 차등 적용 (0 / 20 / 30%~)</span>
+      </div>
+      <div class="pb-info-row">
+        <span class="pb-info-label">운영 횟수</span>
+        <span class="pb-info-value">유동적 (가이드님 일정에 맞춰 조율)</span>
+      </div>
+      <div class="pb-info-row">
+        <span class="pb-info-label">정산 주기</span>
+        <span class="pb-info-value">매월 완료 기준 익월 15일</span>
+      </div>
+      <div class="pb-info-row">
+        <span class="pb-info-label">품질 기준</span>
+        <span class="pb-info-value">평점 4.7 이상 유지</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pb-divider"></div>
+
+  <!-- 7. 다음 단계 -->
+  <div class="pb-section">
+    <h2 class="pb-section-title">7. 다음 단계</h2>
+
+    <div class="step-list">
+      <div class="step-item">
+        <span class="step-num">1</span>
+        <div class="step-content">
+          <h4>제안서 검토 및 회신</h4>
+          <p>3월 2주차 — 궁금하신 점이나 조건 협의</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <span class="step-num">2</span>
+        <div class="step-content">
+          <h4>코스 초안 공유 및 시범 답사</h4>
+          <p>3월 3주차 — 가이드님의 코스 아이디어를 기반으로 동선 확정</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <span class="step-num">3</span>
+        <div class="step-content">
+          <h4>파트너 계정 개설 및 온보딩</h4>
+          <p>3월 중순 — MRT 파트너 계정 개설, 스크립트·자료 공유</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <span class="step-num">4</span>
+        <div class="step-content">
+          <h4>시범 운영 시작</h4>
+          <p>3월 말~4월 초 — 주 2회, 소규모로 시작</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <span class="step-num">5</span>
+        <div class="step-content">
+          <h4>성과 리뷰 및 조건 조율</h4>
+          <p>5월 — 리뷰·예약 데이터를 함께 보며 조건 재검토</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="pb-section" style="padding-bottom: 20px;">
+    <div class="pb-card" style="text-align: center; background: var(--color-slate-900, #0F172A); color: #fff; border-color: transparent;">
+      <p style="font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.8); margin: 0;">
+        구마모토에 한국어 시내 워킹투어를 함께 만들어보고 싶습니다.<br>
+        가이드님의 20년 현지 경험과<br>
+        마이리얼트립의 마케팅·브랜드를 결합해<br>
+        <strong style="color: #fff;">구마모토를 걷는 새로운 이유</strong>를 만들겠습니다.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
